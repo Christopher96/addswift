@@ -1,6 +1,11 @@
 const express = require('express')
 const { Nuxt, Builder } = require('nuxt')
+const cors = require('cors')
+const bodyParser = require('body-parser')
+const morgan = require('morgan')
+
 const app = express()
+
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 
@@ -22,6 +27,13 @@ async function start() {
 
     // Give nuxt middleware to express
     app.use(nuxt.render)
+
+    // Log server messages
+    app.use(morgan('combine'))
+
+    // Parse json responses and allow requests from any domain
+    app.use(bodyParser.json())
+    app.use(cors())
 
     // Listen the server
     app.listen(port, host)
