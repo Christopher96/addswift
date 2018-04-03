@@ -1,42 +1,29 @@
 const express = require('express')
-const { Nuxt, Builder } = require('nuxt')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 
+const api = require('./routes/api');
+
 const app = express()
 
 const host = process.env.HOST || '127.0.0.1'
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 
 app.set('port', port)
 
-// Import and Set Nuxt.js options
-let config = require('../nuxt.config.js')
-config.dev = !(process.env.NODE_ENV === 'production')
+// Log server messages
+app.use(morgan('dev'))
 
-async function start() {
-    // Init Nuxt.js
-    const nuxt = new Nuxt(config)
+// Parse json responses and allow requests from any domain
+app.use(bodyParser.json())
+app.use(cors())
 
-    // Build only in dev mode
-    if (config.dev) {
-        const builder = new Builder(nuxt)
-        await builder.build()
-    }
+// Attach API route
+app.use('/api', api);
 
-    // Give nuxt middleware to express
-    app.use(nuxt.render)
-
-    // Log server messages
-    app.use(morgan('combine'))
-
-    // Parse json responses and allow requests from any domain
-    app.use(bodyParser.json())
-    app.use(cors())
-
-    // Listen the server
-    app.listen(port, host)
-    console.log('Server listening on http://' + host + ':' + port) // eslint-disable-line no-console
-}
-start()
+// Listen the server
+app.listen(port, host)
+app.on('listening', function() {
+    console.log('Express server started on port %s at %s', server.address().port, server.address().address);
+})
