@@ -7,3 +7,8 @@
         </v-content>
     </v-app>
 </template>
+
+<style lang="stylus" scoped>
+.container
+    max-width: 40em;
+</style>

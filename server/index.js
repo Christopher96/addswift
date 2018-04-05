@@ -3,8 +3,6 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 
-const api = require('./routes/api');
-
 const app = express()
 
 const host = process.env.HOST || '127.0.0.1'
@@ -20,10 +18,10 @@ app.use(bodyParser.json())
 app.use(cors())
 
 // Attach API route
-app.use('/api', api);
+app.use('/api', require('./routes/api'))
 
 // Listen the server
 app.listen(port, host)
 app.on('listening', function() {
-    console.log('Express server started on port %s at %s', server.address().port, server.address().address);
+    console.log('Express server started on port %s at %s', server.address().port, server.address().address)
 })
