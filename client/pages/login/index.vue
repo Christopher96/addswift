@@ -36,8 +36,11 @@ export default {
             username: this.username,
             password: this.password
         }).then((res) => {
-
+          this.$store.dispatch('setToken', res.data.token)
+          this.$store.dispatch('setUser', res.data.user)
+          this.$router.push('/')
         }).catch((err) => {
+          console.log(err)
           this.error = err.response.data
         })
       }
