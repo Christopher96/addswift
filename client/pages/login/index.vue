@@ -1,44 +1,53 @@
 <template>
-  <v-form v-model="valid" ref="form" lazy-validation>
-      <span class="mr-3">Don't have a user?</span>
-      <nuxt-link to="register">Register</nuxt-link>
-      <v-text-field
-      v-model="username"
-      label="Username"
-      :counter="10"
-      :error-messages="errors.collect('username')"
-      v-validate="'required|max:10|min:3'"
-      data-vv-name="username"
-      required
-      ></v-text-field>
-      <v-text-field
-      v-model="password"
-      label="Password"
-      :counter="50"
-      :error-messages="errors.collect('password')"
-      v-validate="'required|max:50|min:3'"
-      data-vv-name="password"
-      required
-      ></v-text-field>
-      <v-alert
-      v-show="error"
-      type="error"
-      :value="true"
-      >{{ error }}</v-alert>
-      <v-btn
-      @click="login"
-      :disabled="!valid">
-      Login</v-btn>
-      <v-btn
-      @click="clear"
-      >clear</v-btn>
-  </v-form>
+  <div>
+    <v-flex md6>
+      <v-form v-model="valid" ref="form" lazy-validation>
+          <p class="subheading">Already a member? <nuxt-link to="register">Register</nuxt-link><i class="fa fa-arrow-right"></i></p>
+          
+          <v-text-field
+          v-model="username"
+          label="Username"
+          :counter="10"
+          :error-messages="errors.collect('username')"
+          v-validate="'required|max:10|min:3'"
+          data-vv-name="username"
+          required
+          ></v-text-field>
+          <v-text-field
+          v-model="password"
+          label="Password"
+          :counter="50"
+          :error-messages="errors.collect('password')"
+          v-validate="'required|max:50|min:3'"
+          data-vv-name="password"
+          required
+          ></v-text-field>
+          <v-alert
+          v-show="error"
+          type="error"
+          :value="true"
+          >{{ error }}</v-alert>
+          <v-btn
+          @click="login"
+          :disabled="!valid">
+          Login</v-btn>
+          <v-btn
+          @click="clear"
+          >clear</v-btn>
+          
+      </v-form>
+    </v-flex>
+  </div>
 </template>
 
 <script>
+import SocialLoginButton from "@/components/SocialLoginButton.vue";
 import Auth from '@/services/AuthenticationService'
 
 export default {
+  components: {
+    SocialLoginButton
+  },
   $_veeValidate: {
     validator: 'new'
   },

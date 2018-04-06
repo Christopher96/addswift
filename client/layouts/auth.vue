@@ -11,15 +11,12 @@
 
 <script>
 import Logo from '@/components/Logo'
+
+import "@/assets/scss/auth.scss"
+
 export default {
   components: {
       Logo
   }
 }
 </script>
-
-
-<style lang="stylus" scoped>
-.container
-    max-width 50em
-</style>

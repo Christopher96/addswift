@@ -1,7 +1,9 @@
 <template>
-  <button @click="login" :id="site">
-		<span><i :class="'fa fa-'+site"></i> Sign in with {{name}}</span>
-	</button>
+  <v-btn
+  @click="login" 
+  :class="'social-btn-' + site"
+  ><span><i :class="'fa fa-'+site"></i> Sign in with {{name}}</span>
+  </v-btn>
 </template>
 
 <script>
@@ -12,7 +14,6 @@
     ],
     methods: {
       login: (event) => {
-        console.log(event.target.id);
         switch (event.target.id) {
           case "facebook":
 

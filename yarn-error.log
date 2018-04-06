@@ -1,17 +1,17 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Christopher\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install mongoose
+  /usr/bin/node /usr/bin/yarn install font-awesome
 
 PATH: 
-  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Christopher\bin;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client;C:\Program Files\Intel\iCLS Client;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\dotnet;C:\MAMP\bin\php\php7.1.5;C:\ProgramData\ComposerSetup\bin;C:\Users\Christopher\AppData\Roaming\npm\node_modules;C:\Program Files\nodejs;C:\Program Files\MongoDB\Server\3.4\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\Program Files\Microsoft\Web Platform Installer;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client;C:\Program Files\Intel\iCLS Client;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\dotnet;C:\MAMP\bin\php\php7.1.5;C:\ProgramData\ComposerSetup\bin;C:\Users\Christopher\AppData\Roaming\npm\node_modules;C:\Program Files\nodejs;C:\Program Files\MongoDB\Server\3.4\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\Program Files\Microsoft\Web Platform Installer;C:\Users\Christopher\AppData\Local\Microsoft\WindowsApps;C:\Users\Christopher\AppData\Roaming\npm;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Heroku\bin
+  /usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/opt/android-sdk/platform-tools:/opt/android-sdk/tools:/opt/android-sdk/tools/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
 
 Yarn version: 
   1.5.1
 
 Node version: 
-  8.9.1
+  9.8.0
 
 Platform: 
-  win32 x64
+  linux x64
 
 npm manifest: 
   {
@@ -35,6 +35,7 @@ npm manifest:
           "cors": "^2.8.4",
           "express": "^4.15.3",
           "jsonwebtoken": "^8.2.0",
+          "mongoose": "5.0.12",
           "mongoose-beautiful-unique-validation": "^7.1.1",
           "mongoose-validation-error-transform": "^0.0.2",
           "nuxt": "^1.0.0",
@@ -393,6 +394,12 @@ Lockfile:
   async-limiter@~1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.0.tgz#78faed8c3d074ab81f22b4e985d79e8738f720f8"
+  
+  async@2.1.4:
+    version "2.1.4"
+    resolved "https://registry.yarnpkg.com/async/-/async-2.1.4.tgz#2d2160c7788032e4dd6cbe2502f1f9a2c8f6cde4"
+    dependencies:
+      lodash "^4.14.0"
   
   async@^2.1.2, async@^2.4.1:
     version "2.6.0"
@@ -1085,6 +1092,10 @@ Lockfile:
     dependencies:
       inherits "~2.0.0"
   
+  bluebird@3.5.0:
+    version "3.5.0"
+    resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
+  
   bluebird@^3.1.1, bluebird@^3.4.7, bluebird@^3.5.1:
     version "3.5.1"
     resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
@@ -1235,6 +1246,10 @@ Lockfile:
     dependencies:
       caniuse-lite "^1.0.30000792"
       electron-to-chromium "^1.3.30"
+  
+  bson@~1.0.4:
+    version "1.0.6"
+    resolved "https://registry.yarnpkg.com/bson/-/bson-1.0.6.tgz#444db59ddd4c24f0cb063aabdc5c8c7b0ceca912"
   
   buffer-equal-constant-time@1.0.1:
     version "1.0.1"
@@ -3658,6 +3673,10 @@ Lockfile:
       jwa "^1.1.4"
       safe-buffer "^5.0.1"
   
+  kareem@2.0.6:
+    version "2.0.6"
+    resolved "https://registry.yarnpkg.com/kareem/-/kareem-2.0.6.tgz#011ed59fd718bb147c63141a799fc888cd5a211b"
+  
   kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
     version "3.2.2"
     resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
@@ -3769,6 +3788,10 @@ Lockfile:
   lodash.clonedeep@^4.5.0:
     version "4.5.0"
     resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
+  
+  lodash.get@4.4.2:
+    version "4.4.2"
+    resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
   
   lodash.includes@^4.3.0:
     version "4.3.0"
@@ -4026,9 +4049,26 @@ Lockfile:
     dependencies:
       minimist "0.0.8"
   
+  mongodb-core@3.0.4:
+    version "3.0.4"
+    resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-3.0.4.tgz#a3fdf466e697a2f1df87e458e5e2df1c26cc654b"
+    dependencies:
+      bson "~1.0.4"
+      require_optional "^1.0.1"
+  
+  mongodb@3.0.4:
+    version "3.0.4"
+    resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.0.4.tgz#ee0c0f7bc565edc5f40ee2d23170e522a8ad2286"
+    dependencies:
+      mongodb-core "3.0.4"
+  
   mongoose-beautiful-unique-validation@^7.1.1:
     version "7.1.1"
     resolved "https://registry.yarnpkg.com/mongoose-beautiful-unique-validation/-/mongoose-beautiful-unique-validation-7.1.1.tgz#50eaf88e395f9b194cd29ad76913cd9ebd515653"
+  
+  mongoose-legacy-pluralize@1.0.2:
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   
   mongoose-validation-error-transform@^0.0.2:
     version "0.0.2"
@@ -4036,6 +4076,22 @@ Lockfile:
     dependencies:
       lodash "^4.17.4"
       underscore.string "^3.3.4"
+  
+  mongoose@5.0.12:
+    version "5.0.12"
+    resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.0.12.tgz#608a3829bf2edae47b0078cd1970ede2a033b3a0"
+    dependencies:
+      async "2.1.4"
+      bson "~1.0.4"
+      kareem "2.0.6"
+      lodash.get "4.4.2"
+      mongodb "3.0.4"
+      mongoose-legacy-pluralize "1.0.2"
+      mpath "0.3.0"
+      mquery "3.0.0"
+      ms "2.0.0"
+      regexp-clone "0.0.1"
+      sliced "1.0.1"
   
   morgan@^1.9.0:
     version "1.9.0"
@@ -4057,6 +4113,19 @@ Lockfile:
       mkdirp "^0.5.1"
       rimraf "^2.5.4"
       run-queue "^1.0.3"
+  
+  mpath@0.3.0:
+    version "0.3.0"
+    resolved "https://registry.yarnpkg.com/mpath/-/mpath-0.3.0.tgz#7a58f789e9b5fd3c94520634157960f26bd5ef44"
+  
+  mquery@3.0.0:
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/mquery/-/mquery-3.0.0.tgz#e5f387dbabc0b9b69859e550e810faabe0ceabb0"
+    dependencies:
+      bluebird "3.5.0"
+      debug "2.6.9"
+      regexp-clone "0.0.1"
+      sliced "0.0.5"
   
   ms@2.0.0:
     version "2.0.0"
@@ -5472,6 +5541,10 @@ Lockfile:
       extend-shallow "^3.0.2"
       safe-regex "^1.1.0"
   
+  regexp-clone@0.0.1:
+    version "0.0.1"
+    resolved "https://registry.yarnpkg.com/regexp-clone/-/regexp-clone-0.0.1.tgz#a7c2e09891fdbf38fbb10d376fb73003e68ac589"
+  
   regexpp@^1.0.1:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/regexpp/-/regexpp-1.1.0.tgz#0e3516dd0b7904f413d2d4193dce4618c3a689ab"
@@ -5620,6 +5693,13 @@ Lockfile:
       caller-path "^0.1.0"
       resolve-from "^1.0.0"
   
+  require_optional@^1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/require_optional/-/require_optional-1.0.1.tgz#4cf35a4247f64ca3df8c2ef208cc494b1ca8fc2e"
+    dependencies:
+      resolve-from "^2.0.0"
+      semver "^5.1.0"
+  
   requires-port@1.x.x:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
@@ -5627,6 +5707,10 @@ Lockfile:
   resolve-from@^1.0.0:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-1.0.1.tgz#26cbfe935d1aeeeabb29bc3fe5aeb01e93d44226"
+  
+  resolve-from@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-2.0.0.tgz#9480ab20e94ffa1d9e80a804c7ea147611966b57"
   
   resolve-url@^0.2.1:
     version "0.2.1"
@@ -5861,6 +5945,14 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/slice-ansi/-/slice-ansi-1.0.0.tgz#044f1a49d8842ff307aad6b505ed178bd950134d"
     dependencies:
       is-fullwidth-code-point "^2.0.0"
+  
+  sliced@0.0.5:
+    version "0.0.5"
+    resolved "https://registry.yarnpkg.com/sliced/-/sliced-0.0.5.tgz#5edc044ca4eb6f7816d50ba2fc63e25d8fe4707f"
+  
+  sliced@1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/sliced/-/sliced-1.0.1.tgz#0b3a662b5d04c3177b1926bea82b03f837a2ef41"
   
   snapdragon-node@^2.0.1:
     version "2.1.1"
@@ -6951,10 +7043,10 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: `install` has been replaced with `add` to add new dependencies. Run "yarn add mongoose" instead.
-      at new MessageError (C:\Users\Christopher\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:186:110)
-      at Object.<anonymous> (C:\Users\Christopher\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:21987:13)
+  Error: `install` has been replaced with `add` to add new dependencies. Run "yarn add font-awesome" instead.
+      at new MessageError (/usr/lib/node_modules/yarn/lib/cli.js:186:110)
+      at Object.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:21987:13)
       at Generator.next (<anonymous>)
-      at step (C:\Users\Christopher\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:98:30)
-      at C:\Users\Christopher\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:109:13
+      at step (/usr/lib/node_modules/yarn/lib/cli.js:98:30)
+      at /usr/lib/node_modules/yarn/lib/cli.js:109:13
       at <anonymous>
