@@ -25,7 +25,7 @@ module.exports = {
     /*
      ** Customize the progress-bar color
      */
-    loading: { color: '#3B8070' },
+    loading: { color: 'red' },
 
     /*
      ** Global CSS
@@ -38,7 +38,8 @@ module.exports = {
      ** Plugins to load before mounting the App
      */
     plugins: [
-        '@/plugins/vuetify'
+        '@/plugins/vuetify',
+        '@/plugins/vee-validate'
     ],
 
     /*

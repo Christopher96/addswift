@@ -2,24 +2,25 @@
  * Mongoose Schema for Users
  */
 
-const mongoose = require("mongoose")
-const bcrypt = require("bcrypt")
+const mongoose = ('mongoose')
+const bcrypt = ('bcrypt')
 const SALT_WORK_FACTOR = 10
 
-const UserSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const UserSchema = new Schema({
     username: {
         type: String,
-        minlength: [3, 'Username must be atleast 3 characters'],
-        maxlength: [10, 'Username must be less than 10 characters'],
-        required: 'Please enter a username',
-        unique: 'Username "{VALUE}" is already taken'
+        minlength: 3,
+        maxlength: 10,
+        unique: 'Username "{VALUE}" is already taken',
+        required: true
     },
     password: {
         type: String,
-        required: 'Please enter a password',
-        minlength: [3, 'Password must be atleast 3 characters'],
-        maxlength: [50, 'Password must be less than 50 characters'],
-        default: ''
+        minlength: 3,
+        maxlength: 50,
+        required: true
     },
     created: {
         type: Date,

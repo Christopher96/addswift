@@ -1,37 +1,70 @@
 <template>
   <v-form v-model="valid" ref="form" lazy-validation>
-    <span class="mr-3">Already have a user?</span>
-    <nuxt-link to="login">Login</nuxt-link>
-    <v-text-field label="Username" v-model="username" :rules="nameRules" :counter="10" required></v-text-field>
-    <v-text-field label="Password" v-model="password" :rules="passwordRules" :counter="10" required></v-text-field>
-    <v-alert v-show="error" type="error" :value="true">{{ error }}</v-alert>
-    <v-btn @click="register" :disabled="!valid">Register</v-btn>
-    <v-btn @click="clear">clear</v-btn>
+      <span class="mr-3">Already have a user?</span>
+      <nuxt-link to="login">Login</nuxt-link>
+      <v-text-field
+      v-model="username"
+      label="Username"
+      :counter="10"
+      :error-messages="errors.collect('username')"
+      v-validate="'required|max:10|min:3'"
+      data-vv-name="username"
+      required
+      ></v-text-field>
+      <v-text-field
+      v-model="password"
+      label="Password"
+      :counter="50"
+      :error-messages="errors.collect('password')"
+      v-validate="'required|max:50|min:3'"
+      data-vv-name="password"
+      required
+      ></v-text-field>
+      <v-text-field
+      v-model="email"
+      :counter="50"
+      label="Email"
+      :error-messages="errors.collect('email')"
+      v-validate="'required|email'"
+      data-vv-name="email"
+      required
+      ></v-text-field>
+      <v-alert
+      v-show="error"
+      type="error"
+      :value="true"
+      >{{ error }}</v-alert>
+      <v-btn
+      @click="register"
+      :disabled="!valid">Register</v-btn>
+      <v-btn
+      @click="clear"
+      >clear</v-btn>
   </v-form>
 </template>
 
 <script>
 import Auth from '@/services/AuthenticationService'
+
 export default {
+  $_veeValidate: {
+    validator: 'new'
+  },
   data: () => ({
     valid: true,
-    username: "",
-    nameRules: [
-      v => !!v || "Username is required",
-      v => (v && v.length <= 10) || "Username must be less than 10 characters"
-    ],
-    password: "",
-    passwordRules: [
-      v => !!v || "Password is required",
-      v => (v && v.length <= 10) || "Username must be less than 10 characters"
-    ],
-    error: ""
+    username: '',
+    password: '',
+    email: '',
+    error: '',
+    dictionary: {
+      custom: {}
+    }
   }),
   methods: {
     async register() {
-      this.error = ""
-      this.success = ""
-      if (this.$refs.form.validate()) {
+      this.error = ''
+      this.success = ''
+      if (this.$validator.validateAll()) {
         await Auth.register({
             username: this.username,
             password: this.password
@@ -46,7 +79,11 @@ export default {
     },
     clear() {
       this.$refs.form.reset()
+      this.$validator.reset()
     }
+  },
+  mounted() {
+    this.$validator.localize('en', this.dictionary)
   },
   layout: 'auth'
 }
