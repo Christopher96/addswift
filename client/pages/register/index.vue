@@ -22,7 +22,6 @@
       ></v-text-field>
       <v-text-field
       v-model="email"
-      :counter="50"
       label="Email"
       :error-messages="errors.collect('email')"
       v-validate="'required|email'"
@@ -36,7 +35,8 @@
       >{{ error }}</v-alert>
       <v-btn
       @click="register"
-      :disabled="!valid">Register</v-btn>
+      :disabled="!valid">
+      Register</v-btn>
       <v-btn
       @click="clear"
       >clear</v-btn>
@@ -64,7 +64,8 @@ export default {
     async register() {
       this.error = ''
       this.success = ''
-      if (this.$validator.validateAll()) {
+      this.$validator.validateAll().then(async (result) => {
+        if(!result) return
         await Auth.register({
             username: this.username,
             password: this.password
@@ -75,7 +76,7 @@ export default {
         }).catch((err) => {
           this.error = err.response.data
         })
-      }
+      })
     },
     clear() {
       this.$refs.form.reset()
