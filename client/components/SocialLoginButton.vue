@@ -1,16 +1,18 @@
 <template>
   <v-btn
   @click="login" 
-  :class="'social-btn-' + site"
-  ><span><i :class="'fa fa-'+site"></i> Sign in with {{name}}</span>
+  :data-site="site"
+  :style="{ backgroundColor: color }"
+  ><span><i :class="'fa fa-'+site"></i>{{title}}</span>
   </v-btn>
 </template>
 
 <script>
   export default {
     props: [
+      "title",
       "site",
-      "name"
+      "color"
     ],
     methods: {
       login: (event) => {
@@ -29,3 +31,14 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+.fa {
+  margin-right: 10px;
+}
+
+.btn {
+  width: 100%;
+  margin: 0 0 15px 0;
+}
+</style>

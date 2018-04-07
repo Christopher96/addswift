@@ -1,9 +1,8 @@
 <template>
-  <div>
-    <v-flex md6>
+  <v-layout fluid>
+    <v-flex column md6>
       <v-form v-model="valid" ref="form" lazy-validation>
-          <p class="subheading">Already a member? <nuxt-link to="register">Register</nuxt-link><i class="fa fa-arrow-right"></i></p>
-          
+          <p class="fl subheading">Not a member yet? <nuxt-link to="register">Register </nuxt-link><i class="fa fa-arrow-right"></i></p>
           <v-text-field
           v-model="username"
           label="Username"
@@ -25,19 +24,37 @@
           <v-alert
           v-show="error"
           type="error"
-          :value="true"
-          >{{ error }}</v-alert>
+          :value="true">
+            {{ error }}
+          </v-alert>
           <v-btn
+          id="login-btn"
           @click="login"
           :disabled="!valid">
-          Login</v-btn>
+            Login
+          </v-btn>
           <v-btn
-          @click="clear"
-          >clear</v-btn>
-          
+          @click="clear">
+            Clear
+          </v-btn>
       </v-form>
     </v-flex>
-  </div>
+    <v-flex column md6>
+      <p class="subheading">Or sign in with social media</p>
+      <SocialLoginButton
+        title="Facebook"
+        site="facebook"
+        color="#4267b2"/>
+      <SocialLoginButton
+        title="Google +"
+        site="google-plus"
+        color="#db4437"/>
+      <SocialLoginButton
+        title="Twitter"
+        site="twitter"
+        color="#1DA1F2"/>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -90,3 +107,15 @@ export default {
   layout: 'auth'
 }
 </script>
+
+<style lang="scss" scoped>
+.column {
+  &:first-of-type {
+    padding-right: 10px;
+  }
+  &:last-of-type {
+    padding-left: 10px;
+  }
+}
+</style>
+

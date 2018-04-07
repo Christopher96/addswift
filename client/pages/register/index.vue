@@ -1,7 +1,6 @@
 <template>
   <v-form v-model="valid" ref="form" lazy-validation>
-      <span class="mr-3">Already have a user?</span>
-      <nuxt-link to="login">Login</nuxt-link>
+      <p class="fl subheading">Already a member? <nuxt-link to="login">Login </nuxt-link><i class="fa fa-arrow-right"></i></p>
       <v-text-field
       v-model="username"
       label="Username"
@@ -34,6 +33,7 @@
       :value="true"
       >{{ error }}</v-alert>
       <v-btn
+      id="register-btn"
       @click="register"
       :disabled="!valid">
       Register</v-btn>

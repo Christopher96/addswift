@@ -1,4 +1,18 @@
 @import '~font-awesome/scss/font-awesome';
-.input-group__details {
-    min-height: 27px;
+
+* {
+    box-sizing: border-box;
 }
+
+.input-group__details {
+    min-height: 30px;
+}
+
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+

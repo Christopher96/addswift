@@ -22,7 +22,6 @@
         "jsonwebtoken": "^8.2.0",
         "mongoose": "5.0.12",
         "mongoose-beautiful-unique-validation": "^7.1.1",
-        "mongoose-validation-error-transform": "^0.0.2",
         "nuxt": "^1.0.0",
         "vee-validate": "^2.0.6",
         "vuetify": "^0.17.3"
