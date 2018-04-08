@@ -20,6 +20,9 @@ import FacebookService from '@/services/social/FacebookService'
         switch (this.site) {
           case "facebook":
             FacebookService.loginWindow()
+            .then((res) => {
+                window.open(res.data.url)
+            })
           break;
           case "twitter":
 

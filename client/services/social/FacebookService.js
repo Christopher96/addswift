@@ -3,12 +3,9 @@ const fbApi = Api('/social/facebook')
 
 export default {
     loginWindow() {
-        fbApi.get('/login-url')
-        .then((res) => {    
-            window.open(res.data.url)
-        })
-        .catch((err) => {
-
-        })
+        return fbApi.get('/login-url')
+    },
+    getToken(code) {
+        return fbApi.post('/token', { code })
     }
 }

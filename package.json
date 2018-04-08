@@ -5,7 +5,7 @@
     "author": "Christopher Gauffin",
     "private": true,
     "scripts": {
-        "dev": "cross-env NODE_ENV=development nodemon client/server/index.js --watch server",
+        "dev": "cross-env NODE_ENV=development nodemon client/server/index.js --watch client/server",
         "backend": "nodemon server/index.js",
         "build": "nuxt build",
         "start": "cross-env NODE_ENV=production node client/server/server.js",

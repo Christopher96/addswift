@@ -29,7 +29,7 @@ const createStore = () => {
                 commit('setUser', user)
             },
             logout({ commit }, user) {
-                commit('logoout', user)
+                commit('logout', user)
             }
         }
     })
