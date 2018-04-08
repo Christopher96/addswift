@@ -30,6 +30,8 @@ const User = require('../models/User')
 
 const jwt = require('jsonwebtoken')
 
+router.use('/social', require('./social'))
+
 router.post('/register', (req, res) => {
     let user = new User(req.body)
     user.save()

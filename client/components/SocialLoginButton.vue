@@ -1,13 +1,14 @@
 <template>
   <v-btn
   @click="login" 
-  :data-site="site"
   :style="{ backgroundColor: color }"
   ><span><i :class="'fa fa-'+site"></i>{{title}}</span>
   </v-btn>
 </template>
 
 <script>
+import FacebookService from '@/services/social/FacebookService'
+
   export default {
     props: [
       "title",
@@ -15,10 +16,10 @@
       "color"
     ],
     methods: {
-      login: (event) => {
-        switch (event.target.id) {
+      login: function() {
+        switch (this.site) {
           case "facebook":
-
+            FacebookService.loginWindow()
           break;
           case "twitter":
 
@@ -39,6 +40,7 @@
 
 .btn {
   width: 100%;
-  margin: 0 0 15px 0;
+  margin-bottom: 15px;
 }
+
 </style>

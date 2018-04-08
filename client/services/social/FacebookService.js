@@ -1,8 +1,14 @@
+import Api from '../Api'
+const fbApi = Api('/social/facebook')
+
 export default {
-    register(credentials) {
-        return Api().post('register', credentials)
-    },
-    login(credentials) {
-        return Api().post('login', credentials)
+    loginWindow() {
+        fbApi.get('/login-url')
+        .then((res) => {    
+            window.open(res.data.url)
+        })
+        .catch((err) => {
+
+        })
     }
 }

@@ -59,7 +59,7 @@
 
 <script>
 import SocialLoginButton from "@/components/SocialLoginButton.vue";
-import Auth from '@/services/AuthenticationService'
+import AuthenticationService from '@/services/AuthenticationService'
 
 export default {
   components: {
@@ -83,7 +83,7 @@ export default {
       this.success = ''
       this.$validator.validateAll().then(async (result) => {
         if(!result) return
-        await Auth.login({
+        await AuthenticationService.login({
             username: this.username,
             password: this.password
         }).then((res) => {
