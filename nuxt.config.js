@@ -31,7 +31,8 @@ module.exports = {
      ** Global CSS
      */
     css: [
-        '@assets/stylus/main.styl'
+        '@assets/styl/main.styl',
+        '@assets/scss/main.scss'
     ],
 
     /*
@@ -46,7 +47,6 @@ module.exports = {
      ** Nuxt.js modules
      */
     modules: [
-        // Doc: https://github.com/nuxt-community/axios-module#usage
         '@nuxtjs/axios'
     ],
 

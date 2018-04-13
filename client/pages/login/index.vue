@@ -1,54 +1,121 @@
 <template>
-  <v-form v-model="valid" ref="form" lazy-validation>
-    <span class="mr-3">Don't have a user?</span>
-    <nuxt-link to="register">Register</nuxt-link>
-    <v-text-field label="Username" v-model="username" :rules="nameRules" :counter="10" required></v-text-field>
-    <v-text-field label="Password" v-model="password" :rules="passwordRules" :counter="10" required></v-text-field>
-    <v-alert v-show="error" type="error" :value="true">{{ error }}</v-alert>
-    <v-btn @click="login" :disabled="!valid">Login</v-btn>
-    <v-btn @click="clear">clear</v-btn>
-  </v-form>
+  <v-layout fluid>
+    <v-flex column md6>
+      <v-form v-model="valid" ref="form" lazy-validation>
+          <p class="fl subheading">Not a member yet? <nuxt-link to="register">Register </nuxt-link><i class="fa fa-arrow-right"></i></p>
+          <v-text-field
+          v-model="username"
+          label="Username"
+          :counter="10"
+          :error-messages="errors.collect('username')"
+          v-validate="'required|max:10|min:3'"
+          data-vv-name="username"
+          required
+          ></v-text-field>
+          <v-text-field
+          v-model="password"
+          label="Password"
+          :counter="50"
+          :error-messages="errors.collect('password')"
+          v-validate="'required|max:50|min:3'"
+          data-vv-name="password"
+          required
+          ></v-text-field>
+          <v-alert
+          v-show="error"
+          type="error"
+          :value="true">
+            {{ error }}
+          </v-alert>
+          <v-btn
+          id="login-btn"
+          @click="login"
+          :disabled="!valid">
+            Login
+          </v-btn>
+          <v-btn
+          @click="clear">
+            Clear
+          </v-btn>
+      </v-form>
+    </v-flex>
+    <v-flex column md6>
+      <p class="subheading">Or sign in with social media</p>
+      <SocialLoginButton
+        title="Facebook"
+        site="facebook"
+        color="#4267b2"/>
+      <SocialLoginButton
+        title="Google +"
+        site="google-plus"
+        color="#db4437"/>
+      <SocialLoginButton
+        title="Twitter"
+        site="twitter"
+        color="#1DA1F2"/>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
-import Auth from '@/services/AuthenticationService'
+import SocialLoginButton from "@/components/SocialLoginButton.vue";
+import AuthenticationService from '@/services/AuthenticationService'
+
 export default {
+  components: {
+    SocialLoginButton
+  },
+  $_veeValidate: {
+    validator: 'new'
+  },
   data: () => ({
     valid: true,
-    username: "",
-    nameRules: [
-      v => !!v || "Username is required",
-      v => (v && v.length <= 10) || "Username must be less than 10 characters"
-    ],
-    password: "",
-    passwordRules: [
-      v => !!v || "Password is required",
-      v => (v && v.length <= 10) || "Username must be less than 10 characters"
-    ],
-    error: ""
+    username: '',
+    password: '',
+    error: '',
+    dictionary: {
+      custom: {}
+    }
   }),
   methods: {
     async login() {
-      this.error = ""
-      this.success = ""
-      if (this.$refs.form.validate()) {
-        await Auth.login({
+      this.error = ''
+      this.success = ''
+      this.$validator.validateAll().then(async (result) => {
+        if(!result) return
+        await AuthenticationService.login({
             username: this.username,
             password: this.password
         }).then((res) => {
-          this.$store.dispatch('setToken', res.data.token)
-          this.$store.dispatch('setUser', res.data.user)
-          this.$router.push('/')
+            this.$store.dispatch('setToken', res.data.token)
+            this.$store.dispatch('setUser', res.data.user)
+            this.$router.push('/')
         }).catch((err) => {
           console.log(err)
           this.error = err.response.data
         })
-      }
+      })
     },
     clear() {
       this.$refs.form.reset()
+      this.$validator.reset()
     }
+  },
+  mounted() {
+    this.$validator.localize('en', this.dictionary)
   },
   layout: 'auth'
 }
 </script>
+
+<style lang="scss" scoped>
+.column {
+  &:first-of-type {
+    padding-right: 10px;
+  }
+  &:last-of-type {
+    padding-left: 10px;
+  }
+}
+</style>
+

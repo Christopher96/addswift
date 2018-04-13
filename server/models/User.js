@@ -2,8 +2,8 @@
  * Mongoose Schema for Users
  */
 
-const mongoose = ('mongoose')
-const bcrypt = ('bcrypt')
+const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
 const SALT_WORK_FACTOR = 10
 
 const Schema = mongoose.Schema;
@@ -26,7 +26,7 @@ const UserSchema = new Schema({
         type: Date,
         default: Date.now
     }
-});
+})
 
 UserSchema.pre('save', function(next) {
     if (!this.isModified('password'))

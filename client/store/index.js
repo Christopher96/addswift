@@ -16,7 +16,7 @@ const createStore = () => {
             setUser(state, user) {
                 state.user = user
             },
-            logoout(state, user) {
+            logout(state, user) {
                 state.token = null
                 state.user = null
             }
@@ -29,7 +29,7 @@ const createStore = () => {
                 commit('setUser', user)
             },
             logout({ commit }, user) {
-                commit('logoout', user)
+                commit('logout', user)
             }
         }
     })

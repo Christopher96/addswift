@@ -1,7 +1,6 @@
 <template>
   <v-form v-model="valid" ref="form" lazy-validation>
-      <span class="mr-3">Already have a user?</span>
-      <nuxt-link to="login">Login</nuxt-link>
+      <p class="fl subheading">Already a member? <nuxt-link to="login">Login </nuxt-link><i class="fa fa-arrow-right"></i></p>
       <v-text-field
       v-model="username"
       label="Username"
@@ -22,7 +21,6 @@
       ></v-text-field>
       <v-text-field
       v-model="email"
-      :counter="50"
       label="Email"
       :error-messages="errors.collect('email')"
       v-validate="'required|email'"
@@ -35,8 +33,10 @@
       :value="true"
       >{{ error }}</v-alert>
       <v-btn
+      id="register-btn"
       @click="register"
-      :disabled="!valid">Register</v-btn>
+      :disabled="!valid">
+      Register</v-btn>
       <v-btn
       @click="clear"
       >clear</v-btn>
@@ -64,7 +64,8 @@ export default {
     async register() {
       this.error = ''
       this.success = ''
-      if (this.$validator.validateAll()) {
+      this.$validator.validateAll().then(async (result) => {
+        if(!result) return
         await Auth.register({
             username: this.username,
             password: this.password
@@ -75,7 +76,7 @@ export default {
         }).catch((err) => {
           this.error = err.response.data
         })
-      }
+      })
     },
     clear() {
       this.$refs.form.reset()

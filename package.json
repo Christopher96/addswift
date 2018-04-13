@@ -5,7 +5,7 @@
     "author": "Christopher Gauffin",
     "private": true,
     "scripts": {
-        "dev": "cross-env NODE_ENV=development nodemon client/server/index.js --watch server",
+        "dev": "cross-env NODE_ENV=development nodemon client/server/index.js --watch client/server",
         "backend": "nodemon server/index.js",
         "build": "nuxt build",
         "start": "cross-env NODE_ENV=production node client/server/server.js",
@@ -18,10 +18,11 @@
         "bcrypt": "^1.0.3",
         "cors": "^2.8.4",
         "express": "^4.15.3",
+        "fb": "^2.0.0",
+        "font-awesome": "^4.7.0",
         "jsonwebtoken": "^8.2.0",
-        "mongoose": "^5.0.13",
+        "mongoose": "5.0.12",
         "mongoose-beautiful-unique-validation": "^7.1.1",
-        "mongoose-validation-error-transform": "^0.0.2",
         "nuxt": "^1.0.0",
         "vee-validate": "^2.0.6",
         "vuetify": "^0.17.3"
@@ -33,7 +34,9 @@
         "eslint-loader": "^1.7.1",
         "eslint-plugin-vue": "^4.0.0",
         "morgan": "^1.9.0",
+        "node-sass": "^4.8.3",
         "nodemon": "^1.11.0",
+        "sass-loader": "^6.0.7",
         "stylus": "^0.54.5",
         "stylus-loader": "^3.0.1"
     }
