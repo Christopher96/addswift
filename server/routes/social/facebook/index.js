@@ -1,5 +1,7 @@
 const router = require('express').Router()
-const { FB, FacebookApiException } = require('fb');
+const { FB, FacebookApiException } = require('fb')
+
+const SocialUser = require.main.require('./models/SocialUser')
 
 FB.options({
     appId: '1577677152512840',
@@ -17,7 +19,7 @@ router.get('/login-url', (req, res) => {
 
 })
 
-router.post('/token', (req, res) => {
+getToken = (req, res, next) => {
     FB.api('oauth/access_token', {
         client_id: FB.options('appId'),
         client_secret: FB.options('appSecret'),
@@ -25,16 +27,51 @@ router.post('/token', (req, res) => {
         code: req.body.code,
     }, function(data) {
         if (!data || data.error) {
-            return res.status(400).send(!data ? 'error occurred' : data.error);
+            return res.status(400).send(!data ? 'error occurred' : data.error)
         }
 
-        var accessToken = data.access_token;
-        var expires = data.expires ? data.expires : 0;
-        return res.status(200).json({
-            accessToken,
-            expires
+        var token = data.access_token
+        var expires = data.expires ? data.expires : 0
+        FB.options({ timeout: expires, accessToken: token })
+
+        next()
+    })
+}
+
+fetchUser = (req, res, next) => {
+    FB.api('/me', function(data) {
+        if (data && data.error) {
+            if (data.error.code === 'ETIMEDOUT') {
+                return res.status(408).send('request timeout')
+            } else {
+                return res.status(403).send(data.error)
+            }
+        } else {
+            req.data = data
+            next()
+        }
+    })
+}
+
+createUser = (req, res, next) => {
+    const user = new SocialUser({
+        username: "facebook." + req.data.id,
+        displayName: req.data.name,
+        accessToken: FB.options("accessToken"),
+        site: "facebook"
+    })
+
+    req.user = user
+
+    user.save().then(next)
+        .catch((err) => {
+            res.status(500).send(err)
         })
-    });
+}
+
+router.use('/register', getToken, fetchUser, createUser)
+router.post('/register', (req, res) => {
+    res.send(200).json(req.user)
 })
 
 module.exports = router

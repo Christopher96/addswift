@@ -2,10 +2,10 @@ import Api from '../Api'
 const fbApi = Api('/social/facebook')
 
 export default {
-    loginWindow() {
+    loginUrl() {
         return fbApi.get('/login-url')
     },
-    getToken(code) {
-        return fbApi.post('/token', { code })
+    registerCode(code) {
+        return fbApi.post('/register', { code })
     }
 }

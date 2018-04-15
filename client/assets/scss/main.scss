@@ -1,8 +1,15 @@
-@import '~font-awesome/scss/font-awesome';
+/* IMPORTS */
+
+@import "~font-awesome/scss/font-awesome";
+
+/* ELEMENTS */
 
 * {
     box-sizing: border-box;
 }
+
+
+/* CLASSES */
 
 .input-group__details {
     min-height: 30px;
@@ -16,3 +23,28 @@
     float: left;
 }
 
+
+/* AUTH */
+
+.logo {
+    img {
+        width: 100%;
+    }
+}
+
+.form-btns {
+    margin: 0px 0px 0px -10px;
+}
+
+
+/* TOOLBAR */
+
+.logo,
+.toolbar__title {
+    height: 100%;
+}
+
+.toolbar__title .logo img {
+    height: 100%;
+    padding: 15px;
+}

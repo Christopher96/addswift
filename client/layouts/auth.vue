@@ -12,11 +12,31 @@
 <script>
 import Logo from '@/components/Logo'
 
-import "@/assets/scss/auth.scss"
-
 export default {
   components: {
       Logo
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.container {
+    max-width: 50em;
+}
+
+#login-btn,
+#register-btn {
+    margin: 0;
+}
+
+.logo {
+    width: 100%;
+    text-align: center;
+    padding: 2em 6em;
+    img {
+        width: 100%;
+    }
+}
+
+
+</style>

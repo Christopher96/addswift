@@ -7,11 +7,14 @@ import FacebookService from '@/services/social/FacebookService'
 import AuthenticationService from '@/services/AuthenticationService'
 
 export default {
+  layout: 'loading',
   mounted() {
     const params = this.$route.query
+    
     if(params.code !== undefined) {
-      FacebookService.getToken(params.code)
+      FacebookService.registerCode(params.code)
         .then((res) => {
+          console.log(res)
           return AuthenticationService.socialLogin(res.data.token)
         })
         .then((res) => {
@@ -22,5 +25,6 @@ export default {
         })
     }
   }
+ 
 }
 </script>

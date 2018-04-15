@@ -56,7 +56,7 @@ router.post('/login', (req, res) => {
 })
 
 router.post('/social-login', (req, res) => {
-
+    console.log(req.token)
 })
 
 router.post('/testin', verifyToken, (req, res) => {

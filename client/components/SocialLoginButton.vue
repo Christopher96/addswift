@@ -2,7 +2,11 @@
   <v-btn
   @click="login" 
   :style="{ backgroundColor: color }"
-  ><span><i :class="'fa fa-'+site"></i>{{title}}</span>
+  >
+  <v-layout>
+    <v-flex class="site-icon" md2><v-icon>fa-{{site}}</v-icon></v-flex>
+    <v-flex md10>{{title}}</v-flex>
+  </v-layout>
   </v-btn>
 </template>
 
@@ -19,7 +23,7 @@ import FacebookService from '@/services/social/FacebookService'
       login: function() {
         switch (this.site) {
           case "facebook":
-            FacebookService.loginWindow()
+            FacebookService.loginUrl()
             .then((res) => {
                 window.open(res.data.url)
             })
@@ -38,12 +42,19 @@ import FacebookService from '@/services/social/FacebookService'
 
 <style lang="scss" scoped>
 .fa {
-  margin-right: 10px;
+  font-size: 1.5em;
+}
+
+.site-icon {
+  border-right: 1px solid;
 }
 
 .btn {
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  padding: 15px 15px 15px 0;
+  height: auto;
 }
+
 
 </style>

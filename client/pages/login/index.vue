@@ -27,16 +27,20 @@
           :value="true">
             {{ error }}
           </v-alert>
-          <v-btn
-          id="login-btn"
-          @click="login"
-          :disabled="!valid">
-            Login
-          </v-btn>
-          <v-btn
-          @click="clear">
-            Clear
-          </v-btn>
+          <div class="form-btns">
+            <v-btn
+            id="login-btn"
+            @click="login"
+            :disabled="!valid">
+              Login
+            </v-btn>
+            <v-btn
+            @click="clear">
+              Clear
+            </v-btn>
+          </div>
+ 
+          
       </v-form>
     </v-flex>
     <v-flex column md6>
@@ -117,5 +121,6 @@ export default {
     padding-left: 10px;
   }
 }
+
 </style>
 

@@ -32,6 +32,7 @@
       type="error"
       :value="true"
       >{{ error }}</v-alert>
+      <div class="form-btns">
       <v-btn
       id="register-btn"
       @click="register"
@@ -40,6 +41,8 @@
       <v-btn
       @click="clear"
       >clear</v-btn>
+      </div>
+      
   </v-form>
 </template>
 
