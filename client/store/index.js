@@ -6,7 +6,8 @@ const createStore = () => {
         state: {
             token: null,
             user: null,
-            isLoggedIn: false
+            isLoggedIn: false,
+            drawer: true
         },
         mutations: {
             setToken(state, token) {
@@ -19,6 +20,9 @@ const createStore = () => {
             logout(state, user) {
                 state.token = null
                 state.user = null
+            },
+            toggleDrawer(state) {
+                state.drawer = !state.drawer
             }
         },
         actions: {
@@ -30,6 +34,9 @@ const createStore = () => {
             },
             logout({ commit }, user) {
                 commit('logout', user)
+            },
+            toggleDrawer({ commit }) {
+                commit('toggleDrawer')
             }
         }
     })

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import colors from 'vuetify/es5/util/colors'
+// import colors from 'vuetify/es5/util/colors'
 
 Vue.use(Vuetify, {
     theme: {
@@ -11,5 +11,5 @@ Vue.use(Vuetify, {
         warning: "#ffeb3b",
         info: "#2196f3",
         success: "#4caf50"
-      }
+    }
 })

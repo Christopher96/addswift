@@ -1,32 +1,52 @@
 <template>
   <v-form v-model="valid" ref="form" lazy-validation>
-      <p class="fl subheading">Already a member? <nuxt-link to="login">Login </nuxt-link><i class="fa fa-arrow-right"></i></p>
-      <v-text-field
-      v-model="username"
-      label="Username"
-      :counter="10"
-      :error-messages="errors.collect('username')"
-      v-validate="'required|max:10|min:3'"
-      data-vv-name="username"
-      required
-      ></v-text-field>
-      <v-text-field
-      v-model="password"
-      label="Password"
-      :counter="50"
-      :error-messages="errors.collect('password')"
-      v-validate="'required|max:50|min:3'"
-      data-vv-name="password"
-      required
-      ></v-text-field>
-      <v-text-field
-      v-model="email"
-      label="Email"
-      :error-messages="errors.collect('email')"
-      v-validate="'required|email'"
-      data-vv-name="email"
-      required
-      ></v-text-field>
+       <p class="subheading">Already a member? <nuxt-link to="login">Login </nuxt-link><i class="fa fa-arrow-right"></i></p>
+      <v-layout fluid>
+        <v-flex md6 column>
+          <v-text-field
+          prepend-icon="fa-user"
+          v-model="username"
+          label="Username"
+          :counter="10"
+          :error-messages="errors.collect('username')"
+          v-validate="'required|max:10|min:3'"
+          data-vv-name="username"
+          required
+          ></v-text-field>
+          <v-text-field
+          prepend-icon="fa-envelope"
+          v-model="email"
+          label="Email"
+          :error-messages="errors.collect('email')"
+          v-validate="'required|email'"
+          data-vv-name="email"
+          required
+          ></v-text-field>
+          
+        </v-flex >
+        <v-flex md6 column>
+          <v-text-field
+          prepend-icon="fa-lock"
+          v-model="password"
+          label="Password"
+          :counter="50"
+          :error-messages="errors.collect('password')"
+          v-validate="'required|max:50|min:3'"
+          data-vv-name="password"
+          required
+          ></v-text-field>
+          <v-text-field
+          prepend-icon="fa-unlock-alt"
+          v-model="confirm_password"
+          label="Confirm password"
+          :counter="50"
+          :error-messages="errors.collect('confirm_password')"
+          v-validate="'confirmed:password'"
+          data-vv-name="confirm_password"
+          required
+          ></v-text-field>
+        </v-flex>
+      </v-layout>
       <v-alert
       v-show="error"
       type="error"
@@ -57,6 +77,7 @@ export default {
     valid: true,
     username: '',
     password: '',
+    confirm_password: '',
     email: '',
     error: '',
     dictionary: {

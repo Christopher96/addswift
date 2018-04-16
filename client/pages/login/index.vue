@@ -4,6 +4,7 @@
       <v-form v-model="valid" ref="form" lazy-validation>
           <p class="fl subheading">Not a member yet? <nuxt-link to="register">Register </nuxt-link><i class="fa fa-arrow-right"></i></p>
           <v-text-field
+          prepend-icon="fa-user"
           v-model="username"
           label="Username"
           :counter="10"
@@ -13,6 +14,7 @@
           required
           ></v-text-field>
           <v-text-field
+          prepend-icon="fa-lock"
           v-model="password"
           label="Password"
           :counter="50"
@@ -39,8 +41,6 @@
               Clear
             </v-btn>
           </div>
- 
-          
       </v-form>
     </v-flex>
     <v-flex column md6>
@@ -112,15 +112,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.column {
-  &:first-of-type {
-    padding-right: 10px;
-  }
-  &:last-of-type {
-    padding-left: 10px;
-  }
-}
-
-</style>
 

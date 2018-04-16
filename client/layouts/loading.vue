@@ -3,7 +3,9 @@
             <v-layout align-center justify-center>
             <div>
                 <v-progress-circular :width="7" :size="400" indeterminate color="secondary">
-                    <Logo/>
+                    <div class="logo">
+                        <img src="~/assets/images/logo_large.png">
+                    </div>
                 </v-progress-circular>
             </div>
             <nuxt />
@@ -11,18 +13,11 @@
     </v-app>
 </template>
 
-<script>
-import Logo from '@/components/Logo'
-
-export default {
-  components: {
-    Logo
-  }
-}
-</script>
-
 <style lang="scss" scoped>
 .logo {
     margin: -3em;
+    img {
+        width: 100%;
+    }
 }
 </style>
