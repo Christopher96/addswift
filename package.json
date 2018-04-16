@@ -19,10 +19,12 @@
         "cors": "^2.8.4",
         "express": "^4.15.3",
         "fb": "^2.0.0",
+        "file": "^0.2.2",
         "font-awesome": "^4.7.0",
         "jsonwebtoken": "^8.2.0",
         "mongoose": "5.0.12",
         "mongoose-beautiful-unique-validation": "^7.1.1",
+        "mongoose-validation-error-transform": "^0.0.2",
         "nuxt": "^1.0.0",
         "vee-validate": "^2.0.6",
         "vuetify": "^1.0.14"

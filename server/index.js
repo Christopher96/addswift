@@ -2,8 +2,11 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const path = require('path')
+const file = require('file')
 
 const app = express()
+const router = express.Router()
 
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3001
@@ -17,8 +20,13 @@ app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(cors())
 
-// Attach API route
-app.use('/api', require('./routes/api'))
+// Dynamically add routes by folder structure
+const routePath = path.join(__dirname, '/routes')
+file.walkSync(routePath, function(path, dirs, files) {
+    const dirPath = path.replace(routePath, '')
+    if (dirPath != '' && files.indexOf('index.js') != -1)
+        router.use(dirPath, require(path))
+})
 
 // Listen the server
 app.listen(port, host)

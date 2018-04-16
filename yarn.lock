@@ -2619,6 +2619,10 @@ file-loader@^1.1.6:
     loader-utils "^1.0.2"
     schema-utils "^0.4.5"
 
+file@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/file/-/file-0.2.2.tgz#c3dfd8f8cf3535ae455c2b423c2e52635d76b4d3"
+
 filesize@^3.5.11:
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/filesize/-/filesize-3.6.1.tgz#090bb3ee01b6f801a8a8be99d31710b3422bb317"
@@ -4210,6 +4214,13 @@ mongoose-beautiful-unique-validation@^7.1.1:
 mongoose-legacy-pluralize@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
+
+mongoose-validation-error-transform@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/mongoose-validation-error-transform/-/mongoose-validation-error-transform-0.0.2.tgz#918dbb0be5032ddfcf597067ab5a332069cd4989"
+  dependencies:
+    lodash "^4.17.4"
+    underscore.string "^3.3.4"
 
 mongoose@5.0.12:
   version "5.0.12"
@@ -6370,6 +6381,10 @@ split@0.3:
   dependencies:
     through "2"
 
+sprintf-js@^1.0.3:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.1.1.tgz#36be78320afe5801f6cea3ee78b6e5aab940ea0c"
+
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
@@ -6840,6 +6855,13 @@ undefsafe@^2.0.2:
   dependencies:
     debug "^2.2.0"
 
+underscore.string@^3.3.4:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/underscore.string/-/underscore.string-3.3.4.tgz#2c2a3f9f83e64762fdc45e6ceac65142864213db"
+  dependencies:
+    sprintf-js "^1.0.3"
+    util-deprecate "^1.0.2"
+
 union-value@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/union-value/-/union-value-1.0.0.tgz#5c71c34cb5bad5dcebe3ea0cd08207ba5aa1aea4"
@@ -6971,7 +6993,7 @@ use@^3.1.0:
   dependencies:
     kind-of "^6.0.2"
 
-util-deprecate@~1.0.1:
+util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
 

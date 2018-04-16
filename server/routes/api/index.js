@@ -15,10 +15,10 @@ const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:4000/addswift'
 mongoose.connect(mongoUri)
 
 // Transform errors from mongoose to a more human readable format
-// const mongooseBeautifulUniqueValidation = require('mongoose-beautiful-unique-validation');
-// const mongooseValidationErrorTransform = require('mongoose-validation-error-transform');
-// mongoose.plugin(mongooseBeautifulUniqueValidation);
-// mongoose.plugin(mongooseValidationErrorTransform);
+const mongooseBeautifulUniqueValidation = require('mongoose-beautiful-unique-validation');
+const mongooseValidationErrorTransform = require('mongoose-validation-error-transform');
+mongoose.plugin(mongooseBeautifulUniqueValidation);
+mongoose.plugin(mongooseValidationErrorTransform);
 
 const db = mongoose.connection
 
@@ -26,11 +26,9 @@ db.on('error', function(err) {
     console.log(err)
 })
 
-const User = require('../models/User')
+const User = require.main.require('./models/User')
 
 const jwt = require('jsonwebtoken')
-
-router.use('/social', require('./social'))
 
 router.post('/register', (req, res) => {
     let user = new User(req.body)
