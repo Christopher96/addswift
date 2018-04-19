@@ -26,7 +26,7 @@ db.on('error', function(err) {
     console.log(err)
 })
 
-const User = require.main.require('./models/User')
+const User = require('models/User')
 
 const jwt = require('jsonwebtoken')
 
@@ -38,7 +38,7 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-    console.log("asdf")
+    console.log(req)
     User.findOne({ username: req.body.username })
         .then((user) => {
             if (user.comparePassword(req.body.password)) {

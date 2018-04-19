@@ -50,7 +50,7 @@ module.exports = {
         // 'redirect-ssl',
 
         // Will register file from project api directory to handle /api/* requires
-        { path: '/api', handler: './server/api/index.js' }
+        { path: '/api', handler: './api/index.js' }
     ],
 
     /*
@@ -86,6 +86,8 @@ module.exports = {
      ** Axios module configuration
      */
     axios: {
+        // baseURL: 'https://localhost:3001/api',
+        // browserBaseURL: 'https://localhost:3000'
         // See https://github.com/nuxt-community/axios-module#options
     },
 

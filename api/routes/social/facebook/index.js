@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const { FB, FacebookApiException } = require('fb')
 
-const SocialUser = require.main.require('./models/SocialUser')
+const SocialUser = require('models/SocialUser')
 
 FB.options({
     appId: '1577677152512840',
