@@ -38,6 +38,7 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
+    console.log("asdf")
     User.findOne({ username: req.body.username })
         .then((user) => {
             if (user.comparePassword(req.body.password)) {
@@ -50,6 +51,9 @@ router.post('/login', (req, res) => {
             console.log(err)
             res.status(404).send(`User '${req.body.username}' was not found`)
         })
+})
+
+router.post('/logout', (req, res) => {
 
 })
 

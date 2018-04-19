@@ -1,6 +1,6 @@
 <template>
   <v-toolbar app fixed clipped-left>
-    <v-toolbar-side-icon @click.stop="$store.dispatch('toggleDrawer')"></v-toolbar-side-icon>
+    <v-toolbar-side-icon @click.stop="$store.commit('toggleDrawer')"></v-toolbar-side-icon>
     <v-spacer></v-spacer>
     <v-toolbar-title>
       <nuxt-link to="/">
@@ -17,7 +17,7 @@
         flat
       ></v-text-field>
     <v-spacer></v-spacer>
-    <nuxt-link v-if="$store.state.isLoggedIn" to="/logout">
+    <nuxt-link v-if="$store.state.user" to="/logout">
       <v-btn class="error">
         <span class="mr-2">Logout</span>
         <v-icon>exit_to_app</v-icon>
@@ -41,6 +41,6 @@ export default {
 
 .toolbar__title .logo img {
     height: 100%;
-    padding: .3em;
+    padding: .6em;
 }
 </style>

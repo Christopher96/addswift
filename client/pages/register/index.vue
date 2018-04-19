@@ -94,8 +94,7 @@ export default {
             username: this.username,
             password: this.password
         }).then((res) => {
-          this.$store.dispatch('setToken', res.data.token)
-          this.$store.dispatch('setUser', res.data.user)
+          this.$store.commit('setUser', res.data.user)
           this.$router.push('/')
         }).catch((err) => {
           this.error = err.response.data
@@ -110,6 +109,7 @@ export default {
   mounted() {
     this.$validator.localize('en', this.dictionary)
   },
-  layout: 'auth'
+  layout: 'auth',
+  auth: false
 }
 </script>

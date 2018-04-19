@@ -1,35 +1,36 @@
 const express = require('express')
-const cors = require('cors')
-const bodyParser = require('body-parser')
-const morgan = require('morgan')
-const path = require('path')
-const file = require('file')
+const { Nuxt, Builder } = require('nuxt')
 
 const app = express()
-const router = express.Router()
 
 const host = process.env.HOST || '127.0.0.1'
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3000
 
 app.set('port', port)
 
-// Log server messages
-app.use(morgan('dev'))
+// Import and Set Nuxt.js options
+let config = require('../nuxt.config.js')
+config.dev = !(process.env.NODE_ENV === 'production')
 
-// Parse json responses and allow requests from any domain
-app.use(bodyParser.json())
-app.use(cors())
+async function start() {
 
-// Dynamically add routes by folder structure
-const routePath = path.join(__dirname, '/routes')
-file.walkSync(routePath, function(path, dirs, files) {
-    const dirPath = path.replace(routePath, '')
-    if (dirPath != '' && files.indexOf('index.js') != -1)
-        router.use(dirPath, require(path))
-})
+    // Init Nuxt.js
+    const nuxt = new Nuxt(config)
 
-// Listen the server
-app.listen(port, host)
-app.on('listening', function() {
-    console.log('Express server started on port %s at %s', server.address().port, server.address().address)
-})
+    // Build only in dev mode
+    if (config.dev) {
+        const builder = new Builder(nuxt)
+        await builder.build()
+    }
+
+    // Give nuxt middleware to express
+    app.use(nuxt.render)
+
+    // Listen the server
+    app.listen(port, host)
+    app.on('listening', function() {
+        console.log('Express server started on port %s at %s', server.address().port, server.address().address);
+    })
+}
+
+start()

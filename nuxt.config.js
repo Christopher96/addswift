@@ -17,10 +17,41 @@ module.exports = {
             { hid: 'description', name: 'description', content: pkg.description }
         ],
         link: [
-            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
+            { rel: 'icon', type: 'image/x-icon', href: '/favicon/favicon.ico' },
+            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=PT+Sans:300,400,500,700|Material+Icons' }
         ]
     },
+
+    router: {
+        middleware: ['auth']
+    },
+
+    auth: {
+        redirect: {
+            login: '/login',
+            logout: '/',
+            home: '/'
+        },
+        strategies: {
+            local: {
+                endpoints: {
+                    login: { url: '/api/auth/login', method: 'post', propertyName: 'token' },
+                    logout: { url: '/api/auth/logout', method: 'post' },
+                    user: { url: '/api/auth/user', method: 'get', propertyName: 'user' }
+                },
+                tokenRequired: true,
+                tokenType: 'Bearer',
+            }
+        }
+    },
+
+    serverMiddleware: [
+        // Will register redirect-ssl npm package
+        // 'redirect-ssl',
+
+        // Will register file from project api directory to handle /api/* requires
+        { path: '/api', handler: './server/api/index.js' }
+    ],
 
     /*
      ** Customize the progress-bar color
@@ -47,7 +78,8 @@ module.exports = {
      ** Nuxt.js modules
      */
     modules: [
-        '@nuxtjs/axios'
+        '@nuxtjs/axios',
+        '@nuxtjs/auth'
     ],
 
     /*

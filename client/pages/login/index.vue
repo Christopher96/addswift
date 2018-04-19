@@ -87,12 +87,12 @@ export default {
       this.success = ''
       this.$validator.validateAll().then(async (result) => {
         if(!result) return
-        await AuthenticationService.login({
+        await this.$auth.loginWith('local', {
             username: this.username,
             password: this.password
         }).then((res) => {
-            this.$store.dispatch('setToken', res.data.token)
-            this.$store.dispatch('setUser', res.data.user)
+          console.log(res)
+            this.$store.commit('setUser', res.data.user)
             this.$router.push('/')
         }).catch((err) => {
           console.log(err)
@@ -108,7 +108,8 @@ export default {
   mounted() {
     this.$validator.localize('en', this.dictionary)
   },
-  layout: 'auth'
+  layout: 'auth',
+  auth: false
 }
 </script>
 
