@@ -5,8 +5,10 @@
 <script>
 export default {
     created: function() {
-        this.$store.commit('logout')
-        this.$router.push('login')
+        this.$store.dispatch('auth/logout')
+        .then(() => {
+            this.$router.push('/login')
+        })
     },
     layout: 'loading',
     auth: false

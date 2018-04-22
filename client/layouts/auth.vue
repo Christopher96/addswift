@@ -34,3 +34,9 @@
   }
 }
 </style>
+
+<script>
+export default {
+  middleware: 'notAuthenticated'
+}
+</script>

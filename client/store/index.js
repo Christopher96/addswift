@@ -1,24 +1,9 @@
-import Vuex from 'vuex'
+export const state = () => ({
+    drawer: true
+})
 
-const createStore = () => {
-    return new Vuex.Store({
-        strict: true,
-        state: {
-            user: null,
-            drawer: true
-        },
-        mutations: {
-            setUser(state, user) {
-                state.user = user
-            },
-            logout(state, user) {
-                state.user = null
-            },
-            toggleDrawer(state) {
-                state.drawer = !state.drawer
-            }
-        },
-        actions: {}
-    })
+export const mutations = {
+    toggleDrawer(state) {
+        state.drawer = !state.drawer
+    }
 }
-export default createStore

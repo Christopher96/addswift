@@ -38,7 +38,6 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-    console.log(req)
     User.findOne({ username: req.body.username })
         .then((user) => {
             if (user.comparePassword(req.body.password)) {
@@ -55,6 +54,20 @@ router.post('/login', (req, res) => {
 
 router.post('/logout', (req, res) => {
 
+})
+
+router.get('/user', verifyToken, (req, res) => {
+    console.log(req.token)
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (err) {
+            res.sendStatus(403)
+        } else {
+            res.json({
+                message: 'hello test swag',
+                authData
+            })
+        }
+    })
 })
 
 router.post('/social-login', (req, res) => {
@@ -80,6 +93,7 @@ router.post('/testin', verifyToken, (req, res) => {
 // Verify JWT token
 function verifyToken(req, res, next) {
     const bearerHeader = req.headers['authorization']
+    console.log(bearerHeader)
 
     if (typeof bearerHeader !== 'undefined') {
         const bearer = bearerHeader.split(' ')

@@ -1,11 +1,11 @@
 import Api from '../Api'
-const fbApi = Api('/social/facebook')
+const FB = Api('/social/facebook')
 
 export default {
     loginUrl() {
-        return fbApi.get('/login-url')
+        return FB.get('/login-url')
     },
     registerCode(code) {
-        return fbApi.post('/register', { code })
+        return FB.post('/register', { code })
     }
 }

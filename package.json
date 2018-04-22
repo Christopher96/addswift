@@ -1,11 +1,11 @@
 {
-    "name": "Addswift",
+    "name": "addswift",
     "version": "1.0.0",
     "description": "My primo Nuxt.js project",
     "author": "Christopher Gauffin",
     "private": true,
     "scripts": {
-        "dev": "cross-env NODE_ENV=development NODE_PATH=server nodemon server --watch server",
+        "dev": "cross-env NODE_ENV=development nodemon client/server --watch client/server",
         "api": "cross-env NODE_PATH=api nodemon api",
         "build": "nuxt build",
         "start": "cross-env NODE_ENV=production node server/index.js",
@@ -14,7 +14,6 @@
         "precommit": "npm run lint"
     },
     "dependencies": {
-        "@nuxtjs/auth": "^4.1.0",
         "@nuxtjs/axios": "^5.3.1",
         "bcrypt": "^1.0.3",
         "cors": "^2.8.4",

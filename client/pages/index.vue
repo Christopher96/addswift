@@ -1,9 +1,25 @@
 <template>
   <div>
-    <div v-if="this.$store.state.user">
-      <h1>Hello {{ this.$store.state.user.username }}</h1>
-    </div>
-    <h1 v-else>fuck you</h1>
+    <!-- <h1>Hello {{ this.user.username }}</h1> -->
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      user: null
+    }
+  },
+  asyncData({ store, redirect }) {
+    store.dispatch('auth/getUser')
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      redirect('/login')
+    })
+  }
+}
+</script>
 

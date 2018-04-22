@@ -87,16 +87,15 @@ export default {
       this.success = ''
       this.$validator.validateAll().then(async (result) => {
         if(!result) return
-        await this.$auth.loginWith('local', {
+        await this.$store.dispatch('auth/login', {
             username: this.username,
             password: this.password
         }).then((res) => {
-          console.log(res)
-            this.$store.commit('setUser', res.data.user)
-            this.$router.push('/')
+          this.$router.push('/')
         }).catch((err) => {
-          console.log(err)
-          this.error = err.response.data
+          if(err.response.data)
+            this.error = err.response.data
+          else console.log(err)
         })
       })
     },
@@ -109,7 +108,6 @@ export default {
     this.$validator.localize('en', this.dictionary)
   },
   layout: 'auth',
-  auth: false
 }
 </script>
 

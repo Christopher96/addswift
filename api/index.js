@@ -24,14 +24,13 @@ file.walkSync(routePath, function(path, dirs, files) {
         router.use(dirPath, require(path))
 })
 
-// app.use('/api', router)
+app.use('/api', router)
 
+const host = process.env.HOST || '127.0.0.1'
+const port = process.env.PORT || 3001
 
-// const host = process.env.HOST || '127.0.0.1'
-// const port = process.env.PORT || 3001
-
-// // Listen the server
-// app.listen(port, host)
-// app.on('listening', function() {
-//     console.log('Express server started on port %s at %s', server.address().port, server.address().address);
-// })
+// Listen the server
+app.listen(port, host)
+app.on('listening', function() {
+    console.log('Express server started on port %s at %s', server.address().port, server.address().address);
+})

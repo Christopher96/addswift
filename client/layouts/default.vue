@@ -28,7 +28,8 @@ export default {
   },
   props: {
     source: String
-  }
+  },
+  middleware: 'authenticated'
 }
 </script>
 

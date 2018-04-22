@@ -22,37 +22,9 @@ module.exports = {
         ]
     },
 
-    router: {
-        middleware: ['auth']
-    },
-
-    auth: {
-        redirect: {
-            login: '/login',
-            logout: '/',
-            home: '/'
-        },
-        strategies: {
-            local: {
-                endpoints: {
-                    login: { url: '/api/auth/login', method: 'post', propertyName: 'token' },
-                    logout: { url: '/api/auth/logout', method: 'post' },
-                    user: { url: '/api/auth/user', method: 'get', propertyName: 'user' }
-                },
-                tokenRequired: true,
-                tokenType: 'Bearer',
-            }
-        }
-    },
-
-    serverMiddleware: [
-        // Will register redirect-ssl npm package
-        // 'redirect-ssl',
-
-        // Will register file from project api directory to handle /api/* requires
-        { path: '/api', handler: './api/index.js' }
-    ],
-
+    // router: {
+    //     middleware: ['auth']
+    // },
     /*
      ** Customize the progress-bar color
      */
@@ -78,8 +50,7 @@ module.exports = {
      ** Nuxt.js modules
      */
     modules: [
-        '@nuxtjs/axios',
-        '@nuxtjs/auth'
+        '@nuxtjs/axios'
     ],
 
     /*

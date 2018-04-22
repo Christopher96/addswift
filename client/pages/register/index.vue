@@ -26,6 +26,7 @@
         </v-flex >
         <v-flex md6 column>
           <v-text-field
+          name="password"
           prepend-icon="fa-lock"
           v-model="password"
           label="Password"
@@ -39,7 +40,6 @@
           prepend-icon="fa-unlock-alt"
           v-model="confirm_password"
           label="Confirm password"
-          :counter="50"
           :error-messages="errors.collect('confirm_password')"
           v-validate="'confirmed:password'"
           data-vv-name="confirm_password"
@@ -67,8 +67,6 @@
 </template>
 
 <script>
-import Auth from '@/services/AuthenticationService'
-
 export default {
   $_veeValidate: {
     validator: 'new'
@@ -90,11 +88,10 @@ export default {
       this.success = ''
       this.$validator.validateAll().then(async (result) => {
         if(!result) return
-        await Auth.register({
+        await this.$store.dispatch('auth/register', {
             username: this.username,
             password: this.password
         }).then((res) => {
-          this.$store.commit('setUser', res.data.user)
           this.$router.push('/')
         }).catch((err) => {
           this.error = err.response.data
@@ -110,6 +107,6 @@ export default {
     this.$validator.localize('en', this.dictionary)
   },
   layout: 'auth',
-  auth: false
+  middleware: 'notAuthenticated'
 }
 </script>
