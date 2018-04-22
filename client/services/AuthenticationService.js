@@ -13,5 +13,6 @@ export default {
     },
     getUser() {
         return Auth.get('/user')
-    }
+    },
+    axios: Auth
 }

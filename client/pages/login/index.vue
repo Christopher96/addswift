@@ -82,17 +82,18 @@ export default {
     }
   }),
   methods: {
-    async login() {
+    login() {
       this.error = ''
       this.success = ''
-      this.$validator.validateAll().then(async (result) => {
+      this.$validator.validateAll().then((result) => {
         if(!result) return
-        await this.$store.dispatch('auth/login', {
+        this.$store.dispatch('auth/login', {
             username: this.username,
             password: this.password
         }).then((res) => {
           this.$router.push('/')
         }).catch((err) => {
+          console.log(err)
           if(err.response.data)
             this.error = err.response.data
           else console.log(err)

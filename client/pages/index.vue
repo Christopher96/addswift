@@ -12,14 +12,15 @@ export default {
     }
   },
   asyncData({ store, redirect }) {
-    store.dispatch('auth/getUser')
+    return store.dispatch('auth/getUser')
     .then((res) => {
       console.log(res)
     })
-    .catch((err) => {
+    .catch(() => {
+      console.log('hello')
       redirect('/login')
     })
-  }
+  },
 }
 </script>
 

@@ -19,7 +19,6 @@ app.use(cors())
 const routePath = path.resolve(__dirname, './routes')
 file.walkSync(routePath, function(path, dirs, files) {
     const dirPath = path.replace(routePath, '')
-    console.log(dirPath)
     if (dirPath != '' && files.indexOf('index.js') != -1)
         router.use(dirPath, require(path))
 })

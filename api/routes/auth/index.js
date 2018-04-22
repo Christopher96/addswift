@@ -47,7 +47,6 @@ router.post('/login', (req, res) => {
             }
         })
         .catch((err) => {
-            console.log(err)
             res.status(404).send(`User '${req.body.username}' was not found`)
         })
 })
@@ -57,34 +56,18 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/user', verifyToken, (req, res) => {
-    console.log(req.token)
-    jwt.verify(req.token, 'secretkey', (err, authData) => {
+    jwt.verify(req.token, 'secretkey', (err, auth) => {
         if (err) {
-            res.sendStatus(403)
+            res.status(500)
         } else {
-            res.json({
-                message: 'hello test swag',
-                authData
-            })
+            res.status(200).json(auth)
+
         }
     })
 })
 
 router.post('/social-login', (req, res) => {
     console.log(req.token)
-})
-
-router.post('/testin', verifyToken, (req, res) => {
-    jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (err) {
-            res.sendStatus(403)
-        } else {
-            res.json({
-                message: 'hello test swag',
-                authData
-            })
-        }
-    })
 })
 
 // Token format
@@ -106,7 +89,7 @@ function verifyToken(req, res, next) {
 
 function signToken(user, res) {
     jwt.sign({ user }, 'secretkey', { expiresIn: '30s' }, (err, token) => {
-        res.json({ user, token })
+        res.json({ token })
     })
 }
 

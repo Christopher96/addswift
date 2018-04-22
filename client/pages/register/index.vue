@@ -106,7 +106,6 @@ export default {
   mounted() {
     this.$validator.localize('en', this.dictionary)
   },
-  layout: 'auth',
-  middleware: 'notAuthenticated'
+  layout: 'auth'
 }
 </script>

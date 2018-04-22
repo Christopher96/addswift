@@ -37,6 +37,6 @@
 
 <script>
 export default {
-  middleware: 'notAuthenticated'
+    middleware: 'notAuthenticated'
 }
 </script>
