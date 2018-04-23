@@ -14,5 +14,15 @@ export default {
     getUser() {
         return Auth.get('/user')
     },
-    axios: Auth
+    setToken(token) {
+        localStorage.setItem('token', token)
+        Auth.defaults.headers.common['Authorization'] = 'Bearer ' + token
+    },
+    removeToken() {
+        localStorage.removeItem('token')
+        delete Auth.defaults.headers.common['Authorization']
+    },
+    getToken() {
+        return localStorage.getItem('token') || ''
+    }
 }

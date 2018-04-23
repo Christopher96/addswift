@@ -63,7 +63,6 @@
 
 <script>
 import SocialLoginButton from "@/components/SocialLoginButton.vue";
-import AuthenticationService from '@/services/AuthenticationService'
 
 export default {
   components: {

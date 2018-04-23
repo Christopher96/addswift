@@ -83,12 +83,12 @@ export default {
     }
   }),
   methods: {
-    async register() {
+    register() {
       this.error = ''
       this.success = ''
-      this.$validator.validateAll().then(async (result) => {
+      this.$validator.validateAll().then((result) => {
         if(!result) return
-        await this.$store.dispatch('auth/register', {
+        this.$store.dispatch('auth/register', {
             username: this.username,
             password: this.password
         }).then((res) => {

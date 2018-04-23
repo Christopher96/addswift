@@ -57,9 +57,7 @@ module.exports = {
      ** Axios module configuration
      */
     axios: {
-        // baseURL: 'https://localhost:3001/api',
-        // browserBaseURL: 'https://localhost:3000'
-        // See https://github.com/nuxt-community/axios-module#options
+        baseURL: 'https://localhost:3001/api',
     },
 
     /*

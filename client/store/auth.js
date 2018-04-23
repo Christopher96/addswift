@@ -1,8 +1,28 @@
 import Auth from '@/services/AuthenticationService'
+import axios from 'axios'
+
+
+const setToken = (token) => {
+    localStorage.setItem('token', token)
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+}
+const removeToken = () => {
+    localStorage.removeItem('token')
+    delete axios.defaults.headers.common['Authorization']
+}
+const getToken = () => {
+    return localStorage.getItem('token') || ''
+}
+
+const AUTH_REQUEST = "AUTH_REQUEST"
+const AUTH_SUCCESS = "AUTH_SUCCESS"
+const AUTH_ERROR = "AUTH_ERROR"
+const AUTH_LOGOUT = "AUTH_LOGOUT"
+const USER_SUCCESS = "USER_SUCCESS"
 
 export const state = () => ({
     user: null,
-    token: localStorage.getItem('token') || '',
+    token: null,
     status: ''
 })
 
@@ -11,12 +31,6 @@ export const getters = {
     authStatus: state => state.status,
 }
 
-const AUTH_REQUEST = "AUTH_REQUEST"
-const AUTH_SUCCESS = "AUTH_SUCCESS"
-const AUTH_ERROR = "AUTH_ERROR"
-const AUTH_LOGOUT = "AUTH_LOGOUT"
-const USER_REQUEST = "USER_REQUEST"
-
 export const mutations = {
     [AUTH_REQUEST]: (state) => {
         state.status = 'loading'
@@ -24,28 +38,35 @@ export const mutations = {
     [AUTH_SUCCESS]: (state, token) => {
         state.status = 'success'
         state.token = token
+        setToken(token)
     },
     [AUTH_ERROR]: (state) => {
         state.status = 'error'
+        state.token = null
+        removeToken()
     },
-    [USER_REQUEST]: (state, user) => {
+    [AUTH_LOGOUT]: (state) => {
+        Auth.removeToken()
+        state.token = null
+        removeToken()
+    },
+    [USER_SUCCESS]: (state, user) => {
         state.user = user
     }
 }
 
 export const actions = {
-    nuxtServerInit({ commit }, { req }) {
-        console.log('init')
+    init({ commit }) {
+        const token = getToken()
+        if (token) commit(AUTH_SUCCESS, token)
+        else commit(AUTH_LOGOUT)
     },
     login({ commit, dispatch }, creds) {
         commit(AUTH_REQUEST)
         return new Promise((resolve, reject) => {
             Auth.login(creds)
                 .then((res) => {
-                    const token = res.data.token
-                    Auth.axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-                    localStorage.setItem('token', token)
-                    commit(AUTH_SUCCESS, token)
+                    commit(AUTH_SUCCESS, res.data.token)
                     resolve(res)
                 })
                 .catch((err) => {
@@ -56,8 +77,7 @@ export const actions = {
     },
     logout({ commit }) {
         return new Promise((resolve, reject) => {
-            delete Auth.axios.defaults.headers.common['Authorization']
-            localStorage.removeItem('token')
+            commit(AUTH_LOGOUT)
             resolve()
         })
     },
@@ -78,12 +98,11 @@ export const actions = {
         return new Promise((resolve, reject) => {
             Auth.getUser()
                 .then((res) => {
-                    commit(USER_REQUEST, res.user)
+                    commit(USER_SUCCESS, res.user)
                     resolve(res)
                 })
                 .catch((err) => {
-                    delete Auth.axios.defaults.headers.common['Authorization']
-                    localStorage.removeItem('token')
+                    commit(AUTH_LOGOUT)
                     reject()
                 })
         })
