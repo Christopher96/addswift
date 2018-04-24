@@ -34,6 +34,9 @@
           :error-messages="errors.collect('password')"
           v-validate="'required|max:50|min:3'"
           data-vv-name="password"
+          :append-icon="pw ? 'visibility' : 'visibility_off'"
+          :append-icon-cb="() => (pw = !pw)"
+          :type="pw ? 'text' : 'password'"
           required
           ></v-text-field>
           <v-text-field
@@ -43,6 +46,7 @@
           :error-messages="errors.collect('confirm_password')"
           v-validate="'confirmed:password'"
           data-vv-name="confirm_password"
+          :type="pw ? 'text' : 'password'"
           required
           ></v-text-field>
         </v-flex>
@@ -72,6 +76,7 @@ export default {
     validator: 'new'
   },
   data: () => ({
+    pw: false,
     valid: true,
     username: '',
     password: '',

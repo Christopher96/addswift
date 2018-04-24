@@ -3,7 +3,7 @@
         <v-content>
             <v-container align-center justify-center>
                 <div class="logo">
-                    <img src="~/assets/images/logo_large.png">
+                    <img src="~/assets/images/addswift.png">
                 </div>
                 <nuxt />
             </v-container>
@@ -19,7 +19,7 @@
 
 .logo {
     width: 100%;
-    padding: 3em 8em;
+    padding: 3em 10em;
     img {
         width: 100%;
     }
