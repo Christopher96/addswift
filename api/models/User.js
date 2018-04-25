@@ -6,13 +6,19 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const SALT_WORK_FACTOR = 10
 
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
+const ObjectId = Schema.ObjectId
 
 const UserSchema = new Schema({
+    role: {
+        type: ObjectId,
+        ref: 'Role',
+        required: true
+    },
     username: {
         type: String,
         minlength: 3,
-        maxlength: 10,
+        maxlength: 20,
         unique: 'Username "{VALUE}" is already taken',
         required: true
     },
@@ -22,6 +28,22 @@ const UserSchema = new Schema({
         maxlength: 50,
         required: true
     },
+    status: {
+        type: Number,
+        required: true
+    },
+    accounts: [
+        [Account]
+    ],
+    settings: [Settings],
+    following: [{
+        type: ObjectId,
+        ref: 'User'
+    }],
+    followers: [{
+        type: ObjectId,
+        ref: 'User'
+    }],
     created: {
         type: Date,
         default: Date.now
@@ -52,4 +74,4 @@ UserSchema.methods = {
     }
 }
 
-module.exports = mongoose.model('user', UserSchema)
+module.exports = mongoose.model('User', UserSchema)

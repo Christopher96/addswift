@@ -7,9 +7,9 @@
           prepend-icon="fa-user"
           v-model="username"
           label="Username"
-          :counter="10"
+          :counter="20"
           :error-messages="errors.collect('username')"
-          v-validate="'required|max:10|min:3'"
+          v-validate="'required|max:20|min:3'"
           data-vv-name="username"
           required
           ></v-text-field>
