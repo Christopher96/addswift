@@ -4,19 +4,23 @@
 
 const mongoose = require('mongoose')
 
-const AccountSchema = new mongoose.Schema({
+const AccountDataSchema = require('./AccountData')
+
+const Schema = mongoose.Schema
+const ObjectId = Schema.ObjectId
+
+const AccountSchema = new Schema({
     vendor: {
         type: ObjectId,
         ref: 'Vendor',
         required: true
     },
-    data: [AccountData],
+    telephone: Number,
+    private: Boolean,
     created: {
         type: Date,
         default: Date.now
-    },
-    telephone: Number,
-    private: Boolean
+    }
 })
 
-module.exports = mongoose.model('Settings', SettingsSchema)
+module.exports = AccountSchema

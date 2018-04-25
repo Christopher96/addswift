@@ -4,7 +4,7 @@
 
 const mongoose = require('mongoose')
 
-const SocialUserSchema = new mongoose.Schema({
+const SocialUser = new mongoose.Schema({
     username: {
         type: String,
         unique: true,
@@ -28,4 +28,4 @@ const SocialUserSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('social-user', SocialUserSchema)
+module.exports = mongoose.model('social-user', SocialUser)

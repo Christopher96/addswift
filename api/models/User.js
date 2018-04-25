@@ -1,56 +1,32 @@
 /*
- * Mongoose Schema for Users
+ * Mongoose Model for User
  */
 
 const mongoose = require('mongoose')
+
+const UserSchema = require('schemas/User')
+const Role = require('models/Role')
+
 const bcrypt = require('bcrypt')
 const SALT_WORK_FACTOR = 10
 
-const Schema = mongoose.Schema
-const ObjectId = Schema.ObjectId
 
-const UserSchema = new Schema({
-    role: {
-        type: ObjectId,
-        ref: 'Role',
-        required: true
-    },
-    username: {
-        type: String,
-        minlength: 3,
-        maxlength: 20,
-        unique: 'Username "{VALUE}" is already taken',
-        required: true
-    },
-    password: {
-        type: String,
-        minlength: 3,
-        maxlength: 50,
-        required: true
-    },
-    status: {
-        type: Number,
-        required: true
-    },
-    accounts: [
-        [Account]
-    ],
-    settings: [Settings],
-    following: [{
-        type: ObjectId,
-        ref: 'User'
-    }],
-    followers: [{
-        type: ObjectId,
-        ref: 'User'
-    }],
-    created: {
-        type: Date,
-        default: Date.now
+UserSchema.pre('validate', async function(next) {
+
+    // Set user as regular member is no role is given
+    if (!this.role) {
+        const schema = this
+        await Role.findOne({ title: 'member' }, function(err, role) {
+            if (!err) schema.role = role._id
+        })
     }
+
+    next()
 })
 
 UserSchema.pre('save', function(next) {
+
+    // Encrypt the password if it hasn't been modified
     if (!this.isModified('password'))
         return next()
 
@@ -59,9 +35,13 @@ UserSchema.pre('save', function(next) {
 
 UserSchema.methods = {
     comparePassword: function(plainPassword) {
+
+        // Compare the plaintext password with hash
         return bcrypt.compareSync(plainPassword, this.password);
     },
     encryptPassword: function(next) {
+
+        // Run encryption with salt to generate hash
         bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
             if (err) next(err)
 

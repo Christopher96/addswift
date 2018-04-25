@@ -15,8 +15,9 @@ const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:4000/addswift'
 mongoose.connect(mongoUri)
 
 // Transform errors from mongoose to a more human readable format
-const mongooseBeautifulUniqueValidation = require('mongoose-beautiful-unique-validation');
-const mongooseValidationErrorTransform = require('mongoose-validation-error-transform');
+const mongooseBeautifulUniqueValidation = require('mongoose-beautiful-unique-validation')
+const mongooseValidationErrorTransform = require('mongoose-validation-error-transform')
+
 mongoose.plugin(mongooseBeautifulUniqueValidation);
 mongoose.plugin(mongooseValidationErrorTransform);
 
@@ -26,12 +27,29 @@ db.on('error', function(err) {
     console.log(err)
 })
 
+
 const User = require('models/User')
+const Role = require('models/Role')
 
 const jwt = require('jsonwebtoken')
 
+
+router.post('/save', (req, res) => {
+    new Role({
+        title: 'member',
+        privilege: 1
+    }).save()
+    res.sendStatus(200)
+})
+
 router.post('/register', (req, res) => {
-    let user = new User(req.body)
+    let user = new User({
+        data: {
+            username: req.body.username,
+            password: req.body.password,
+            display_name: req.body.username
+        }
+    })
     user.save()
         .then(user => signToken(user, res))
         .catch(err => res.status(400).send(err.message))
