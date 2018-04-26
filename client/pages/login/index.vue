@@ -1,48 +1,47 @@
 <template>
   <v-layout fluid>
     <v-flex column md6>
-      <v-form v-model="valid" ref="form" lazy-validation>
+      <v-form ref="form" lazy-validation>
           <p class="fl subheading">Not a member yet? <nuxt-link to="register">Register </nuxt-link><i class="fa fa-arrow-right"></i></p>
           <v-text-field
-          prepend-icon="fa-user"
-          v-model="username"
-          label="Username"
-          :counter="20"
-          :error-messages="errors.collect('username')"
-          v-validate="'required|max:20|min:3'"
-          data-vv-name="username"
-          required
-          ></v-text-field>
+            prepend-icon="fa-user"
+            v-model="username"
+            label="Username"
+            :counter="20"
+            :error-messages="errors.collect('username')"
+            v-validate="'required|max:20|min:3'"
+            data-vv-name="username"
+            required>
+          </v-text-field>
           <v-text-field
-          prepend-icon="fa-lock"
-          v-model="password"
-          label="Password"
-          :counter="50"
-          :error-messages="errors.collect('password')"
-          v-validate="'required|max:50|min:3'"
-          data-vv-name="password"
-          :append-icon="pw ? 'visibility' : 'visibility_off'"
-          :append-icon-cb="() => (pw = !pw)"
-          :type="pw ? 'text' : 'password'"
-          required
-          ></v-text-field>
+            prepend-icon="fa-lock"
+            v-model="password"
+            label="Password"
+            :counter="50"
+            :error-messages="errors.collect('password')"
+            v-validate="'required|max:50|min:3'"
+            data-vv-name="password"
+            :append-icon="pw ? 'visibility' : 'visibility_off'"
+            :append-icon-cb="() => (pw = !pw)"
+            :type="pw ? 'text' : 'password'"
+            required>
+          </v-text-field>
           <v-alert
-          v-show="error"
-          type="error"
-          :value="true">
+            v-show="error"
+            type="error"
+            :value="true">
             {{ error }}
           </v-alert>
           <div class="form-btns">
-            <v-btn
+          <v-btn
             id="login-btn"
-            @click="login"
-            :disabled="!valid">
-              Login
-            </v-btn>
-            <v-btn
+            @click="login">
+            Login
+          </v-btn>
+          <v-btn
             @click="clear">
-              Clear
-            </v-btn>
+            Clear
+          </v-btn>
           </div>
       </v-form>
     </v-flex>
@@ -76,7 +75,6 @@ export default {
   },
   data: () => ({
     pw: false,
-    valid: true,
     username: '',
     password: '',
     error: '',

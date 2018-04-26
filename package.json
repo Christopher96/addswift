@@ -21,6 +21,7 @@
         "fb": "^2.0.0",
         "file": "^0.2.2",
         "font-awesome": "^4.7.0",
+        "js-cookie": "^2.2.0",
         "jsonwebtoken": "^8.2.0",
         "mongoose": "5.0.12",
         "mongoose-beautiful-unique-validation": "^7.1.1",

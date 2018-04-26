@@ -23,11 +23,15 @@ const UserSchema = new Schema({
         type: String,
         minlength: 3,
         maxlength: 50,
-        required: true
+        required: function() {
+            return this.isSocial ? false : true
+        }
     },
     email: {
         type: Email,
-        required: true
+        required: function() {
+            return this.isSocial ? false : true
+        }
     },
     data: {
         type: [UserDataSchema]
@@ -35,6 +39,10 @@ const UserSchema = new Schema({
     accounts: [
         [AccountSchema]
     ],
+    isSocial: {
+        type: Boolean,
+        default: false
+    },
     status: {
         type: Number,
         required: true,

@@ -12,7 +12,6 @@ const SALT_WORK_FACTOR = 10
 
 
 UserSchema.pre('validate', async function(next) {
-
     // Set user as regular member is no role is given
     if (!this.role) {
         const schema = this
@@ -25,7 +24,6 @@ UserSchema.pre('validate', async function(next) {
 })
 
 UserSchema.pre('save', function(next) {
-
     // Encrypt the password if it hasn't been modified
     if (!this.isModified('password'))
         return next()
@@ -35,12 +33,10 @@ UserSchema.pre('save', function(next) {
 
 UserSchema.methods = {
     comparePassword: function(plainPassword) {
-
         // Compare the plaintext password with hash
         return bcrypt.compareSync(plainPassword, this.password);
     },
     encryptPassword: function(next) {
-
         // Run encryption with salt to generate hash
         bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
             if (err) next(err)

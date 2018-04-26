@@ -8,7 +8,7 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
 
 const UserDataSchema = new Schema({
-    display_name: {
+    displayName: {
         type: String,
         default: this.username
     },

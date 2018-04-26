@@ -1,7 +1,8 @@
 const router = require('express').Router()
 const { FB, FacebookApiException } = require('fb')
 
-const SocialUser = require('models/SocialUser')
+const User = require('models/User')
+const Account = require('models/Account')
 
 FB.options({
     appId: '1577677152512840',
@@ -54,16 +55,18 @@ fetchUser = (req, res, next) => {
 }
 
 createUser = (req, res, next) => {
-    const user = new SocialUser({
+    const user = new User({
+        isSocial: true,
         username: "facebook." + req.data.id,
-        displayName: req.data.name,
-        accessToken: FB.options("accessToken"),
-        site: "facebook"
+        data: {
+            displayName: req.data.name
+        }
     })
 
-    req.user = user
+    const account =
 
-    user.save().then(next)
+
+        user.save().then(next)
         .catch((err) => {
             res.status(500).send(err)
         })

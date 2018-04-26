@@ -1,4 +1,5 @@
 import Auth from '@/services/AuthenticationService'
+import TS from '@/services/TokenService'
 import axios from 'axios'
 
 const AUTH_REQUEST = "AUTH_REQUEST"
@@ -10,31 +11,26 @@ const USER_SUCCESS = "USER_SUCCESS"
 export const state = () => ({
     user: null,
     token: null,
-    status: ''
 })
 
 export const getters = {
     isAuthenticated: state => !!state.token && state.token != 'undefined',
-    authStatus: state => state.status,
+    user: state => state.user
 }
 
 export const mutations = {
-    [AUTH_REQUEST]: (state) => {
-        state.status = 'loading'
-    },
+    [AUTH_REQUEST]: (state) => {},
     [AUTH_SUCCESS]: (state, token) => {
-        state.status = 'success'
         state.token = token
-        Auth.setToken(token)
+        TS.setToken(token)
     },
     [AUTH_ERROR]: (state) => {
-        state.status = 'error'
         state.token = null
-        Auth.removeToken()
+        TS.removeToken()
     },
     [AUTH_LOGOUT]: (state) => {
         state.token = null
-        Auth.removeToken()
+        TS.removeToken()
     },
     [USER_SUCCESS]: (state, user) => {
         state.user = user
@@ -42,11 +38,6 @@ export const mutations = {
 }
 
 export const actions = {
-    init({ commit }) {
-        const token = Auth.getToken()
-        if (token) commit(AUTH_SUCCESS, token)
-        else commit(AUTH_LOGOUT)
-    },
     login({ commit, dispatch }, creds) {
         commit(AUTH_REQUEST)
         return new Promise((resolve, reject) => {
@@ -90,7 +81,6 @@ export const actions = {
                     resolve(res)
                 })
                 .catch((err) => {
-                    console.log("swag")
                     commit(AUTH_LOGOUT)
                     reject(err)
                 })

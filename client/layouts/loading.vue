@@ -4,7 +4,7 @@
             <div>
                 <v-progress-circular :width="7" :size="400" indeterminate color="secondary">
                     <div class="logo">
-                        <img src="~/assets/images/logo_large.png">
+                        <img src="~/assets/images/addswift.png">
                     </div>
                 </v-progress-circular>
             </div>
@@ -15,7 +15,7 @@
 
 <style lang="scss" scoped>
 .logo {
-    margin: -3em;
+    margin: -2em;
     img {
         width: 100%;
     }

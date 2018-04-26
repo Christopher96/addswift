@@ -82,7 +82,6 @@ router.get('/user', verifyToken, (req, res) => {
             res.status(500)
         } else {
             res.status(200).json(auth)
-
         }
     })
 })

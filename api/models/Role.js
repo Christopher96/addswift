@@ -4,6 +4,6 @@
 
 const mongoose = require('mongoose')
 
-const Role = require('schemas/Role')
+const RoleSchema = require('schemas/Role')
 
-module.exports = mongoose.model('Role', Role)
+module.exports = mongoose.model('Role', RoleSchema)

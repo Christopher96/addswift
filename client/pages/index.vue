@@ -1,25 +1,20 @@
 <template>
   <div>
-    <!-- <h1>Hello {{ this.user.username }}</h1> -->
+    <h1 v-if="user">Hello {{ user.username }}</h1>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      user: null
-    }
-  },
   asyncData({ store, redirect }) {
     return store.dispatch('auth/getUser')
     .then((res) => {
-      console.log(res)
+      return { user: res.data.user }
     })
     .catch(() => {
       redirect('/login')
     })
-  },
+  }
 }
 </script>
 

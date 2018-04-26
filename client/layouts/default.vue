@@ -18,9 +18,6 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 
 export default {
-  data: () => ({
-    drawer: true
-  }),
   components: {
     Header,
     Nav,
@@ -29,7 +26,7 @@ export default {
   props: {
     source: String
   },
-  middleware: 'authenticated'
+  middleware: 'authenticated',
 }
 </script>
 
