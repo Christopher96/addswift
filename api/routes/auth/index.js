@@ -14,19 +14,21 @@ const ObjectId = require('mongoose').Types.ObjectId
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:4000/addswift'
 mongoose.connect(mongoUri)
 
-// Transform errors from mongoose to a more human readable format
-const mongooseBeautifulUniqueValidation = require('mongoose-beautiful-unique-validation')
-const mongooseValidationErrorTransform = require('mongoose-validation-error-transform')
+// Additional Schema types
+require('mongoose-type-email')
 
-mongoose.plugin(mongooseBeautifulUniqueValidation);
-mongoose.plugin(mongooseValidationErrorTransform);
+// Transform errors from mongoose to a more human readable format
+// const mongooseBeautifulUniqueValidation = require('mongoose-beautiful-unique-validation')
+// const mongooseValidationErrorTransform = require('mongoose-validation-error-transform')
+
+// mongoose.plugin(mongooseBeautifulUniqueValidation)
+// mongoose.plugin(mongooseValidationErrorTransform)
 
 const db = mongoose.connection
 
 db.on('error', function(err) {
     console.log(err)
 })
-
 
 const User = require('models/User')
 const Role = require('models/Role')
@@ -37,22 +39,22 @@ const jwt = require('jsonwebtoken')
 router.post('/save', (req, res) => {
     new Role({
         title: 'member',
-        privilege: 1
+        priv: 1
     }).save()
     res.sendStatus(200)
 })
 
 router.post('/register', (req, res) => {
-    let user = new User({
-        data: {
-            username: req.body.username,
-            password: req.body.password,
-            display_name: req.body.username
+    User.findOne({ username: req.body.username }, function(err, user) {
+        if (!user) {
+            let user = new User(req.body)
+            user.save()
+                .then(user => signToken(user, res))
+                .catch(err => res.status(400).send(err.message))
+        } else {
+            res.status(401).send(`User '${req.body.username}' already exists`)
         }
     })
-    user.save()
-        .then(user => signToken(user, res))
-        .catch(err => res.status(400).send(err.message))
 })
 
 router.post('/login', (req, res) => {
@@ -65,6 +67,7 @@ router.post('/login', (req, res) => {
             }
         })
         .catch((err) => {
+            console.log(err)
             res.status(404).send(`User '${req.body.username}' was not found`)
         })
 })
@@ -94,7 +97,6 @@ router.post('/social-login', (req, res) => {
 // Verify JWT token
 function verifyToken(req, res, next) {
     const bearerHeader = req.headers['authorization']
-    console.log(bearerHeader)
 
     if (typeof bearerHeader !== 'undefined') {
         const bearer = bearerHeader.split(' ')

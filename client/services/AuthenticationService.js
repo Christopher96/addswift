@@ -1,26 +1,27 @@
+import axios from 'axios'
 import Api from '@/services/Api'
 const Auth = Api('/auth')
 
 export default {
-    register(credentials) {
-        return Auth.post('/register', credentials)
+    register(creds) {
+        return Auth.post('/register', creds)
     },
-    login(credentials) {
-        return Auth.post('/login', credentials)
+    login(creds) {
+        return Auth.post('/login', creds)
     },
-    socialLogin(credentials) {
-        return Auth.post('/social-login', credentials)
+    socialLogin(creds) {
+        return Auth.post('/social-login', creds)
     },
     getUser() {
         return Auth.get('/user')
     },
     setToken(token) {
         localStorage.setItem('token', token)
-        Auth.defaults.headers.common['Authorization'] = 'Bearer ' + token
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
     },
     removeToken() {
         localStorage.removeItem('token')
-        delete Auth.defaults.headers.common['Authorization']
+        delete axios.defaults.headers.common['Authorization']
     },
     getToken() {
         return localStorage.getItem('token') || ''

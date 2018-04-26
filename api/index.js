@@ -18,7 +18,7 @@ app.use(cors())
 // Dynamically add routes by folder structure
 const routePath = path.resolve(__dirname, './routes')
 file.walkSync(routePath, function(path, dirs, files) {
-    const dirPath = path.replace(routePath, '')
+    const dirPath = path.replace(routePath, '').replace(/\\/g, '/')
     if (dirPath != '' && files.indexOf('index.js') != -1)
         router.use(dirPath, require(path))
 })

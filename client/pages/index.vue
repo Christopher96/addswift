@@ -17,7 +17,6 @@ export default {
       console.log(res)
     })
     .catch(() => {
-      console.log('hello')
       redirect('/login')
     })
   },

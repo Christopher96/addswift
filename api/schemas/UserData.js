@@ -8,21 +8,10 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
 
 const UserDataSchema = new Schema({
-    username: {
+    display_name: {
         type: String,
-        minlength: 3,
-        maxlength: 20,
-        unique: 'Username "{VALUE}" is already taken',
-        required: true
+        default: this.username
     },
-    password: {
-        type: String,
-        minlength: 3,
-        maxlength: 50,
-        required: true
-    },
-    display_name: String,
-    email: String,
     telephone: Number,
     private: Boolean,
 

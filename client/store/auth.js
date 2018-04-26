@@ -1,19 +1,6 @@
 import Auth from '@/services/AuthenticationService'
 import axios from 'axios'
 
-
-const setToken = (token) => {
-    localStorage.setItem('token', token)
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-}
-const removeToken = () => {
-    localStorage.removeItem('token')
-    delete axios.defaults.headers.common['Authorization']
-}
-const getToken = () => {
-    return localStorage.getItem('token') || ''
-}
-
 const AUTH_REQUEST = "AUTH_REQUEST"
 const AUTH_SUCCESS = "AUTH_SUCCESS"
 const AUTH_ERROR = "AUTH_ERROR"
@@ -38,17 +25,16 @@ export const mutations = {
     [AUTH_SUCCESS]: (state, token) => {
         state.status = 'success'
         state.token = token
-        setToken(token)
+        Auth.setToken(token)
     },
     [AUTH_ERROR]: (state) => {
         state.status = 'error'
         state.token = null
-        removeToken()
+        Auth.removeToken()
     },
     [AUTH_LOGOUT]: (state) => {
-        Auth.removeToken()
         state.token = null
-        removeToken()
+        Auth.removeToken()
     },
     [USER_SUCCESS]: (state, user) => {
         state.user = user
@@ -57,7 +43,7 @@ export const mutations = {
 
 export const actions = {
     init({ commit }) {
-        const token = getToken()
+        const token = Auth.getToken()
         if (token) commit(AUTH_SUCCESS, token)
         else commit(AUTH_LOGOUT)
     },
@@ -86,9 +72,11 @@ export const actions = {
         return new Promise((resolve, reject) => {
             Auth.register(creds)
                 .then((res) => {
-                    return dispatch('login', creds)
+                    commit(AUTH_SUCCESS, res.data.token)
+                    resolve(res)
                 })
                 .catch((err) => {
+                    console.log(err)
                     commit(AUTH_ERROR)
                     reject(err)
                 })
@@ -102,8 +90,9 @@ export const actions = {
                     resolve(res)
                 })
                 .catch((err) => {
+                    console.log("swag")
                     commit(AUTH_LOGOUT)
-                    reject()
+                    reject(err)
                 })
         })
     }

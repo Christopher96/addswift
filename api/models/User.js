@@ -17,7 +17,7 @@ UserSchema.pre('validate', async function(next) {
     if (!this.role) {
         const schema = this
         await Role.findOne({ title: 'member' }, function(err, role) {
-            if (!err) schema.role = role._id
+            if (!err && role) schema.role = role._id
         })
     }
 

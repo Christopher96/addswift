@@ -43,7 +43,8 @@ module.exports = {
      */
     plugins: [
         '@/plugins/vuetify',
-        '@/plugins/vee-validate'
+        '@/plugins/vee-validate',
+        { src: '@/plugins/localStorage.js', ssr: false }
     ],
 
     /*
@@ -56,9 +57,7 @@ module.exports = {
     /*
      ** Axios module configuration
      */
-    axios: {
-        baseURL: 'https://localhost:3001/api',
-    },
+    axios: {},
 
     /*
      ** Build configuration

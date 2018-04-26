@@ -95,11 +95,15 @@ export default {
         if(!result) return
         this.$store.dispatch('auth/register', {
             username: this.username,
-            password: this.password
+            password: this.password,
+            email: this.email
         }).then((res) => {
           this.$router.push('/')
         }).catch((err) => {
-          this.error = err.response.data
+          console.log(err.response)
+          if(err.response.data)
+            this.error = err.response.data
+          else console.log(err)
         })
       })
     },
