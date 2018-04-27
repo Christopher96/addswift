@@ -8,8 +8,15 @@ const file = require('file')
 const app = express()
 const router = express.Router()
 
-// Log server messages
-app.use(morgan('dev'))
+// Dev middleware
+if (!(process.env.NODE_ENV === 'production')) {
+    // Log server messages
+    app.use(morgan('dev'))
+
+    // Route to generate database
+    const database = require('middleware/database')
+    app.use('/save', database)
+}
 
 // Parse json responses and allow requests from any domain
 app.use(bodyParser.json())

@@ -31,18 +31,8 @@ db.on('error', function(err) {
 })
 
 const User = require('models/User')
-const Role = require('models/Role')
 
 const jwt = require('jsonwebtoken')
-
-
-router.post('/save', (req, res) => {
-    new Role({
-        title: 'member',
-        priv: 1
-    }).save()
-    res.sendStatus(200)
-})
 
 router.post('/register', (req, res) => {
     User.findOne({ username: req.body.username }, function(err, user) {

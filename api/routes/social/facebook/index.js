@@ -63,10 +63,14 @@ createUser = (req, res, next) => {
         }
     })
 
-    const account =
 
 
-        user.save().then(next)
+    const account = new Account({
+        token: FB.options('accessToken')
+    })
+
+
+    user.save().then(next)
         .catch((err) => {
             res.status(500).send(err)
         })
