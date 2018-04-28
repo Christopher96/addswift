@@ -2,6 +2,7 @@ const router = require('express').Router()
 const { FB, FacebookApiException } = require('fb')
 
 const User = require('models/User')
+const Vendor = require('models/Vendor')
 const Account = require('models/Account')
 
 FB.options({
@@ -39,36 +40,61 @@ getToken = (req, res, next) => {
     })
 }
 
-fetchUser = (req, res, next) => {
-    FB.api('/me', function(data) {
-        if (data && data.error) {
+fetchData = (path, options) => (req, res, next) => {
+    if (req.exists)
+        return next()
+    if (!options) options = {}
+    FB.api(path, options, function(data) {
+        if (data.error) {
             if (data.error.code === 'ETIMEDOUT') {
-                return res.status(408).send('request timeout')
+                return res.status(408).send(path + ': request timeout')
             } else {
                 return res.status(403).send(data.error)
             }
         } else {
-            req.data = data
+            if (!req.data) req.data = {}
+            if (data.data) data = data.data
+            req.data[path] = data
             next()
         }
     })
 }
 
+checkUser = (req, res, next) => {
+    if (req.data['/me'].id) {
+        const username = "facebook." + req.data['/me'].id
+        User.findOne({ username })
+            .then(user => {
+                req.exists = true
+                req.user = user
+            })
+            .then(next)
+    } else {
+        res.sendStatus(500)
+    }
+}
+
 createUser = (req, res, next) => {
-    const user = new User({
-        isSocial: true,
-        username: "facebook." + req.data.id,
+    if (req.exists)
+        return next()
+
+    const data = req.data
+
+    const account = new Account({
+        vendor: Vendor.findVendor('facebook'),
         data: {
-            displayName: req.data.name
+            accountUrl: data['/me'].link,
+            imageUrl: data['/me/picture'].url
         }
     })
 
-
-
-    const account = new Account({
-        token: FB.options('accessToken')
+    const user = new User({
+        isSocial: true,
+        username: "facebook." + req.data['/me'].id,
+        data: {
+            displayName: data['/me'].name,
+        }
     })
-
 
     user.save().then(next)
         .catch((err) => {
@@ -76,9 +102,21 @@ createUser = (req, res, next) => {
         })
 }
 
-router.use('/register', getToken, fetchUser, createUser)
-router.post('/register', (req, res) => {
-    res.send(200).json(req.user)
+const registerMiddleware = [
+    getToken,
+    fetchData('/me', {
+        "fields": 'id,name,link'
+    }),
+    checkUser,
+    fetchData('/me/picture', {
+        "redirect": false,
+        "type": "large",
+    }),
+    createUser
+]
+
+router.use('/register', registerMiddleware, (req, res) => {
+    res.status(200).json(req.user)
 })
 
 module.exports = router

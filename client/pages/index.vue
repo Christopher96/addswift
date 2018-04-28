@@ -9,10 +9,12 @@ export default {
   asyncData({ store, redirect }) {
     return store.dispatch('auth/getUser')
     .then((res) => {
+      console.log(res)
       return { user: res.data.user }
     })
     .catch(() => {
-      redirect('/login')
+      store.dispatch('auth/logout')
+      .then(redirect('/login'))
     })
   }
 }

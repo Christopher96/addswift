@@ -2,6 +2,7 @@
   <v-btn
   @click="login" 
   :style="{ backgroundColor: color }"
+  class="social-btn"
   >
   <v-layout>
     <v-flex class="site-icon" md2><v-icon>fa-{{site}}</v-icon></v-flex>
@@ -20,12 +21,16 @@ import FacebookService from '@/services/social/FacebookService'
       "color"
     ],
     methods: {
-      login: function() {
+      login() {
         switch (this.site) {
           case "facebook":
+          console.log("asdf")
             FacebookService.loginUrl()
             .then((res) => {
-                window.open(res.data.url)
+                const loginWindow = window.open(res.data.url)
+                loginWindow.onbeforeunload = () => {
+                  this.$emit('socialLogin')
+                }
             })
           break;
           case "twitter":
@@ -40,21 +45,29 @@ import FacebookService from '@/services/social/FacebookService'
   }
 </script>
 
-<style lang="scss" scoped>
-.fa {
-  font-size: 1.5em;
-}
+<style lang="scss">
 
-.site-icon {
-  border-right: 1px solid;
-}
 
-.btn {
+
+.social-btn {
   width: 100%;
   margin-bottom: 10px;
-  padding: 15px 15px 15px 0;
   height: auto;
+
+  .site-icon {
+    border-right: 1px solid;
+  }
+
+  .fa {
+    font-size: 1.5em;
+  }
+    
+  .btn__content {
+    padding: 15px 15px 15px 0;
+    
+  }
 }
+
 
 
 </style>

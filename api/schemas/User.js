@@ -14,15 +14,17 @@ const ObjectId = Schema.ObjectId
 const UserSchema = new Schema({
     username: {
         type: String,
-        minlength: 3,
-        maxlength: 20,
+        min: 3,
+        max: function() {
+            return this.isSocial ? 100 : 20
+        },
         unique: true,
         required: true
     },
     password: {
         type: String,
-        minlength: 3,
-        maxlength: 50,
+        min: 3,
+        max: 50,
         required: function() {
             return this.isSocial ? false : true
         }
@@ -33,16 +35,16 @@ const UserSchema = new Schema({
             return this.isSocial ? false : true
         }
     },
+    isSocial: {
+        type: Boolean,
+        default: false
+    },
     data: {
         type: [UserDataSchema]
     },
     accounts: [
         [AccountSchema]
     ],
-    isSocial: {
-        type: Boolean,
-        default: false
-    },
     status: {
         type: Number,
         required: true,

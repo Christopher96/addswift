@@ -8,7 +8,7 @@ const router = express.Router()
 
 // Gets mongoose plugin
 const mongoose = require('mongoose')
-const ObjectId = require('mongoose').Types.ObjectId
+const ObjectId = mongoose.Types.ObjectId
 
 // Connects to MongoDB through public database URI or local database
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:4000/addswift'
@@ -16,13 +16,6 @@ mongoose.connect(mongoUri)
 
 // Additional Schema types
 require('mongoose-type-email')
-
-// Transform errors from mongoose to a more human readable format
-// const mongooseBeautifulUniqueValidation = require('mongoose-beautiful-unique-validation')
-// const mongooseValidationErrorTransform = require('mongoose-validation-error-transform')
-
-// mongoose.plugin(mongooseBeautifulUniqueValidation)
-// mongoose.plugin(mongooseValidationErrorTransform)
 
 const db = mongoose.connection
 
@@ -48,7 +41,7 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-    User.findOne({ username: req.body.username })
+    User.findOne({ username: req.body.username, isSocial: false })
         .then((user) => {
             if (user.comparePassword(req.body.password)) {
                 signToken(user, res)
@@ -68,23 +61,24 @@ router.post('/logout', (req, res) => {
 
 router.get('/user', verifyToken, (req, res) => {
     jwt.verify(req.token, 'secretkey', (err, auth) => {
-        if (err) {
-            res.status(500)
-        } else {
+        if (!err) {
             res.status(200).json(auth)
+        } else {
+            res.sendStatus(500)
         }
     })
 })
 
 router.post('/social-login', (req, res) => {
-    console.log(req.token)
+    signToken(req.body, res)
 })
 
-// Token format
-// Authorization: Bearer <access_token>
 
 // Verify JWT token
 function verifyToken(req, res, next) {
+
+    // Token format
+    // Authorization: Bearer <access_token>
     const bearerHeader = req.headers['authorization']
 
     if (typeof bearerHeader !== 'undefined') {
@@ -98,7 +92,10 @@ function verifyToken(req, res, next) {
 
 function signToken(user, res) {
     jwt.sign({ user }, 'secretkey', { expiresIn: '30s' }, (err, token) => {
-        res.json({ token })
+        if (!err) res.status(200).json({ token })
+        else {
+            res.sendStatus(500)
+        }
     })
 }
 

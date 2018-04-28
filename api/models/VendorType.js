@@ -6,6 +6,8 @@ const mongoose = require('mongoose')
 
 const VendorTypeSchema = require('schemas/VendorType')
 
+const ObjectId = mongoose.Types.ObjectId
+
 class VendorTypeClass {
     static getAllIds() {
         return new Promise((resolve, reject) => {
@@ -13,7 +15,7 @@ class VendorTypeClass {
                 if (err) reject(err)
                 else {
                     const newdocs = {}
-                    docs.map(item => newdocs[item.title] = item.id)
+                    docs.map(item => newdocs[item.title] = ObjectId(item.id))
                     resolve(newdocs)
                 }
             })

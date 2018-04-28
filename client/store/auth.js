@@ -2,7 +2,6 @@ import Auth from '@/services/AuthenticationService'
 import TS from '@/services/TokenService'
 import axios from 'axios'
 
-const AUTH_REQUEST = "AUTH_REQUEST"
 const AUTH_SUCCESS = "AUTH_SUCCESS"
 const AUTH_ERROR = "AUTH_ERROR"
 const AUTH_LOGOUT = "AUTH_LOGOUT"
@@ -19,8 +18,8 @@ export const getters = {
 }
 
 export const mutations = {
-    [AUTH_REQUEST]: (state) => {},
     [AUTH_SUCCESS]: (state, token) => {
+        console.log(state.token)
         state.token = token
         TS.setToken(token)
     },
@@ -39,9 +38,21 @@ export const mutations = {
 
 export const actions = {
     login({ commit, dispatch }, creds) {
-        commit(AUTH_REQUEST)
         return new Promise((resolve, reject) => {
             Auth.login(creds)
+                .then((res) => {
+                    commit(AUTH_SUCCESS, res.data.token)
+                    resolve(res)
+                })
+                .catch((err) => {
+                    commit(AUTH_ERROR)
+                    reject(err)
+                })
+        })
+    },
+    socialLogin({ commit, dispatch }, creds) {
+        return new Promise((resolve, reject) => {
+            Auth.socialLogin(creds)
                 .then((res) => {
                     commit(AUTH_SUCCESS, res.data.token)
                     resolve(res)
@@ -59,7 +70,6 @@ export const actions = {
         })
     },
     register({ commit, dispatch }, creds) {
-        commit(AUTH_REQUEST)
         return new Promise((resolve, reject) => {
             Auth.register(creds)
                 .then((res) => {

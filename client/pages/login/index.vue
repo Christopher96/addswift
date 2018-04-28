@@ -64,7 +64,8 @@
 </template>
 
 <script>
-import SocialLoginButton from "@/components/SocialLoginButton.vue";
+import SocialLoginButton from "@/components/SocialLoginButton.vue"
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -91,8 +92,6 @@ export default {
         this.$store.dispatch('auth/login', {
             username: this.username,
             password: this.password
-        }).then((res) => {
-          this.$router.push('/')
         }).catch((err) => {
           console.log(err)
           if(err.response.data)
@@ -104,6 +103,20 @@ export default {
     clear() {
       this.$refs.form.reset()
       this.$validator.reset()
+    }
+  },
+  computed: {
+    ...mapGetters({
+      isAuthenticated: 'auth/isAuthenticated'
+    }),
+    
+  },
+  watch: {
+    isAuthenticated() {
+      console.log("asd")
+      if(this.isAuthenticated) {
+        this.$router.push('/')
+      }
     }
   },
   mounted() {

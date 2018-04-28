@@ -3,8 +3,7 @@
 </template>
 
 <script>
-import FacebookService from '@/services/social/FacebookService'
-import AuthenticationService from '@/services/AuthenticationService'
+import FB from '@/services/social/FacebookService'
 
 export default {
   layout: 'loading',
@@ -12,16 +11,15 @@ export default {
     const params = this.$route.query
     
     if(params.code !== undefined) {
-      FacebookService.registerCode(params.code)
+      FB.registerCode(params.code)
         .then((res) => {
-          console.log(res)
-          return AuthenticationService.socialLogin(res.data.token)
-        })
-        .then((res) => {
-          console.log(res)
+          return this.$store.dispatch('auth/socialLogin', res.data)
         })
         .catch((err) => {
           console.log(err.response)
+        })
+        .then(() => {
+          window.close()
         })
     }
   }

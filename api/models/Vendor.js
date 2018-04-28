@@ -4,6 +4,23 @@
 
 const mongoose = require('mongoose')
 
-const Vendor = require('schemas/Vendor')
+const VendorSchema = require('schemas/Vendor')
 
-module.exports = mongoose.model('Vendor', Vendor)
+class VendorClass {
+    static findVendor(site) {
+        return new Promise((resolve, reject) => {
+            this.findOne({ site }, (err, doc) => {
+                if (err) reject(err)
+                else {
+                    resolve(doc._id)
+                }
+            })
+        })
+
+    }
+}
+
+VendorSchema.loadClass(VendorClass)
+
+
+module.exports = mongoose.model('Vendor', VendorSchema)

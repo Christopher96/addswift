@@ -11,11 +11,11 @@ const bcrypt = require('bcrypt')
 const SALT_WORK_FACTOR = 10
 
 
-UserSchema.pre('validate', function(next) {
+UserSchema.pre('validate', async function(next) {
     // Set user as regular member is no role is given
     if (!this.role) {
         const schema = this
-        Role.findRole('Member')
+        await Role.findRole('Member')
             .then(role => schema.role = role)
             .catch(err => console.log(err))
     }

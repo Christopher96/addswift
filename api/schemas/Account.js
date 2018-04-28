@@ -15,8 +15,10 @@ const AccountSchema = new Schema({
         ref: 'Vendor',
         required: true
     },
-    telephone: Number,
-    private: Boolean,
+    data: {
+        type: [AccountDataSchema],
+        required: true
+    },
     created: {
         type: Date,
         default: Date.now

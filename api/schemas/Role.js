@@ -10,7 +10,8 @@ const ObjectId = Schema.ObjectId
 const RoleSchema = new Schema({
     title: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     priv: {
         type: Number,
