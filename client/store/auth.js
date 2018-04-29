@@ -19,7 +19,6 @@ export const getters = {
 
 export const mutations = {
     [AUTH_SUCCESS]: (state, token) => {
-        console.log(state.token)
         state.token = token
         TS.setToken(token)
     },

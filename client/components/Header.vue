@@ -17,12 +17,6 @@
         flat
       ></v-text-field>
     <v-spacer></v-spacer>
-    <nuxt-link v-if="$store.state.user" to="/logout">
-      <v-btn class="error">
-        <span class="mr-2">Logout</span>
-        <v-icon>exit_to_app</v-icon>
-      </v-btn>
-    </nuxt-link>
   </v-toolbar>
 </template>
 

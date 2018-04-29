@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const path = require('path')
 const file = require('file')
+require('dotenv').config()
 
 const app = express()
 const router = express.Router()
@@ -32,8 +33,8 @@ file.walkSync(routePath, function(path, dirs, files) {
 
 app.use('/api', router)
 
-const host = process.env.HOST || '127.0.0.1'
-const port = process.env.PORT || 3001
+const host = process.env.HOST
+const port = process.env.BACKEND_PORT
 
 // Listen the server
 app.listen(port, host)

@@ -17,6 +17,7 @@
         "@nuxtjs/axios": "^5.3.1",
         "bcrypt": "^1.0.3",
         "cors": "^2.8.4",
+        "dotenv": "^5.0.1",
         "express": "^4.15.3",
         "fb": "^2.0.0",
         "file": "^0.2.2",
@@ -27,8 +28,7 @@
         "mongoose-type-email": "^1.0.5",
         "nuxt": "^1.0.0",
         "vee-validate": "^2.0.6",
-        "vuetify": "^1.0.14",
-        "vuex-persistedstate": "^2.5.2"
+        "vuetify": "^1.0.14"
     },
     "devDependencies": {
         "babel-eslint": "^8.2.1",

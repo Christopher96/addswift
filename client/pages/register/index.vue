@@ -1,8 +1,8 @@
 <template>
   <v-form v-model="valid" ref="form" lazy-validation>
-       <p class="subheading">Already a member? <nuxt-link to="login">Login </nuxt-link><i class="fa fa-arrow-right"></i></p>
-      <v-layout fluid>
-        <v-flex md6 column>
+      <p class="subheading">Already a member? <nuxt-link to="login">Login </nuxt-link><i class="fa fa-arrow-right"></i></p>
+      <v-layout row wrap>
+        <v-flex column sm6 xs12>
           <v-text-field
           prepend-icon="fa-user"
           v-model="username"
@@ -24,7 +24,7 @@
           ></v-text-field>
           
         </v-flex >
-        <v-flex md6 column>
+        <v-flex column sm6 xs12>
           <v-text-field
           name="password"
           prepend-icon="fa-lock"

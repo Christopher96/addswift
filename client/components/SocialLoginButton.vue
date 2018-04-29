@@ -24,12 +24,11 @@ import FacebookService from '@/services/social/FacebookService'
       login() {
         switch (this.site) {
           case "facebook":
-          console.log("asdf")
             FacebookService.loginUrl()
             .then((res) => {
                 const loginWindow = window.open(res.data.url)
                 loginWindow.onbeforeunload = () => {
-                  this.$emit('socialLogin')
+                  this.$router.push('/')
                 }
             })
           break;
@@ -47,10 +46,9 @@ import FacebookService from '@/services/social/FacebookService'
 
 <style lang="scss">
 
-
-
 .social-btn {
   width: 100%;
+  margin: 0;
   margin-bottom: 10px;
   height: auto;
 

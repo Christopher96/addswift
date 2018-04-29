@@ -22,9 +22,9 @@ module.exports = {
         ]
     },
 
-    // router: {
-    //     middleware: ['auth']
-    // },
+    router: {
+        middleware: ['token']
+    },
     /*
      ** Customize the progress-bar color
      */
@@ -43,8 +43,7 @@ module.exports = {
      */
     plugins: [
         '@/plugins/vuetify',
-        '@/plugins/vee-validate',
-        '@/plugins/localStorage.js'
+        '@/plugins/vee-validate'
     ],
 
     /*

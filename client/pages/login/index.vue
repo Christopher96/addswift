@@ -1,6 +1,6 @@
 <template>
-  <v-layout fluid>
-    <v-flex column md6>
+  <v-layout row wrap>
+    <v-flex column sm6 xs12>
       <v-form ref="form" lazy-validation>
           <p class="fl subheading">Not a member yet? <nuxt-link to="register">Register </nuxt-link><i class="fa fa-arrow-right"></i></p>
           <v-text-field
@@ -45,7 +45,7 @@
           </div>
       </v-form>
     </v-flex>
-    <v-flex column md6>
+    <v-flex class="social-btns" column sm6 xs12>
       <p class="subheading">Or sign in with social media</p>
       <SocialLoginButton
         title="Facebook"
@@ -92,7 +92,11 @@ export default {
         this.$store.dispatch('auth/login', {
             username: this.username,
             password: this.password
-        }).catch((err) => {
+        })
+        .then(res => {
+          this.$router.push('/')
+        })
+        .catch((err) => {
           console.log(err)
           if(err.response.data)
             this.error = err.response.data
@@ -105,20 +109,20 @@ export default {
       this.$validator.reset()
     }
   },
-  computed: {
-    ...mapGetters({
-      isAuthenticated: 'auth/isAuthenticated'
-    }),
+  // computed: {
+  //   ...mapGetters({
+  //     isAuthenticated: 'auth/isAuthenticated'
+  //   }),
     
-  },
-  watch: {
-    isAuthenticated() {
-      console.log("asd")
-      if(this.isAuthenticated) {
-        this.$router.push('/')
-      }
-    }
-  },
+  // },
+  // watch: {
+  //   isAuthenticated() {
+  //     console.log("asd")
+  //     if(this.isAuthenticated) {
+  //       this.$router.push('/')
+  //     }
+  //   }
+  // },
   mounted() {
     this.$validator.localize('en', this.dictionary)
   },
@@ -126,4 +130,13 @@ export default {
 }
 </script>
 
+<style lang="stylus">
+@require '~vuetify/src/stylus/settings/_variables'
+
+@media $display-breakpoints.xs-only
+    .social-btns
+          margin-top: 2em;   
+
+
+</style>
 
