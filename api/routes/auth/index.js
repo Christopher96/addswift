@@ -48,7 +48,7 @@ router.post('/login', (req, res, next) => {
     User.findOne({ username: req.body.username, isSocial: false })
         .then((user) => {
             if (user.comparePassword(req.body.password)) {
-                req.user = user     
+                req.user = user
                 next()
             } else {
                 res.status(401).send("Invalid username or password")
@@ -66,13 +66,15 @@ router.post('/logout', (req, res) => {
 
 router.get('/user', verifyToken, (req, res) => {
     User.findById(req.userId)
-    .then(user => {
-        res.status(200).json(user)
-    })
-    .catch(err => {
-        console.log(err)
-        res.sendStatus(500)
-    })
+        .populate('accounts.vendor')
+        .exec((err, user) => {
+            console.log(user)
+            if (!err && user) res.status(200).json(user)
+            else {
+                console.log(err)
+                res.sendStatus(500)
+            }
+        })
 })
 
 module.exports = router

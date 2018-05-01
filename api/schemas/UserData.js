@@ -13,6 +13,7 @@ const UserDataSchema = new Schema({
         default: this.username
     },
     telephone: Number,
+    address: String,
     private: Boolean,
 
 })

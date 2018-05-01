@@ -10,8 +10,8 @@ const ObjectId = Schema.ObjectId
 const AccountDataSchema = new Schema({
     accountUrl: String,
     imageUrl: String,
+    name: String,
     username: String,
-    description: String,
     followers: Number,
     following: Number,
     friends: Number

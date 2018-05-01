@@ -53,6 +53,7 @@ fetchData = (path, options) => (req, res, next) => {
             if (data.error.code === 'ETIMEDOUT') {
                 return res.status(408).send(path + ': request timeout')
             } else {
+                console.log(data.error)
                 return res.status(403).send(data.error)
             }
         } else {
@@ -68,12 +69,12 @@ checkUser = (req, res, next) => {
     if (req.data['/me'].id) {
         const username = "facebook." + req.data['/me'].id
         User.findOne({ username }, (err, user) => {
-            if(!err && user) {
+            if (!err && user) {
                 req.pass = true
                 req.user = user
             }
             req.data.username = username
-            
+
             return next()
         })
     } else {
@@ -83,11 +84,11 @@ checkUser = (req, res, next) => {
 
 findVendor = (req, res, next) => {
     Vendor.findVendor('facebook')
-    .then(vendor => {
-        req.data.vendor = vendor
-        return next()
-    })
-    .catch(err => console.log(err))
+        .then(vendor => {
+            req.data.vendor = vendor
+            return next()
+        })
+        .catch(err => console.log(err))
 }
 
 createUser = (req, res, next) => {
@@ -101,8 +102,7 @@ createUser = (req, res, next) => {
         data: {
             accountUrl: data['/me'].link,
             imageUrl: data['/me/picture'].url,
-            username: data['/me'].name,
-            description: data['/me'].bio
+            name: data['/me'].name
         }
     })
 
@@ -113,7 +113,7 @@ createUser = (req, res, next) => {
             displayName: data['/me'].name,
         }
     })
-    
+
     user.accounts.push(account)
 
     user.save()

@@ -10,7 +10,7 @@ const ObjectId = Schema.ObjectId
 const VendorSchema = new Schema({
     vendorType: {
         type: ObjectId,
-        ref: 'Vendor',
+        ref: 'VendorType',
         required: true
     },
     site: {

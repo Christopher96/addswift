@@ -21,26 +21,27 @@
             </v-card>
           </v-flex>
           <v-flex md8 pl-4>
-                <v-toolbar color="transparent" tabs>
-      <v-tabs
-        fixed-tabs
-        v-model="currentItem"
-        color="transparent"
-        slider-color="secondary"
-        icons-and-text
-      >
-        <v-tab
-          v-for="item in items"
-          :key="item.title"
-          :href="'#tab-' + item.title"
+            <v-toolbar
+            tabs
+            >
+        <v-tabs
+          v-model="currentItem"
+          slider-color="secondary"
         >
-          {{ item.title }}
-          <v-icon>
-            {{ item.icon }}
-          </v-icon>
-        </v-tab>
-      </v-tabs>
-    </v-toolbar>
+          <v-tab
+            v-for="item in items"
+            :key="item.title"
+            :href="'#tab-' + item.title"
+          >
+            <v-icon
+              class="mr-2" 
+            >
+              {{ item.icon }}
+            </v-icon>
+            {{ item.title }}
+          </v-tab>
+        </v-tabs>
+      </v-toolbar>
 
     <v-tabs-items v-model="currentItem">
       <v-tab-item
@@ -73,7 +74,7 @@
       items: [
         {
           title: "Accounts",
-          icon: "account_circle",
+          icon: "group",
           component: AccountList
         }
       ]
