@@ -40,10 +40,10 @@ const UserSchema = new Schema({
         default: false
     },
     data: {
-        type: [UserDataSchema]
+        type: UserDataSchema
     },
     accounts: [
-        [AccountSchema]
+        AccountSchema
     ],
     status: {
         type: Number,

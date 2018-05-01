@@ -7,9 +7,6 @@ const app = express()
 const host = process.env.HOST
 const port = process.env.PORT
 
-console.log(host)
-console.log(port)
-
 app.set('port', port)
 
 // Import and Set Nuxt.js options

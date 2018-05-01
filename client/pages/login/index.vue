@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import SocialLoginButton from "@/components/SocialLoginButton.vue"
+import SocialLoginButton from "@/components/auth/SocialLoginButton.vue"
 import { mapGetters } from 'vuex'
 
 export default {

@@ -11,9 +11,9 @@ export default {
     const params = this.$route.query
     
     if(params.code !== undefined) {
-      FB.registerCode(params.code)
+      FB.register(params.code)
         .then((res) => {
-          return this.$store.dispatch('auth/socialLogin', res.data)
+          return this.$store.dispatch('auth/socialLogin', res.data.token)
         })
         .catch((err) => {
           console.log(err.response)

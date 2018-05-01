@@ -1,5 +1,5 @@
 /*
- * Mongoose Schema for holding data for accounts
+ * Mongoose Schema for holding account data
  */
 
 const mongoose = require('mongoose')

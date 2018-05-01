@@ -16,7 +16,7 @@ const AccountSchema = new Schema({
         required: true
     },
     data: {
-        type: [AccountDataSchema],
+        type: AccountDataSchema,
         required: true
     },
     created: {

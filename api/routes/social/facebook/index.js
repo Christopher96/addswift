@@ -1,3 +1,4 @@
+const { signToken } = require('utils/jwt')
 const router = require('express').Router()
 const { FB, FacebookApiException } = require('fb')
 
@@ -44,7 +45,7 @@ getToken = (req, res, next) => {
 }
 
 fetchData = (path, options) => (req, res, next) => {
-    if (req.exists)
+    if (req.pass)
         return next()
     if (!options) options = {}
     FB.api(path, options, function(data) {
@@ -66,41 +67,63 @@ fetchData = (path, options) => (req, res, next) => {
 checkUser = (req, res, next) => {
     if (req.data['/me'].id) {
         const username = "facebook." + req.data['/me'].id
-        User.findOne({ username })
-            .then(user => {
-                req.exists = true
+        User.findOne({ username }, (err, user) => {
+            if(!err && user) {
+                req.pass = true
                 req.user = user
-            })
-            .then(next)
+            }
+            req.data.username = username
+            
+            return next()
+        })
     } else {
         res.sendStatus(500)
     }
 }
 
+findVendor = (req, res, next) => {
+    Vendor.findVendor('facebook')
+    .then(vendor => {
+        req.data.vendor = vendor
+        return next()
+    })
+    .catch(err => console.log(err))
+}
+
 createUser = (req, res, next) => {
-    if (req.exists)
+    if (req.pass)
         return next()
 
     const data = req.data
 
     const account = new Account({
-        vendor: Vendor.findVendor('facebook'),
+        vendor: data.vendor._id,
         data: {
             accountUrl: data['/me'].link,
-            imageUrl: data['/me/picture'].url
+            imageUrl: data['/me/picture'].url,
+            username: data['/me'].name,
+            description: data['/me'].bio
         }
     })
 
     const user = new User({
         isSocial: true,
-        username: "facebook." + req.data['/me'].id,
+        username: data.username,
         data: {
             displayName: data['/me'].name,
         }
     })
+    
+    user.accounts.push(account)
 
-    user.save().then(next)
+    user.save()
+        .then(user => {
+            console.log(user)
+            req.user = user
+            next()
+        })
         .catch((err) => {
+            console.log(err)
             res.status(500).send(err)
         })
 }
@@ -115,11 +138,11 @@ const registerMiddleware = [
         "redirect": false,
         "type": "large",
     }),
-    createUser
+    findVendor,
+    createUser,
+    signToken
 ]
 
-router.use('/register', registerMiddleware, (req, res) => {
-    res.status(200).json(req.user)
-})
+router.use('/register', registerMiddleware)
 
 module.exports = router

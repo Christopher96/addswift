@@ -2,6 +2,9 @@
  * Backend API, communicates with MongoDB through the express router
  */
 
+// JWT helper functions
+const { verifyToken, signToken } = require('utils/jwt')
+
 // Gets express router
 const express = require('express')
 const router = express.Router()
@@ -25,26 +28,28 @@ db.on('error', function(err) {
 
 const User = require('models/User')
 
-const jwt = require('jsonwebtoken')
-
-router.post('/register', (req, res) => {
+router.post('/register', (req, res, next) => {
     User.findOne({ username: req.body.username }, function(err, user) {
         if (!user) {
             let user = new User(req.body)
             user.save()
-                .then(user => signToken(user, res))
+                .then(user => {
+                    req.user = user
+                    next()
+                })
                 .catch(err => res.status(400).send(err.message))
         } else {
             res.status(401).send(`User '${req.body.username}' already exists`)
         }
     })
-})
+}, signToken)
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
     User.findOne({ username: req.body.username, isSocial: false })
         .then((user) => {
             if (user.comparePassword(req.body.password)) {
-                signToken(user, res)
+                req.user = user     
+                next()
             } else {
                 res.status(401).send("Invalid username or password")
             }
@@ -53,50 +58,21 @@ router.post('/login', (req, res) => {
             console.log(err)
             res.status(404).send(`User '${req.body.username}' was not found`)
         })
-})
+}, signToken)
 
 router.post('/logout', (req, res) => {
 
 })
 
 router.get('/user', verifyToken, (req, res) => {
-    jwt.verify(req.token, 'secretkey', (err, auth) => {
-        if (!err) {
-            res.status(200).json(auth)
-        } else {
-            res.sendStatus(500)
-        }
+    User.findById(req.userId)
+    .then(user => {
+        res.status(200).json(user)
+    })
+    .catch(err => {
+        console.log(err)
+        res.sendStatus(500)
     })
 })
-
-router.post('/social-login', (req, res) => {
-    signToken(req.body, res)
-})
-
-
-// Verify JWT token
-function verifyToken(req, res, next) {
-
-    // Token format
-    // Authorization: Bearer <access_token>
-    const bearerHeader = req.headers['authorization']
-
-    if (typeof bearerHeader !== 'undefined') {
-        const bearer = bearerHeader.split(' ')
-        req.token = bearer[1]
-        next()
-    } else {
-        res.sendStatus(403)
-    }
-}
-
-function signToken(user, res) {
-    jwt.sign({ user }, 'secretkey', { expiresIn: '30s' }, (err, token) => {
-        if (!err) res.status(200).json({ token })
-        else {
-            res.sendStatus(500)
-        }
-    })
-}
 
 module.exports = router

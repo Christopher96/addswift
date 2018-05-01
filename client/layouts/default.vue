@@ -1,21 +1,19 @@
 
 <template>
   <v-app dark>
-    <Nav />
     <Header />
+    <Nav />
     <v-content>
-      <v-container fluid>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-content>
     <Footer />
   </v-app>
 </template>
 
 <script>
-import Header from '@/components/Header'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
+import Header from '@/components/base/Header'
+import Nav from '@/components/base/Nav'
+import Footer from '@/components/base/Footer'
 
 export default {
   components: {

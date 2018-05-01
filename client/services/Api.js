@@ -1,9 +1,8 @@
 import axios from 'axios'
 
 export default (path) => {
-    const host = process.env.HOST || 'localhost'
-    const port = process.env.BACKEND_PORT || 3001
-
+    const host = process.env.HOST
+    const port = process.env.API_PORT
 
     let url = 'http://' + host + ':' + port + '/api'
     if (path) url += path

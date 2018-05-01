@@ -34,10 +34,11 @@ file.walkSync(routePath, function(path, dirs, files) {
 app.use('/api', router)
 
 const host = process.env.HOST
-const port = process.env.BACKEND_PORT
+const port = process.env.API_PORT
 
 // Listen the server
 app.listen(port, host)
 app.on('listening', function() {
     console.log('Express server started on port %s at %s', server.address().port, server.address().address);
 })
+process.on('SIGINT', () => { console.log("Bye bye!"); process.exit(); });

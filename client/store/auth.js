@@ -36,7 +36,7 @@ export const mutations = {
 }
 
 export const actions = {
-    login({ commit, dispatch }, creds) {
+    login({ commit }, creds) {
         return new Promise((resolve, reject) => {
             Auth.login(creds)
                 .then((res) => {
@@ -49,18 +49,8 @@ export const actions = {
                 })
         })
     },
-    socialLogin({ commit, dispatch }, creds) {
-        return new Promise((resolve, reject) => {
-            Auth.socialLogin(creds)
-                .then((res) => {
-                    commit(AUTH_SUCCESS, res.data.token)
-                    resolve(res)
-                })
-                .catch((err) => {
-                    commit(AUTH_ERROR)
-                    reject(err)
-                })
-        })
+    socialLogin({ commit }, token) {
+        commit(AUTH_SUCCESS, token)
     },
     logout({ commit }) {
         return new Promise((resolve, reject) => {
@@ -76,7 +66,6 @@ export const actions = {
                     resolve(res)
                 })
                 .catch((err) => {
-                    console.log(err)
                     commit(AUTH_ERROR)
                     reject(err)
                 })
@@ -94,5 +83,5 @@ export const actions = {
                     reject(err)
                 })
         })
-    }
+    },
 }

@@ -12,13 +12,10 @@ class RoleClass {
     static findRole(title) {
         return new Promise((resolve, reject) => {
             this.findOne({ title }, (err, doc) => {
-                if (err) reject(err)
-                else {
-                    resolve(ObjectId(doc._id))
-                }
+                if (!err && doc) resolve(doc._id)
+                else reject(err)
             })
         })
-
     }
 }
 

@@ -16,10 +16,9 @@ UserSchema.pre('validate', async function(next) {
     if (!this.role) {
         const schema = this
         await Role.findRole('Member')
-            .then(role => schema.role = role)
-            .catch(err => console.log(err))
+        .then(role => schema.role = role)
+        .catch(err => console.log(err))
     }
-
     next()
 })
 

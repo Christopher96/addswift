@@ -10,13 +10,10 @@ class VendorClass {
     static findVendor(site) {
         return new Promise((resolve, reject) => {
             this.findOne({ site }, (err, doc) => {
-                if (err) reject(err)
-                else {
-                    resolve(doc._id)
-                }
+                if (!err && doc) return resolve(doc)
+                else return reject(err)
             })
         })
-
     }
 }
 

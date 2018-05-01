@@ -1,4 +1,5 @@
 const pkg = require('./package')
+const Dotenv = require('dotenv-webpack')
 
 const nodeExternals = require('webpack-node-externals')
 
@@ -74,6 +75,7 @@ module.exports = {
                     loader: 'eslint-loader',
                     exclude: /(node_modules)/
                 })
+                config.plugins.push(new Dotenv())
             }
             if (ctx.isServer) {
                 config.externals = [

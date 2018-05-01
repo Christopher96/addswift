@@ -5,7 +5,7 @@ export default {
     loginUrl() {
         return FB.get('/login-url')
     },
-    registerCode(code) {
+    register(code) {
         return FB.post('/register', { code })
     }
 }
