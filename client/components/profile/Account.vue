@@ -3,12 +3,12 @@
     <v-flex xs4>
       <v-card>
           <v-card-actions
-            class="secondary" 
+            :class="vendor.color" 
           >
             <v-btn icon>
               <v-icon>{{ icon }}</v-icon>
             </v-btn>
-            <span class="subheading">{{ this.account.vendor.title }}</span>
+            <span class="subheading">{{ vendor.title }}</span>
             <v-spacer></v-spacer>
             <v-btn icon>
               <v-icon>person_add</v-icon>
@@ -17,13 +17,13 @@
               <v-icon>delete</v-icon>
             </v-btn>
           </v-card-actions>
-        <v-card-media :src="imageUrl" height="200px">
+        <v-card-media :src="data.imageUrl" height="200px">
         </v-card-media>
         <v-card-title primary-title>
           <div>
-            <a :href="accountUrl" class="headline">{{ username }}</a>
+            <a :href="data.accountUrl" class="headline">{{ data.username }}</a>
             <div>
-              <span class="grey--text caption">{{ this.account.created }}</span>
+              <span class="grey--text caption">{{ created }}</span>
             </div> 
           </div>
         </v-card-title>
@@ -38,9 +38,12 @@ export default {
   data() {
       return {
         icon: "fa-"+this.account.vendor.site,
-        ...this.account.data
+        ...this.account
       }
   },
+  mounted() {
+    console.log(this.account)
+  }
 }
 </script>
 

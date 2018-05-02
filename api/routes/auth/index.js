@@ -3,7 +3,7 @@
  */
 
 // JWT helper functions
-const { verifyToken, signToken } = require('utils/jwt')
+const { verifyToken, signToken } = require('middleware/jwt')
 
 // Gets express router
 const express = require('express')

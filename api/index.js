@@ -41,4 +41,7 @@ app.listen(port, host)
 app.on('listening', function() {
     console.log('Express server started on port %s at %s', server.address().port, server.address().address);
 })
-process.on('SIGINT', () => { console.log("Bye bye!"); process.exit(); });
+process.on('SIGINT', () => {
+    console.log("Bye bye!");
+    process.exit();
+});

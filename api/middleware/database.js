@@ -15,9 +15,9 @@ module.exports = (req, res) => {
     VendorType.getAllIds()
         .then((vendorTypes) => {
             Vendor.insertMany([
-                { title: 'Facebook', site: 'facebook', vendorType: vendorTypes.Social },
-                { title: 'Twitter', site: 'twitter', vendorType: vendorTypes.Social },
-                { title: 'Google +', site: 'google-plus', vendorType: vendorTypes.Social },
+                { title: 'Facebook', site: 'facebook', color: "#4267B2", vendorType: vendorTypes.Social },
+                { title: 'Twitter', site: 'twitter', color: "#4267B2", vendorType: vendorTypes.Social },
+                { title: 'Google +', site: 'google-plus', color: "#1DA1F2", vendorType: vendorTypes.Social },
             ], { ordered: true }, (err, docs) => {
                 // if (err) console.log(err)
             })

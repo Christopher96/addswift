@@ -13,6 +13,10 @@ const VendorSchema = new Schema({
         ref: 'VendorType',
         required: true
     },
+    color: {
+        type: String,
+        default: "primary"
+    },
     site: {
         type: String,
         required: true,

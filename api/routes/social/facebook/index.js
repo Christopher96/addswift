@@ -1,4 +1,4 @@
-const { signToken } = require('utils/jwt')
+const { signToken } = require('middleware/jwt')
 const router = require('express').Router()
 const { FB, FacebookApiException } = require('fb')
 
@@ -50,12 +50,7 @@ fetchData = (path, options) => (req, res, next) => {
     if (!options) options = {}
     FB.api(path, options, function(data) {
         if (data.error) {
-            if (data.error.code === 'ETIMEDOUT') {
-                return res.status(408).send(path + ': request timeout')
-            } else {
-                console.log(data.error)
-                return res.status(403).send(data.error)
-            }
+            return res.status(400).send(!data ? 'error occurred' : data.error)
         } else {
             if (!req.data) req.data = {}
             if (data.data) data = data.data
@@ -83,17 +78,20 @@ checkUser = (req, res, next) => {
 }
 
 findVendor = (req, res, next) => {
-    Vendor.findVendor('facebook')
-        .then(vendor => {
-            req.data.vendor = vendor
+    Vendor.findOne({ site: 'facebook' }, (err, doc) => {
+        if (!err && doc) {
+            req.data.vendor = doc
+            console.log(doc)
             return next()
-        })
-        .catch(err => console.log(err))
+        }
+        console.log("No vendor found")
+    })
 }
 
 createUser = (req, res, next) => {
     if (req.pass)
         return next()
+
 
     const data = req.data
 

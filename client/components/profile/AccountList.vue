@@ -15,7 +15,6 @@ export default {
     Account
   },
   mounted() {
-    console.log(this.user)
   }
 }
 </script>
