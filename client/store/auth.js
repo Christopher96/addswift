@@ -36,6 +36,12 @@ export const mutations = {
 }
 
 export const actions = {
+    checkToken({ commit }) {
+        const token = TS.getToken()
+        if (token) {
+            commit(AUTH_SUCCESS, token)
+        }
+    },
     login({ commit }, creds) {
         return new Promise((resolve, reject) => {
             Auth.login(creds)

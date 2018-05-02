@@ -8,14 +8,9 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
 
 const UserDataSchema = new Schema({
-    displayName: {
-        type: String,
-        default: this.username
-    },
-    telephone: Number,
+    phone: Number,
     address: String,
-    private: Boolean,
-
+    email: String
 })
 
 module.exports = UserDataSchema

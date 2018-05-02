@@ -3,7 +3,7 @@
     <v-flex xs4>
       <v-card>
           <v-card-actions
-            :class="vendor.color" 
+            :style="'background-color:' + vendor.color + ';'" 
           >
             <v-btn icon>
               <v-icon>{{ icon }}</v-icon>
@@ -13,19 +13,15 @@
             <v-btn icon>
               <v-icon>person_add</v-icon>
             </v-btn>
-            <v-btn icon>
+            <v-btn @click="remove" icon>
               <v-icon>delete</v-icon>
             </v-btn>
           </v-card-actions>
-        <v-card-media :src="data.imageUrl" height="200px">
+        <v-card-media :src="data.picture" height="150px">
         </v-card-media>
-        <v-card-title primary-title>
-          <div>
-            <a :href="data.accountUrl" class="headline">{{ data.username }}</a>
-            <div>
-              <span class="grey--text caption">{{ created }}</span>
-            </div> 
-          </div>
+        <v-card-title>
+          <a :href="data.link" class="title mb-1">{{ data.name }}</a>
+          <span class="grey--text caption">{{ created }}</span>
         </v-card-title>
       </v-card>
     </v-flex>
@@ -40,6 +36,11 @@ export default {
         icon: "fa-"+this.account.vendor.site,
         ...this.account
       }
+  },
+  methods: {
+    remove() {
+      
+    }
   },
   mounted() {
     console.log(this.account)

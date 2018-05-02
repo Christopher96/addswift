@@ -1,9 +1,7 @@
 <template>
-  <v-container>
-      <v-layout>
-        <Account v-for="account in user.accounts" :key="account._id" :account="account" />
-      </v-layout>
-  </v-container>
+    <v-layout>
+      <Account v-for="account in user.accounts" :key="account._id" :account="account" />
+    </v-layout>
 </template>
 
 <script>

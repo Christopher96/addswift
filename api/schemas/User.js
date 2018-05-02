@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 
 const AccountSchema = require('./Account')
 const UserDataSchema = require('./UserData')
+const UserSettingsSchema = require('./UserSettings')
 
 const Email = mongoose.SchemaTypes.Email;
 const Schema = mongoose.Schema
@@ -35,13 +36,18 @@ const UserSchema = new Schema({
             return this.isSocial ? false : true
         }
     },
+    displayName: {
+        type: String,
+        default: this.username
+    },
+    picture: String,
+    cover: String,
     isSocial: {
         type: Boolean,
         default: false
     },
-    data: {
-        type: UserDataSchema
-    },
+    settings: UserSettingsSchema,
+    data: UserDataSchema,
     accounts: [
         AccountSchema
     ],

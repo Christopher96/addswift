@@ -53,8 +53,11 @@ fetchData = (path, options) => (req, res, next) => {
             return res.status(400).send(!data ? 'error occurred' : data.error)
         } else {
             if (!req.data) req.data = {}
-            if (data.data) data = data.data
-            req.data[path] = data
+            if (!req.data[path]) req.data[path] = {}
+            req.data[path] = {
+                ...req.data[path],
+                ...data
+            }
             next()
         }
     })
@@ -81,7 +84,6 @@ findVendor = (req, res, next) => {
     Vendor.findOne({ site: 'facebook' }, (err, doc) => {
         if (!err && doc) {
             req.data.vendor = doc
-            console.log(doc)
             return next()
         }
         console.log("No vendor found")
@@ -95,11 +97,13 @@ createUser = (req, res, next) => {
 
     const data = req.data
 
+    console.log(data['/me'])
+
     const account = new Account({
         vendor: data.vendor._id,
         data: {
-            accountUrl: data['/me'].link,
-            imageUrl: data['/me/picture'].url,
+            link: data['/me'].link,
+            picture: data['/me/picture'].data.url,
             name: data['/me'].name
         }
     })
@@ -107,8 +111,11 @@ createUser = (req, res, next) => {
     const user = new User({
         isSocial: true,
         username: data.username,
+        displayName: data['/me'].name,
+        picture: data['/me/picture'].data.url,
+        cover: data['/me'].cover.source,
         data: {
-            displayName: data['/me'].name,
+            email: data['/me'].email
         }
     })
 
@@ -129,14 +136,17 @@ createUser = (req, res, next) => {
 const registerMiddleware = [
     getToken,
     fetchData('/me', {
-        "fields": 'id,name,link'
+        "fields": 'id'
     }),
     checkUser,
-    fetchData('/me/picture', {
-        "redirect": false,
-        "type": "large",
-    }),
     findVendor,
+    fetchData('/me/picture', {
+        "type": 'large',
+        "redirect": false
+    }),
+    fetchData('/me', {
+        "fields": 'link,name,cover,address,email'
+    }),
     createUser,
     signToken
 ]

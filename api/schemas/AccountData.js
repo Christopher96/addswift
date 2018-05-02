@@ -8,8 +8,8 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
 
 const AccountDataSchema = new Schema({
-    accountUrl: String,
-    imageUrl: String,
+    link: String,
+    picture: String,
     name: String,
     username: String,
     followers: Number,

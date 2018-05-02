@@ -1,9 +1,8 @@
 <template>
-  <v-toolbar app fixed clipped-left>
+  <v-toolbar app fixed scroll-off-screen>
     <v-layout>
-      <v-toolbar-side-icon @click.stop="$store.commit('toggleDrawer')"></v-toolbar-side-icon>
       <v-spacer></v-spacer>
-      <v-flex md6>
+      <v-flex md4>
         <v-layout row>
         <v-text-field
             prepend-icon="search"
