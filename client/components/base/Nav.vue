@@ -15,10 +15,10 @@
         </v-list-tile>
         <v-list-tile avatar @click="$router.push('/profile')">
           <v-list-tile-avatar>
-            <img src="https://randomuser.me/api/portraits/men/85.jpg" >
+            <img :src="user.picture">
           </v-list-tile-avatar>
           <v-list-tile-content>
-            <v-list-tile-title>John Leider</v-list-tile-title>
+            <v-list-tile-title>{{ user.displayName }}</v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-action>
             <v-btn icon @click.stop="mini = !mini">
@@ -58,6 +58,7 @@ export default {
         { title: 'Settings', icon: 'settings', path: '/settings' },
       ],
       mini: true,
+      user: this.$store.getters['auth/user']
     }
   },
   methods: {
@@ -72,6 +73,8 @@ export default {
           else console.log(err)
         })
     }
+  },
+  mounted() {
   }
 }
 </script>

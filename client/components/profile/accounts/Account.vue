@@ -20,8 +20,12 @@
         <v-card-media :src="data.picture" height="150px">
         </v-card-media>
         <v-card-title>
-          <a :href="data.link" class="title mb-1">{{ data.name }}</a>
-          <span class="grey--text caption">{{ created }}</span>
+          <div>
+            <a :href="data.link" class="title mb-1">{{ data.name }}</a>
+            <div>
+              <span class="grey--text caption">{{ created }}</span>
+            </div>
+          </div>
         </v-card-title>
       </v-card>
     </v-flex>
@@ -43,7 +47,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.account)
+    // console.log(this.account)
   }
 }
 </script>

@@ -75,7 +75,7 @@
               <v-subheader>Private</v-subheader>
             </v-flex>
             <v-flex xs8>
-              
+                <v-switch></v-switch>
             </v-flex>
           </v-layout>
         </v-container>

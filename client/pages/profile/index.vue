@@ -15,13 +15,19 @@
               </v-layout>
             </v-card-media>
             <v-list>
-              <v-list-tile >
+              <v-list-tile class="pt-3 pb-3">
+                <v-list-tile-content>
+                  <span class="headline">{{ user.displayName }}</span>
+                  <span class="caption grey--text">{{ user.username }}</span>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-divider></v-divider>
+              <v-list-tile v-for="(val, key) in userData" :key="key">
                 <v-list-tile-action>
-                  <v-icon color="primary">phone</v-icon>
+                  <v-icon color="primary">{{ icon(key) }}</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content>
-                  <v-list-tile-title>(650) 555-1234</v-list-tile-title>
-                  <v-list-tile-sub-title>Mobile</v-list-tile-sub-title>
+                  <v-list-tile-title>{{ val }}</v-list-tile-title>
                 </v-list-tile-content>
                 <v-list-tile-action>
                   <v-icon>chat</v-icon>
@@ -80,7 +86,8 @@
       items: [
         { title: "Accounts", icon: "group", component: Accounts },
         { title: "Sites", icon: "fa-globe", component: Sites }
-      ]
+      ],
+      userData: null
     }),
     asyncData({ store, redirect }) {
       return store.dispatch('auth/getUser')
@@ -101,7 +108,8 @@
       }
     },
     mounted() {
-      console.log(this.user.data)
+      this.userData = this.user.data
+      delete this.userData["_id"]
     }
   }
 </script>
