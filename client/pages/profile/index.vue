@@ -26,6 +26,16 @@
   import Content from '@/components/profile/layout/Content'
 
   export default {
+    asyncData({ store, redirect }) {
+      return store.dispatch('auth/getUser')
+      .then((res) => {
+        return { user: res.data }
+      })
+      .catch(() => {
+        store.dispatch('auth/logout')
+          .then(redirect('/login'))
+      })
+    },
     components: {
       Aside,
       Content

@@ -1,15 +1,15 @@
 <template>
     <div>
         <v-card class="profile-image">
-            <v-card-media :src="picture" height="175px">
+            <v-card-media :src="user.picture" height="175px">
                 <v-layout column class="media">
                 </v-layout>
             </v-card-media>
             <v-list>
                 <v-list-tile class="pt-3 pb-3">
                     <v-list-tile-content>
-                        <span class="headline">{{ displayName }}</span>
-                        <span class="caption grey--text">{{ username }}</span>
+                        <span class="headline">{{ user.displayName }}</span>
+                        <span class="caption grey--text">{{ user.username }}</span>
                     </v-list-tile-content>
                     <v-spacer></v-spacer>
                     <v-tooltip bottom>

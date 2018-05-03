@@ -37,12 +37,16 @@ import Accounts from '@/components/profile/accounts'
 import Sites from '@/components/profile/sites'
 
 export default {
-    data: () => ({
-      currentItem: 'tab-Accounts',
-      items: [
-        { title: "Accounts", icon: "group", component: Accounts, data: user.accounts },
-        { title: "Sites", icon: "fa-globe", component: Sites, data: user.sites }
-      ]
-    }),
+    props: ['user'],
+    data: () => {
+        return {
+currentItem: 'tab-Accounts',
+        items: [
+            { title: "Accounts", icon: "group", component: Accounts, data: user.accounts },
+            { title: "Sites", icon: "fa-globe", component: Sites, data: user.sites }
+        ]
+        }
+        
+    },
 }
 </script>
