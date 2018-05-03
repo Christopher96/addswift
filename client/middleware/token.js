@@ -1,5 +1,6 @@
 export default function({ store }) {
+    console.log("token")
     if (!store.getters['auth/isAuthenticated']) {
-        store.dispatch('auth/checkToken')
+        return store.dispatch('auth/checkToken')
     }
 }

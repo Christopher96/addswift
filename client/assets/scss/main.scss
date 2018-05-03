@@ -1,37 +1,3 @@
 /* IMPORTS */
 
 @import "~font-awesome/scss/font-awesome";
-
-/* ELEMENTS */
-
-* {
-    box-sizing: border-box;
-}
-
-
-/* CLASSES */
-
-.input-group__details:before {
-    padding: 1px 0px;
-}
-
-.input-group__prepend-icon.fa {
-    font-size: 1.5em;
-    text-align: center;
-}
-
-.fr {
-    float: right;
-}
-
-.fl {
-    float: left;
-}
-
-
-/* AUTH */
-
-.form-btns {
-    margin-top: 10px;
-    margin-left: -10px;
-}

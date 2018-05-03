@@ -9,22 +9,9 @@ const { verifyToken, signToken } = require('middleware/jwt')
 const express = require('express')
 const router = express.Router()
 
-// Gets mongoose plugin
+// Gets mongoose instance
 const mongoose = require('mongoose')
 const ObjectId = mongoose.Types.ObjectId
-
-// Connects to MongoDB through public database URI or local database
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:4000/addswift'
-mongoose.connect(mongoUri)
-
-// Additional Schema types
-require('mongoose-type-email')
-
-const db = mongoose.connection
-
-db.on('error', function(err) {
-    console.log(err)
-})
 
 const User = require('models/User')
 

@@ -1,7 +1,8 @@
-export default async function({ store, redirect }) {
+export default function({ store, redirect }) {
+    console.log("authenticated")
     if (store.getters['auth/isAuthenticated']) {
         if (!store.getters['auth/user']) {
-            await store.dispatch('auth/getUser')
+            return store.dispatch('auth/getUser')
                 .catch(() => {
                     return redirect('/login')
                 })

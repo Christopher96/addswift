@@ -22,7 +22,7 @@
                       <v-subheader>Custom theme</v-subheader>
                   </v-flex>
                   <v-flex xs8 v-if="custom">
-                      <v-layout>
+                      <v-layout class="color-controls">
                           <v-flex xs4>
                               <v-text-field
                                   class="pr-2"
@@ -75,7 +75,9 @@
               <v-subheader>Private</v-subheader>
             </v-flex>
             <v-flex xs8>
-                <v-switch></v-switch>
+                <v-switch
+                    v-model="e1"
+                ></v-switch>
             </v-flex>
           </v-layout>
         </v-container>
@@ -89,6 +91,7 @@
   export default {
     data () {
       return {
+        e1: false,
         color_1: null,
         color_2: null,
         color_3: null,
@@ -105,8 +108,14 @@
     },
     computed: {
         custom() {
-            return this.theme && this.theme.text == 'Custom'
+            return this.theme && this.theme == this.themes[0]
         }
     }
   }
 </script>
+
+<style lang="stylus">
+.color-controls
+    .input-group__details::before
+        display none
+</style>

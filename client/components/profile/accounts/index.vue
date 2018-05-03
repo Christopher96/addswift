@@ -1,6 +1,6 @@
 <template>
     <v-layout>
-      <Account v-for="account in user.accounts" :key="account._id" :account="account" />
+      <Account v-for="account in data" :key="account._id" :account="account" />
     </v-layout>
 </template>
 
@@ -8,7 +8,7 @@
 import Account from './Account'
 
 export default {
-  props: ['user'],
+  props: ['data'],
   components: {
     Account
   },

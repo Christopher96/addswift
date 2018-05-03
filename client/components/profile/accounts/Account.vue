@@ -10,12 +10,25 @@
             </v-btn>
             <span class="subheading">{{ vendor.title }}</span>
             <v-spacer></v-spacer>
-            <v-btn icon>
-              <v-icon>person_add</v-icon>
-            </v-btn>
-            <v-btn @click="remove" icon>
-              <v-icon>delete</v-icon>
-            </v-btn>
+            <v-tooltip bottom>
+              <v-btn
+                icon
+                slot="activator"
+              >
+                <v-icon>person_add</v-icon>
+              </v-btn>
+              <span>Follow/Add</span>
+            </v-tooltip>
+            <v-tooltip bottom>
+              <v-btn
+                icon
+                slot="activator"
+                @click="remove" 
+              >
+                <v-icon>delete</v-icon>
+              </v-btn>
+              <span>Delete account</span>
+            </v-tooltip>
           </v-card-actions>
         <v-card-media :src="data.picture" height="150px">
         </v-card-media>

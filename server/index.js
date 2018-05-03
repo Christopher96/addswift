@@ -6,8 +6,25 @@ const path = require('path')
 const file = require('file')
 require('dotenv').config()
 
+// Get express and the router
 const app = express()
 const router = express.Router()
+
+// Get the mongoose plugin
+const mongoose = require('mongoose')
+
+// Connects to MongoDB through public database URI or local database
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:4000/addswift'
+mongoose.connect(mongoUri)
+
+// Additional Schema types
+mongoose.plugin(require('plugins/modified'))
+
+// Check for DB errors
+const db = mongoose.connection
+db.on('error', function(err) {
+    console.log(err)
+})
 
 // Dev middleware
 if (!(process.env.NODE_ENV === 'production')) {
@@ -41,7 +58,9 @@ app.listen(port, host)
 app.on('listening', function() {
     console.log('Express server started on port %s at %s', server.address().port, server.address().address);
 })
+
+// Exit properly on CTRL-C
 process.on('SIGINT', () => {
     console.log("Bye bye!");
     process.exit();
-});
+})

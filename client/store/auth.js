@@ -81,7 +81,6 @@ export const actions = {
         return new Promise((resolve, reject) => {
             Auth.getUser()
                 .then((res) => {
-                    console.log(res)
                     commit(USER_SUCCESS, res.data)
                     resolve(res)
                 })

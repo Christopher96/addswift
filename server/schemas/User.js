@@ -8,7 +8,9 @@ const AccountSchema = require('./Account')
 const UserDataSchema = require('./UserData')
 const UserSettingsSchema = require('./UserSettings')
 
-const Email = mongoose.SchemaTypes.Email;
+require('mongoose-type-email')
+const Email = mongoose.SchemaTypes.Email
+
 const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
 
@@ -42,6 +44,10 @@ const UserSchema = new Schema({
     },
     picture: String,
     cover: String,
+    isPrivate: {
+        type: Boolean,
+        default: false
+    },
     isSocial: {
         type: Boolean,
         default: false

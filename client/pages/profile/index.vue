@@ -20,6 +20,16 @@
                   <span class="headline">{{ user.displayName }}</span>
                   <span class="caption grey--text">{{ user.username }}</span>
                 </v-list-tile-content>
+                <v-spacer></v-spacer>
+                <v-tooltip bottom>
+                  <v-btn
+                    icon
+                    slot="activator"
+                  >
+                    <v-icon>person_add</v-icon>
+                  </v-btn>
+                  <span>Follow</span>
+                </v-tooltip>
               </v-list-tile>
               <v-divider></v-divider>
               <v-list-tile v-for="(val, key) in userData" :key="key">
@@ -27,11 +37,8 @@
                   <v-icon color="primary">{{ icon(key) }}</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content>
-                  <v-list-tile-title>{{ val }}</v-list-tile-title>
+                  <v-list-tile-title class="body-2">{{ val }}</v-list-tile-title>
                 </v-list-tile-content>
-                <v-list-tile-action>
-                  <v-icon>chat</v-icon>
-                </v-list-tile-action>
               </v-list-tile>
             </v-list>
           </v-card>
@@ -63,7 +70,7 @@
               :id="'tab-' + item.title"
             >
               <v-card class="transparent mt-3">
-                  <component :is="item.component" :user="user"></component>            
+                  <component :is="item.component" :data="item.data"></component>            
               </v-card>
             </v-tab-item>
           </v-tabs-items>
@@ -81,23 +88,15 @@
 
   export default {
     data: () => ({
-      gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
       currentItem: 'tab-Accounts',
       items: [
-        { title: "Accounts", icon: "group", component: Accounts },
-        { title: "Sites", icon: "fa-globe", component: Sites }
-      ],
-      userData: null
+        { title: "Accounts", icon: "group", component: Accounts, data: user.accounts },
+        { title: "Sites", icon: "fa-globe", component: Sites, data: user.sites }
+      ]
     }),
-    asyncData({ store, redirect }) {
-      return store.dispatch('auth/getUser')
-      .then((res) => {
-        return { user: res.data }
-      })
-      .catch(() => {
-        store.dispatch('auth/logout')
-        .then(redirect('/login'))
-      })
+    beforeMount() {
+        this.userData = this.user.data
+        delete this.userData["_id"]
     },
     methods: {
       icon(field) {
@@ -106,10 +105,6 @@
           default: return field
         }
       }
-    },
-    mounted() {
-      this.userData = this.user.data
-      delete this.userData["_id"]
     }
   }
 </script>
@@ -124,3 +119,4 @@
 .fa
   font-size: 1.5em;
 </style>
+
