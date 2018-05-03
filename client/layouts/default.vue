@@ -1,19 +1,29 @@
 <template>
-  <div>
-    <Nav /> 
-    <nuxt />
-  </div>
+  <v-app dark>
+    <v-content>
+        <Header />
+        <Nav /> 
+        <nuxt />
+    </v-content>
+    <Footer />
+  </v-app>
 </template>
 
 <script>
+import Header from '@/components/base/Header'
+import Footer from '@/components/base/Footer'
 import Nav from '@/components/base/Nav'
 
 export default {
   components: {
-    Nav
+    Header,
+    Nav,
+    Footer
   },
-  middleware: 'authenticated',
-  layout: 'public'
+  props: {
+    source: String
+  },
+  middleware: 'authenticated'
 }
 </script>
 
