@@ -1,8 +1,10 @@
 <template>
-  <h1>hello error</h1>
+  <nuxt />
 </template>
+
 
 <script>
 export default {
+  props: ['error']
 }
 </script>

@@ -1,24 +1,28 @@
 <template>
-  <div></div>
+  <Profile /> 
 </template>
 
 <script>
-import ProfileService from '@/services/ProfileService'
+import Profile from '@/components/profile'
 
 export default {
     validate ({ params }) {
-    // Username "user123" or "facebook.123"
+        // Username "user123" or "facebook.123"
         return /^\w+(\.\d+)?$/.test(params.username)
     },
-    asyncData({ params }) {
-        return ProfileService.find(params.username)
-        .then(res => {
-             return { user: res.data }
-        })
-        .catch(err => {
-            console.log(err)
-        })
+    asyncData({ params, store, redirect }) {
+        return store.dispatch('getProfile', params.username)
+            .catch(err => {
+                redirect('/')
+            })
     },
-    layout: 'public'
+    components: {
+        Profile
+    },
+    layout: ({ store }) => {
+        if(store.getters['auth/isAuthenticated']) {
+            return 'authenticated'
+        }
+    }
 }
 </script>

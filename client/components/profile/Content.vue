@@ -25,7 +25,7 @@
                 :id="'tab-' + item.title"
             >
                 <v-card class="transparent mt-3">
-                    <component :is="item.component" :data="item.data"></component>            
+                    <component :is="item.component" :items="item.items"></component>            
                 </v-card>
             </v-tab-item>
         </v-tabs-items>
@@ -37,16 +37,20 @@ import Accounts from '@/components/profile/accounts'
 import Sites from '@/components/profile/sites'
 
 export default {
-    props: ['user'],
-    data: () => {
-        return {
-currentItem: 'tab-Accounts',
+    props: ['accounts', 'sites', 'followers'],
+    data: () => ({
+        currentItem: 'tab-Accounts',
         items: [
-            { title: "Accounts", icon: "group", component: Accounts, data: user.accounts },
-            { title: "Sites", icon: "fa-globe", component: Sites, data: user.sites }
+            { title: "Accounts", icon: "group", component: Accounts, items: this.accounts },
+            { title: "Sites", icon: "fa-globe", component: Sites, items: this.sites },
+            { title: "Followers", icon: "fa-globe", component: Sites, items: this.followers }
         ]
-        }
-        
-    },
+    })
 }
 </script>
+
+<style lang="stylus">
+#profile_menu
+    margin-top: -1.8em;
+</style>
+

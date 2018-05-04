@@ -56,10 +56,6 @@ import FacebookService from '@/services/social/FacebookService'
     border-right: 1px solid;
   }
 
-  .fa {
-    font-size: 1.5em;
-  }
-    
   .btn__content {
     padding: 15px 15px 15px 0;
     

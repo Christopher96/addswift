@@ -5,7 +5,7 @@
       :temporary="!mini"
       :mini-variant="mini"
       dark
-      absolute
+      fixed
     >
       <v-list>
         <v-list-tile v-if="mini" @click.stop="mini = !mini">
@@ -15,10 +15,10 @@
         </v-list-tile>
         <v-list-tile avatar @click="$router.push('/profile')">
           <v-list-tile-avatar>
-            <img :src="user.picture">
+            <img :src="profile.picture || 'logo.png'" :class="!profile.picture ? 'profile-thumb' : ''">
           </v-list-tile-avatar>
           <v-list-tile-content>
-            <v-list-tile-title>{{ user.displayName }}</v-list-tile-title>
+            <v-list-tile-title>{{ profile.displayName }}</v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-action>
             <v-btn icon @click.stop="mini = !mini">
@@ -52,13 +52,15 @@
 
 <script>
 export default {
+  beforeMount() {
+    this.profile = this.$store.getters['auth/user']
+  },
   data () {
     return {
       items: [
         { title: 'Settings', icon: 'settings', path: '/settings' },
       ],
-      mini: true,
-      user: this.$store.getters['auth/user']
+      mini: true
     }
   },
   methods: {
@@ -73,8 +75,11 @@ export default {
           else console.log(err)
         })
     }
-  },
-  mounted() {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.profile-thumb
+  border: 1px solid;
+</style>

@@ -65,10 +65,4 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-.fa
-  font-size: 1.3em;
-  
-</style>
-
 

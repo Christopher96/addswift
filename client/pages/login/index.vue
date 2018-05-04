@@ -94,7 +94,7 @@ export default {
             password: this.password
         })
         .then(res => {
-          this.$router.push('/')
+          this.$router.push('/profile')
         })
         .catch((err) => {
           console.log(err)
@@ -109,24 +109,10 @@ export default {
       this.$validator.reset()
     }
   },
-  // computed: {
-  //   ...mapGetters({
-  //     isAuthenticated: 'auth/isAuthenticated'
-  //   }),
-    
-  // },
-  // watch: {
-  //   isAuthenticated() {
-  //     console.log("asd")
-  //     if(this.isAuthenticated) {
-  //       this.$router.push('/')
-  //     }
-  //   }
-  // },
   mounted() {
     this.$validator.localize('en', this.dictionary)
   },
-  layout: 'auth',
+  layout: 'notAuthenticated',
 }
 </script>
 

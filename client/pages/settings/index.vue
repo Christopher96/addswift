@@ -110,7 +110,8 @@
         custom() {
             return this.theme && this.theme == this.themes[0]
         }
-    }
+    },
+    layout: 'authenticated'
   }
 </script>
 

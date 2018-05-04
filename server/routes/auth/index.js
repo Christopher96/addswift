@@ -55,10 +55,8 @@ router.get('/user', verifyToken, (req, res) => {
     User.findById(req.userId)
         .populate('accounts.vendor')
         .exec((err, user) => {
-            console.log(user)
             if (!err && user) res.status(200).json(user)
             else {
-                console.log(err)
                 res.sendStatus(500)
             }
         })

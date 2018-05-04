@@ -15,20 +15,71 @@ const ObjectId = mongoose.Types.ObjectId
 
 const User = require('models/User')
 
-router.get('/:username', (req, res) => {
-    const username = req.params.username
-    User.findOne({ username })
-        .then(user => {
-            if (res.isPrivate) {
-                return res.status(401).send(`Profile ${res.username} is private`)
+
+findProfile = (req, res, next) => {
+    let query = {}
+    if (req.params.username) query.username = req.params.username
+    if (req.body.userId) query._id = req.body.userId
+
+    User.findOne(query, (err, user) => {
+        if (!err && user) {
+            if (user.isPrivate) {
+                return res.status(401).send(`Profile ${user.username} is private`)
             }
 
-            return res.status(200).json(user)
-        })
-        .catch(err => {
-            console.log(err)
+            req.user = user
+            next()
+        } else {
             return res.sendStatus(404)
-        })
-})
+        }
+    })
+}
+
+router.get('/:username',
+    findProfile,
+    (req, res) => {
+        return res.status(200).json(req.user)
+    }
+)
+
+router.post('/follow',
+    verifyToken,
+    findProfile,
+    (req, res) => {
+        const user = req.user
+
+        if (user.followers.filter(id => id == req.userId).length < 1) {
+            user.followers.push(req.userId)
+            user.save()
+                .then(user => {
+                    user.populate('followers')
+                    return res.status(200).json(user.followers)
+                })
+                .catch(err => res.status(400).send(err.message))
+        } else {
+            res.status(202).json(user)
+        }
+    }
+)
+router.post('/unfollow',
+    verifyToken,
+    findProfile,
+    (req, res) => {
+        const user = req.user
+
+        if (user.followers.filter(id => id == req.userId).length > 0) {
+            user.followers.splice(user.followers.indexOf(req.userId), 1)
+            console.log(user.followers)
+            user.save()
+                .then(user => {
+                    user.populate('followers')
+                    return res.status(200).json(user.followers)
+                })
+                .catch(err => res.status(400).send(err.message))
+        } else {
+            res.status(202).json(user)
+        }
+    }
+)
 
 module.exports = router

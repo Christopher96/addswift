@@ -14,19 +14,23 @@ export const state = () => ({
 
 export const getters = {
     isAuthenticated: state => !!state.token && state.token != 'undefined',
-    user: state => state.user
+    user: state => state.user,
+    userId: state => state.user._id || 0
 }
 
 export const mutations = {
     [AUTH_SUCCESS]: (state, token) => {
+        state.user = null
         state.token = token
         TS.setToken(token)
     },
     [AUTH_ERROR]: (state) => {
+        state.user = null
         state.token = null
         TS.removeToken()
     },
     [AUTH_LOGOUT]: (state) => {
+        state.user = null
         state.token = null
         TS.removeToken()
     },

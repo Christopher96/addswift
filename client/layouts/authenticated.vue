@@ -1,7 +1,8 @@
 <template>
   <v-app dark>
     <v-content>
-        <Header :authenticated="false" />
+        <Header :authenticated="true" />
+        <Nav />
         <nuxt />
     </v-content>
     <Footer />
@@ -11,15 +12,18 @@
 <script>
 import Header from '@/components/base/layout/Header'
 import Footer from '@/components/base/layout/Footer'
+import Nav from '@/components/base/layout/Nav'
 
 export default {
   components: {
     Header,
     Footer,
+    Nav
   },
   props: {
     source: String
-  }
+  },
+  middleware: 'authenticated'
 }
 </script>
 
