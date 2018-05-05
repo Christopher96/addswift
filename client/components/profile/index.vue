@@ -2,9 +2,9 @@
 <div>
   <Cover :source="profile.cover" />
   <v-layout justify-center>
-    <v-flex class="profile-container" md8>
+    <v-flex id="profile_container" md8>
       <v-layout>
-        <v-flex class="profile-aside" md3 pr-3>
+        <v-flex id="profile_aside" md3 pr-3>
           <Aside :name="profile.displayName || profile.username" :picture="profile.picture" :profileData="profileData" />
         </v-flex>
         <v-flex md9>
@@ -18,7 +18,7 @@
 
 <script>
 import Aside from './Aside'
-import Content from './Content'
+import Content from './content'
 import Cover from './Cover'
 
 export default {
@@ -42,7 +42,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.profile-aside
-  margin-top: -8em;
+#profile_container
+    margin-top -2.5em
+#profile_aside
+    margin-top -6em
 </style>
 

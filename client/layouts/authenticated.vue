@@ -5,7 +5,6 @@
         <Nav />
         <nuxt />
     </v-content>
-    <Footer />
   </v-app>
 </template>
 

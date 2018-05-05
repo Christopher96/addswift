@@ -1,10 +1,9 @@
 <template>
   <v-app dark>
     <v-content>
-        <Header :authenticated="false" />
-        <nuxt />
+      <Header :authenticated="false" />
+      <nuxt />
     </v-content>
-    <Footer />
   </v-app>
 </template>
 

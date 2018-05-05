@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-card 
-        class="profile-image fade"
+        class="profile-image fade-3"
         >
             <v-card-media 
             :src="picture || 'logo.png'" 
@@ -16,7 +16,7 @@
                         <span class="headline">{{ name }}</span>
                     </v-list-tile-content>
                     <v-spacer></v-spacer>
-                    <FollowButton v-if="!profileOwner" :isFollowing="isFollowing" />
+                    <FollowButton :name="name" v-if="!profileOwner" :isFollowing="isFollowing" />
                 </v-list-tile>
                 <div v-if="profileData">
                     <v-divider></v-divider>
@@ -29,42 +29,34 @@
                         </v-list-tile-content>
                     </v-list-tile>
                 </div>
-                
             </v-list>
         </v-card>
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
-import FollowButton from '@/components/base/user/FollowButton'
+import FollowButton from "@/components/base/user/FollowButton"
 
 export default {
-    props: ['name', 'picture', 'profileData'],
-    methods: {
-      icon(field) {
-        switch(field) {
-            case 'address': return 'location_on'
-            default: return field
-        }
+  props: ["name", "picture", "profileData"],
+  methods: {
+    icon(field) {
+      switch (field) {
+        case "address":
+          return "location_on";
+        default:
+          return field;
       }
-    },
-    computed: {
-        ...mapGetters([
-            'profileOwner',
-            'isFollowing',
-        ])
-    },
-    components: {
-        FollowButton
     }
-}
+  },
+  computed: {
+    ...mapGetters(["profileOwner", "isFollowing"])
+  },
+  components: {
+    FollowButton
+  }
+};
 </script> 
-
-<style lang="stylus">
-.fade
-    background-color: rgba(0,0,0,0.3) !important;
-    
-</style>
 
