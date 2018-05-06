@@ -41,9 +41,6 @@ export default {
             return this.items[this.selectedItem]
         }
     },
-    mounted() {
-        console.log(this.followers)
-    }
 }
 </script>
 

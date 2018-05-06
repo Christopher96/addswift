@@ -56,6 +56,9 @@ export default {
             this.snackbar.on = true
             this.snackbar.text = (this.isFollowing) ? "You are now following " + this.name : "You've unfollowed " + this.name
         }
+    },
+    mounted() {
+        console.log(this.$store.getters.profile.followers)
     }
 }
 </script>

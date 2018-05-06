@@ -8,10 +8,7 @@
 import Account from './Account'
 
 export default {
-  beforeMount() {
-    const profile = this.$store.getters.profile
-    this.accounts = profile.accounts
-  },
+  props: ['accounts'],
   components: {
     Account
   }

@@ -9,7 +9,6 @@ export default {
         return Profile.post('/follow', { userId })
     },
     unfollow(userId) {
-        console.log(userId)
         return Profile.post('/unfollow', { userId })
     },
     followers(userId) {

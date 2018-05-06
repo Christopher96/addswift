@@ -6,8 +6,8 @@ export const state = () => ({
 
 export const getters = {
     profile: state => state.profile,
-    profileOwner: (state, getters) => state.profile._id == getters['auth/userId'],
-    isFollowing: (state, getters) => state.profile.followers.filter(user => user._id == getters['auth/userId']).length == 1
+    profileOwner: (state, getters) => state.profile && state.profile._id == getters['auth/userId'],
+    isFollowing: (state, getters) => state.profile.followers && state.profile.followers.filter(user => user._id == getters['auth/userId']).length == 1
 }
 
 const PROFILE_SUCCESS = "PROFILE_SUCCESS"

@@ -21,12 +21,13 @@ findProfile = (req, res, next) => {
     if (req.params.username) query.username = req.params.username
     if (req.body.userId) query._id = req.body.userId
 
-    User.findOne(query, (err, user) => {
+    User.findOne(query)
+    .populate('followers', '_id picture name username')
+    .exec((err, user) => {
         if (!err && user) {
             if (user.isPrivate) {
                 return res.status(401).send(`Profile ${user.username} is private`)
             }
-
             req.user = user
             next()
         } else {
@@ -49,7 +50,7 @@ router.post('/follow',
     (req, res) => {
         const user = req.user
 
-        if (user.followers.filter(id => id == req.userId).length < 1) {
+        if (user.followers.filter(user => user._id == req.userId).length < 1) {
             user.followers.push(req.userId)
             user.save()
                 .then(user => {
@@ -67,7 +68,7 @@ router.post('/unfollow',
     (req, res) => {
         const user = req.user
 
-        if (user.followers.filter(id => id == req.userId).length > 0) {
+        if (user.followers.filter(user => user._id == req.userId).length > 0) {
             user.followers.splice(user.followers.indexOf(req.userId), 1)
             user.save()
                 .then(user => {

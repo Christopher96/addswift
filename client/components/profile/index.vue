@@ -8,7 +8,7 @@
           <Aside :name="profile.username" :picture="profile.picture" :profileData="profileData" />
         </v-flex>
         <v-flex md9>
-          <Content :accounts="profile.accounts" :sites="profile.sites" />
+          <Content :accounts="profile.accounts" :sites="profile.sites" :followers="profile.followers" />
         </v-flex>
       </v-layout>
     </v-flex>
@@ -21,22 +21,23 @@ import Aside from './Aside'
 import Content from './content'
 import Cover from './Cover'
 
+import { mapGetters } from 'vuex'
+
 export default {
   beforeMount() {
-    this.profile = this.$store.getters.profile
     this.profileData = this.profile.data
     if(this.profileData) delete this.profileData["_id"]
-
-    if(this.$store.getters['auth/isAuthenticated']) {
-      if(this.profile._id == this.$store.getters['auth/user']._id) {
-        this.owner = true
-      }
-    }
   },
   components: {
       Aside,
       Content,
       Cover
+  },
+  computed: {
+    ...mapGetters([
+      'profile',
+      'profileOwner' 
+    ]) 
   }
 }
 </script>

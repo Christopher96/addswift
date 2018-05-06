@@ -94,10 +94,9 @@ export default {
             password: this.password
         })
         .then(res => {
-          this.$router.push('/profile')
+          this.$router.push('/')
         })
         .catch((err) => {
-          console.log(err)
           if(err.response.data)
             this.error = err.response.data
           else console.log(err)

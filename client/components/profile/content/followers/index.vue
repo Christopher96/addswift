@@ -1,7 +1,7 @@
 <template>
   <div>
     <UserCard
-      v-for="user in followers"
+      v-for="user in items"
       :key="user._id"
       :user="user"
     />
@@ -12,14 +12,9 @@
 import UserCard from '@/components/base/user/UserCard'
 
 export default {
+  props: ['items'],
   components: {
     UserCard
-  },
-  asyncData() {
-    return this.$store.dispatch('followers')
-    .then(res => {
-      return { followers: res.data }
-    })
   }
 }
 </script>

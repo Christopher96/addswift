@@ -52,7 +52,9 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/user', verifyToken, (req, res) => {
-    User.findById(req.userId, (err, user) => {
+    User.findById(req.userId)
+    .populate('followers', '_id picture name username')
+    .exec((err, user) => {
         if (!err && user) {
             res.status(200).json(user)
         } else {

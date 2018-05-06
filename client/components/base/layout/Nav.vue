@@ -13,12 +13,12 @@
             <v-icon>chevron_right</v-icon>
           </v-list-tile-action>
         </v-list-tile>
-        <v-list-tile avatar @click="$router.push('/profile')">
+        <v-list-tile avatar @click="$router.push('/' + user.username)">
           <v-list-tile-avatar>
-            <img :src="profile.picture || 'logo.png'" :class="!profile.picture ? 'profile-thumb' : ''">
+            <img :src="user.picture || 'logo.png'" :class="!user.picture ? 'profile-thumb' : ''">
           </v-list-tile-avatar>
           <v-list-tile-content>
-            <v-list-tile-title>{{ profile.displayName }}</v-list-tile-title>
+            <v-list-tile-title>{{ user.username }}</v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-action>
             <v-btn icon @click.stop="mini = !mini">
@@ -52,9 +52,6 @@
 
 <script>
 export default {
-  beforeMount() {
-    this.profile = this.$store.getters['auth/user']
-  },
   data () {
     return {
       items: [
@@ -74,6 +71,11 @@ export default {
             this.error = err.response.data
           else console.log(err)
         })
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.getters['auth/user']
     }
   }
 }

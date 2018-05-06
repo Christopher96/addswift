@@ -14,7 +14,7 @@ export const state = () => ({
 
 export const getters = {
     isAuthenticated: state => !!state.token && state.token != 'undefined',
-    user: state => state.user,
+    user: state => state.user || false,
     userId: state => state.user._id || 0
 }
 
