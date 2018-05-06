@@ -38,6 +38,7 @@ findProfile = (req, res, next) => {
 router.get('/:username',
     findProfile,
     (req, res) => {
+        req.user
         return res.status(200).json(req.user)
     }
 )
@@ -52,7 +53,6 @@ router.post('/follow',
             user.followers.push(req.userId)
             user.save()
                 .then(user => {
-                    user.populate('followers')
                     return res.status(200).json(user.followers)
                 })
                 .catch(err => res.status(400).send(err.message))
@@ -69,10 +69,8 @@ router.post('/unfollow',
 
         if (user.followers.filter(id => id == req.userId).length > 0) {
             user.followers.splice(user.followers.indexOf(req.userId), 1)
-            console.log(user.followers)
             user.save()
                 .then(user => {
-                    user.populate('followers')
                     return res.status(200).json(user.followers)
                 })
                 .catch(err => res.status(400).send(err.message))
@@ -81,5 +79,14 @@ router.post('/unfollow',
         }
     }
 )
+
+router.get('/followers', (req, res) => {
+    User.findById(req.userId)
+    .populate('followers', '_id picture name username')
+    .exec((err, user) => {
+        if(!err && user) res.status(200).json(user.followers)        
+        else res.sendStatus(500)
+    })
+})
 
 module.exports = router

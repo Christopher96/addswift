@@ -5,10 +5,10 @@
     <v-flex id="profile_container" md8>
       <v-layout>
         <v-flex id="profile_aside" md3 pr-3>
-          <Aside :name="profile.displayName || profile.username" :picture="profile.picture" :profileData="profileData" />
+          <Aside :name="profile.username" :picture="profile.picture" :profileData="profileData" />
         </v-flex>
         <v-flex md9>
-          <Content :accounts="profile.accounts" :sites="profile.sites" :followers="profile.followers" />
+          <Content :accounts="profile.accounts" :sites="profile.sites" />
         </v-flex>
       </v-layout>
     </v-flex>

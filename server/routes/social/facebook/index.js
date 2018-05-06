@@ -111,11 +111,11 @@ createUser = (req, res, next) => {
     const user = new User({
         isSocial: true,
         username: data.username,
-        displayName: data['/me'].name,
         picture: data['/me/picture'].data.url,
         cover: data['/me'].cover.source,
         data: {
-            email: data['/me'].email
+            email: data['/me'].email,
+            name: data['/me'].name
         }
     })
 

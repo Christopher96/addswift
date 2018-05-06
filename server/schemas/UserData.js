@@ -10,7 +10,8 @@ const ObjectId = Schema.ObjectId
 const UserDataSchema = new Schema({
     phone: Number,
     address: String,
-    email: String
+    email: String,
+    username: String
 })
 
 module.exports = UserDataSchema

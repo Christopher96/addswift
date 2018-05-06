@@ -1,9 +1,7 @@
 <template>
     <v-snackbar
         bottom
-        timeout="5000"
-        :multi-line="mode === 'multi-line'"
-        :vertical="mode === 'vertical'"
+        :timeout="5000"
         v-model="show"
         >
         {{ text }}

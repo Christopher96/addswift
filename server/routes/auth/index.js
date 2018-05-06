@@ -52,14 +52,13 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/user', verifyToken, (req, res) => {
-    User.findById(req.userId)
-        .populate('accounts.vendor')
-        .exec((err, user) => {
-            if (!err && user) res.status(200).json(user)
-            else {
-                res.sendStatus(500)
-            }
-        })
+    User.findById(req.userId, (err, user) => {
+        if (!err && user) {
+            res.status(200).json(user)
+        } else {
+            res.sendStatus(500)
+        }
+    })
 })
 
 module.exports = router

@@ -11,5 +11,8 @@ export default {
     unfollow(userId) {
         console.log(userId)
         return Profile.post('/unfollow', { userId })
+    },
+    followers(userId) {
+        return Profile.get('/followers', { userId })
     }
 }

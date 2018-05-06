@@ -49,4 +49,11 @@ UserSchema.methods = {
     }
 }
 
+UserSchema.virtual('link')
+    .get(() => {
+        return '/' + this.username
+    })
+
+UserSchema.plugin(require('plugins/populateAll'))
+
 module.exports = mongoose.model('User', UserSchema)

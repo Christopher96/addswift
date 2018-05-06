@@ -7,7 +7,7 @@ export const state = () => ({
 export const getters = {
     profile: state => state.profile,
     profileOwner: (state, getters) => state.profile._id == getters['auth/userId'],
-    isFollowing: (state, getters) => state.profile.followers.filter(id => id == getters['auth/userId']).length == 1
+    isFollowing: (state, getters) => state.profile.followers.filter(user => user._id == getters['auth/userId']).length == 1
 }
 
 const PROFILE_SUCCESS = "PROFILE_SUCCESS"
@@ -31,12 +31,10 @@ export const actions = {
         return new Promise((resolve, reject) => {
             ProfileService.getProfile(username)
                 .then((res) => {
-                    console.log(res.data)
                     commit(PROFILE_SUCCESS, res.data)
                     resolve(res)
                 })
                 .catch((err) => {
-                    console.log(err)
                     commit(PROFILE_ERROR)
                     reject(err)
                 })
@@ -45,18 +43,21 @@ export const actions = {
     setProfile({ commit }, user) {
         commit(PROFILE_SUCCESS, user)
     },
+    followers({ commit, getters }) {
+        return ProfileService.followers(getters.profile._id)
+    },
     follow({ commit, getters }) {
         return ProfileService.follow(getters.profile._id)
             .then(res => {
-                console.log(res)
                 commit(FOLLOWERS_UPDATE, res.data)
+                return res.data
             })
     },
     unfollow({ commit, getters }) {
         return ProfileService.unfollow(getters.profile._id)
             .then(res => {
-                console.log(res)
                 commit(FOLLOWERS_UPDATE, res.data)
+                return res.data
             })
     }
 }

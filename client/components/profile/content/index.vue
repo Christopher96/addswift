@@ -4,6 +4,7 @@
             id="profile_menu"
             value="true" 
             :active.sync="selectedItem" 
+            shift
         >
             <v-btn
                 flat 
@@ -23,6 +24,7 @@
 <script>
 import Accounts from './accounts'
 import Sites from './sites'
+import Followers from './followers'
 
 export default {
     props: ['accounts', 'sites', 'followers'],
@@ -31,13 +33,16 @@ export default {
         items: [
             { title: "Accounts", icon: "person", component: Accounts, items: this.accounts },
             { title: "Sites", icon: "fa-globe", component: Sites, items: this.sites },
-            { title: "Followers", icon: "group", component: Sites, items: this.followers }
+            { title: "Followers", icon: "group", component: Followers, items: this.followers }
         ]
     }),
     computed: {
         currentItem() {
             return this.items[this.selectedItem]
         }
+    },
+    mounted() {
+        console.log(this.followers)
     }
 }
 </script>
@@ -45,14 +50,17 @@ export default {
 <style lang="stylus">
 #content_container
     position relative
+    .btn:not(.btn--active)
+        .icon
+            color white !important
+    .btn.btn--active
+        span
+            color white !important
 
 #profile_menu
     top 0 
     justify-content left
     margin-bottom 1em
     
-.btn:not(.btn--active)
-    .icon, span
-        color white !important
 </style>
 

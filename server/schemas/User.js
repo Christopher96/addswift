@@ -38,10 +38,6 @@ const UserSchema = new Schema({
             return this.isSocial ? false : true
         }
     },
-    displayName: {
-        type: String,
-        default: this.username
-    },
     picture: String,
     cover: String,
     isPrivate: {
