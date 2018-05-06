@@ -8,9 +8,13 @@
 import Account from './Account'
 
 export default {
-  props: ['accounts'],
   components: {
     Account
+  },
+  computed: {
+    accounts() {
+      return this.$store.getters.profile.accounts
+    }
   }
 }
 </script>

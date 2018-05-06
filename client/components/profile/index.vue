@@ -5,10 +5,10 @@
     <v-flex id="profile_container" md8>
       <v-layout>
         <v-flex id="profile_aside" md3 pr-3>
-          <Aside :name="profile.username" :picture="profile.picture" :profileData="profileData" />
+          <Aside />
         </v-flex>
         <v-flex md9>
-          <Content :accounts="profile.accounts" :sites="profile.sites" :followers="profile.followers" />
+          <Content />
         </v-flex>
       </v-layout>
     </v-flex>
@@ -21,24 +21,18 @@ import Aside from './Aside'
 import Content from './content'
 import Cover from './Cover'
 
-import { mapGetters } from 'vuex'
-
 export default {
-  beforeMount() {
-    this.profileData = this.profile.data
-    if(this.profileData) delete this.profileData["_id"]
-  },
   components: {
       Aside,
       Content,
       Cover
   },
   computed: {
-    ...mapGetters([
-      'profile',
-      'profileOwner' 
-    ]) 
+    profile() {
+        return this.$store.getters.profile
+    }
   }
+
 }
 </script>
 

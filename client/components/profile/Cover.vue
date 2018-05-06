@@ -12,6 +12,6 @@
 
 <script>
 export default {
-    props: ['source']
+    props: ['source']    
 }
 </script>

@@ -4,8 +4,8 @@
         class="profile-image fade-3"
         >
             <v-card-media 
-            :src="picture || 'logo.png'" 
-            :contain="!picture" 
+            :src="profile.picture || 'logo.png'" 
+            :contain="!profile.picture" 
             height="175px">
                 <v-layout column class="media">
                 </v-layout>
@@ -13,10 +13,10 @@
             <v-list>
                 <v-list-tile class="pt-3 pb-3">
                     <v-list-tile-content>
-                        <span class="headline">{{ name }}</span>
+                        <span class="headline">{{ profile.username }}</span>
                     </v-list-tile-content>
                     <v-spacer></v-spacer>
-                    <FollowButton :name="name" v-if="!profileOwner" :isFollowing="isFollowing" />
+                    <FollowButton :name="profile.username" v-if="!profileOwner" :isFollowing="isFollowing" />
                 </v-list-tile>
                 <div v-if="profileData">
                     <v-divider></v-divider>
@@ -40,7 +40,6 @@ import { mapGetters } from "vuex";
 import FollowButton from "@/components/base/user/FollowButton"
 
 export default {
-  props: ["name", "picture", "profileData"],
   methods: {
     icon(field) {
       switch (field) {
@@ -52,7 +51,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["profileOwner", "isFollowing"])
+    ...mapGetters(["profile", "profileOwner", "isFollowing"]),
+    profileData() {
+        let profileData = this.profile.data
+        if(profileData) delete profileData["_id"]
+        return profileData
+    }
   },
   components: {
     FollowButton

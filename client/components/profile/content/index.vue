@@ -17,7 +17,7 @@
                 <v-icon>{{ item.icon }}</v-icon>
             </v-btn>
         </v-bottom-nav>
-        <component :is="currentItem.component" :items="currentItem.items"></component>
+        <component :is="currentItem.component"></component>
     </div>
 </template>
 
@@ -27,20 +27,19 @@ import Sites from './sites'
 import Followers from './followers'
 
 export default {
-    props: ['accounts', 'sites', 'followers'],
     data: () => ({
         selectedItem: 0,
         items: [
-            { title: "Accounts", icon: "person", component: Accounts, items: this.accounts },
-            { title: "Sites", icon: "fa-globe", component: Sites, items: this.sites },
-            { title: "Followers", icon: "group", component: Followers, items: this.followers }
+            { title: "Accounts", icon: "person", component: Accounts },
+            { title: "Sites", icon: "fa-globe", component: Sites },
+            { title: "Followers", icon: "group", component: Followers }
         ]
     }),
     computed: {
         currentItem() {
             return this.items[this.selectedItem]
-        }
-    },
+        },
+    }
 }
 </script>
 
@@ -58,6 +57,9 @@ export default {
     top 0 
     justify-content left
     margin-bottom 1em
+    .fa
+        width 24px
+        height 24px
     
 </style>
 

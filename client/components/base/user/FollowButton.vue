@@ -22,20 +22,25 @@
             <span v-if="isFollowing">Unfollow</span>
             <span v-else>Follow</span>
         </v-tooltip>
-        <Snackbar :show="snackbar.on" :text="snackbar.text" />
+        <v-snackbar
+            bottom
+            :timeout="5000"
+            v-model="snackbar.show"
+            >
+            {{ snackbar.text }}
+            <v-btn flat color="primary" @click.native="snackbar.show = false">Close</v-btn>
+        </v-snackbar>
     </div>
     
 </template>
 
 <script>
-import Snackbar from "./Snackbar"
-
 export default {
     props: ['name', 'isFollowing'],
     data() {
         return  {
             snackbar: {
-                on: false,
+                show: false,
                 text: ""
             },
         }
@@ -48,17 +53,11 @@ export default {
             this.$store.dispatch('unfollow')
         }
     },
-    components: {
-        Snackbar
-    },
     watch: {
         isFollowing() {
-            this.snackbar.on = true
+            this.snackbar.show = true
             this.snackbar.text = (this.isFollowing) ? "You are now following " + this.name : "You've unfollowed " + this.name
         }
-    },
-    mounted() {
-        console.log(this.$store.getters.profile.followers)
     }
 }
 </script>
