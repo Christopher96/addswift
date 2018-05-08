@@ -53,7 +53,6 @@ router.post('/logout', (req, res) => {
 
 router.get('/user', verifyToken, (req, res) => {
     User.findById(req.userId)
-        .populate("accounts.vendor")
         .populate("role")
         .exec((err, user) => {
             if (!err && user) {

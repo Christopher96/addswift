@@ -11,12 +11,6 @@ export default {
         return /^\w+(\.\d+)?$/.test(params.username)
     },
     asyncData({ params, store, redirect }) {
-        if(store.getters['auth/isAuthenticated']) {
-            if(store.getters['auth/user'].username == params.username) {
-                return store.dispatch('setProfile', store.getters['auth/user'])
-            }
-        }
-
         return store.dispatch('getProfile', params.username)
             .catch(err => {
                 redirect('/')

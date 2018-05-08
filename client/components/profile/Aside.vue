@@ -14,7 +14,7 @@
                 <v-list-tile class="pt-3 pb-3">
                     <v-list-tile-content>
                         <span class="headline">{{ profile.username }}</span>
-                        <span class="subheader">{{ profile.role.name }}</span>
+                        <i class="body-2 grey--text">{{ profile.role.title }}</i>
                     </v-list-tile-content>
                     <v-spacer></v-spacer>
                     <FollowButton :name="profile.username" v-if="!profileOwner" :isFollowing="isFollowing" />

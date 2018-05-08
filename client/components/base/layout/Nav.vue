@@ -15,7 +15,7 @@
         </v-list-tile>
         <v-list-tile avatar @click="$router.push('/' + user.username)">
           <v-list-tile-avatar>
-            <img :src="user.picture || 'logo.png'">
+            <img :src="user.picture || '/logo.png'">
           </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>{{ user.username }}</v-list-tile-title>

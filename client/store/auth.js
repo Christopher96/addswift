@@ -1,6 +1,5 @@
 import Auth from '@/services/AuthenticationService'
 import TS from '@/services/TokenService'
-import axios from 'axios'
 
 const AUTH_SUCCESS = "AUTH_SUCCESS"
 const AUTH_ERROR = "AUTH_ERROR"
@@ -13,9 +12,10 @@ export const state = () => ({
 })
 
 export const getters = {
-    isAuthenticated: state => !!state.token && state.token != 'undefined',
     user: state => state.user || false,
-    userId: state => state.user._id || 0
+    userId: getters => (getters.user) ? getters.user._id : 0,
+    isAuthenticated: state => !!state.token && state.token != 'undefined',
+    isAdmin: getters => getters.user && getters.user.role.priv > 2,
 }
 
 export const mutations = {
