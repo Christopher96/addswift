@@ -5,13 +5,13 @@ export default {
     getProfile(username) {
         return Profile.get('/' + username)
     },
+    getFollowers(userId) {
+        return Profile.post('/followers', { userId })
+    },
     follow(userId) {
         return Profile.post('/follow', { userId })
     },
     unfollow(userId) {
         return Profile.post('/unfollow', { userId })
-    },
-    followers(userId) {
-        return Profile.get('/followers', { userId })
     }
 }

@@ -6,14 +6,15 @@
             <v-card-media 
             :src="profile.picture || 'logo.png'" 
             :contain="!profile.picture" 
-            height="175px">
-                <v-layout column class="media">
-                </v-layout>
+            :class="!profile.picture ? 'contain-image' : ''"
+            height="175px"
+            >
             </v-card-media>
             <v-list>
                 <v-list-tile class="pt-3 pb-3">
                     <v-list-tile-content>
                         <span class="headline">{{ profile.username }}</span>
+                        <span class="subheader">{{ profile.role.name }}</span>
                     </v-list-tile-content>
                     <v-spacer></v-spacer>
                     <FollowButton :name="profile.username" v-if="!profileOwner" :isFollowing="isFollowing" />
@@ -60,7 +61,17 @@ export default {
   },
   components: {
     FollowButton
+  },
+  mounted() {
+      console.log(this.profile)
   }
 };
 </script> 
+
+<style lang="stylus">
+.contain-image
+    .card__media__background
+        background-origin: content-box !important;
+        padding 1em
+</style>
 

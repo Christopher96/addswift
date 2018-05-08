@@ -15,6 +15,9 @@ export default {
     accounts() {
       return this.$store.getters.profile.accounts
     }
+  },
+  mounted() {
+    console.log(this.accounts)
   }
 }
 </script>

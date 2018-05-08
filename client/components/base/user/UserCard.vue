@@ -2,22 +2,20 @@
   <v-flex xs4>
     <v-card>
       <v-list >
-        <v-list-tile avatar>
+        <v-list-tile avatar :to="'/' + user.username">
           <v-list-tile-avatar
           >
-            <img :src="user.picture">
+             <img :src="user.picture || 'logo.png'">
           </v-list-tile-avatar>
           <v-list-tile-content>
-            <nuxt-link :to="'/' + user.username">
             <v-list-tile-title >
                 {{ user.username }}
             </v-list-tile-title>
-            </nuxt-link>
             <v-list-tile-sub-title></v-list-tile-sub-title>
           </v-list-tile-content>
-          <v-list-tile-action>
+          <!-- <v-list-tile-action v-if="!isOwner">
             <FollowButton />
-          </v-list-tile-action>
+          </v-list-tile-action> -->
         </v-list-tile>
       </v-list>
     </v-card>
@@ -30,7 +28,18 @@ import FollowButton from '@/components/base/user/FollowButton'
 export default {
   props: ['user'],
   components: {
-    FollowButton
+    FollowButton,
+  },
+  computed: {
+    isOwner() {
+      if(this.$store.getters['auth/isAuthenticated']) {
+        if(this.$store.getters['auth/userId'] == this.user._id) {
+          return true
+        }
+      }
+
+      return false
+    }
   }
 }
 </script>

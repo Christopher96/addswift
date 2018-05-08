@@ -6,7 +6,7 @@
             <v-btn
                 icon
                 slot="activator"
-                @click="unfollow"
+                @click.stop="unfollow"
                 v-if="isFollowing"
             >
                 <v-icon>fa-user-times</v-icon>
@@ -14,7 +14,7 @@
             <v-btn
                 icon
                 slot="activator"
-                @click="follow"
+                @click.stop="follow"
                 v-else
             >
                 <v-icon>fa-user-plus</v-icon>
@@ -42,20 +42,24 @@ export default {
             snackbar: {
                 show: false,
                 text: ""
-            },
+            }
         }
     },
     methods: {
-        follow() {
+        follow(e) {
+            console.log(e)
+            e.stopPropagation()
             this.$store.dispatch('follow')
+            .then(res => this.snackbar.show = true)
+            
         },
-        unfollow() {
+        unfollow(e) {
             this.$store.dispatch('unfollow')
+            .then(res => this.snackbar.show = true)
         }
     },
     watch: {
         isFollowing() {
-            this.snackbar.show = true
             this.snackbar.text = (this.isFollowing) ? "You are now following " + this.name : "You've unfollowed " + this.name
         }
     }

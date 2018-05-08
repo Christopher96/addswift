@@ -53,14 +53,16 @@ router.post('/logout', (req, res) => {
 
 router.get('/user', verifyToken, (req, res) => {
     User.findById(req.userId)
-    .populate('followers', '_id picture name username')
-    .exec((err, user) => {
-        if (!err && user) {
-            res.status(200).json(user)
-        } else {
-            res.sendStatus(500)
-        }
-    })
+        .populate("accounts.vendor")
+        .populate("role")
+        .exec((err, user) => {
+            if (!err && user) {
+                res.status(200).json(user)
+            } else {
+                console.log(err)
+                res.sendStatus(500)
+            }
+        })
 })
 
 module.exports = router

@@ -16,8 +16,8 @@ UserSchema.pre('validate', async function(next) {
     if (!this.role) {
         const schema = this
         await Role.findRole('Member')
-        .then(role => schema.role = role)
-        .catch(err => console.log(err))
+            .then(role => schema.role = role)
+            .catch(err => console.log(err))
     }
     next()
 })
@@ -48,12 +48,5 @@ UserSchema.methods = {
         })
     }
 }
-
-UserSchema.virtual('link')
-    .get(() => {
-        return '/' + this.username
-    })
-
-UserSchema.plugin(require('plugins/populateAll'))
 
 module.exports = mongoose.model('User', UserSchema)

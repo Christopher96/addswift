@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     followers() {
-      return this.$store.getters.profile.followers
+      return this.$store.getters.followers
     }
   },
   mounted() {

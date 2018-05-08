@@ -15,7 +15,7 @@
         </v-list-tile>
         <v-list-tile avatar @click="$router.push('/' + user.username)">
           <v-list-tile-avatar>
-            <img :src="user.picture || 'logo.png'" :class="!user.picture ? 'profile-thumb' : ''">
+            <img :src="user.picture || 'logo.png'">
           </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>{{ user.username }}</v-list-tile-title>
@@ -62,15 +62,7 @@ export default {
   },
   methods: {
     logout() {
-       this.$store.dispatch('auth/logout')
-        .then((res) => {
-          this.$router.push('/login')
-        }).catch((err) => {
-          console.log(err)
-          if(err.response.data)
-            this.error = err.response.data
-          else console.log(err)
-        })
+       this.$router.push('/logout')
     }
   },
   computed: {
@@ -80,8 +72,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus" scoped>
-.profile-thumb
-  border: 1px solid;
-</style>
