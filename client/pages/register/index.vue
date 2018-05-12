@@ -44,12 +44,36 @@
           v-model="confirm_password"
           label="Confirm password"
           :error-messages="errors.collect('confirm_password')"
-          v-validate="'confirmed:password'"
+          v-validate="'required|confirmed:password'"
           data-vv-name="confirm_password"
           :type="pw ? 'text' : 'password'"
           required
           ></v-text-field>
         </v-flex>
+      </v-layout>
+      <v-layout 
+      pb-3
+      justify-start>
+        <v-flex>
+          <v-checkbox
+          class="tos-check"
+          v-validate="'required'"
+          v-model="tosCheck"
+          :error-messages="errors.collect('tosCheck')"
+          value="1"
+          data-vv-name="tosCheck"
+          type="checkbox"
+          required
+          ></v-checkbox>
+        </v-flex>
+          <v-flex 
+          class="tos-text"
+          xs12>
+            <p class="subheading">
+              Do you agree to the <a>Terms of Service</a>?
+            </p>
+          </v-flex>
+
       </v-layout>
       <v-alert
       v-show="error"
@@ -83,8 +107,13 @@ export default {
     confirm_password: '',
     email: '',
     error: '',
+    tosCheck: null,
     dictionary: {
-      custom: {}
+      custom: {
+        tosCheck: {
+          required: 'You must agree to the Terms of Service'
+        }
+      }
     }
   }),
   methods: {
@@ -115,6 +144,22 @@ export default {
   mounted() {
     this.$validator.localize('en', this.dictionary)
   },
-  layout: 'notAuthenticated'
+  layout: 'notAuthenticated',
+  head() {
+      return {
+          title: 'Register',
+      }
+  }
 }
 </script>
+
+<style lang="stylus">
+.tos-check
+  position absolute
+  .input-group__details
+    padding-left 40px 
+
+.tos-text
+  padding-top 3px
+  padding-left 40px
+</style>

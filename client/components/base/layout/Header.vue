@@ -2,10 +2,14 @@
   <v-toolbar 
     app 
     fixed 
-    scroll-off-screen
-  >
+    scroll-off-screen>
     <v-layout>
-      <v-flex md4>
+      <v-flex xs3 xl5>
+        <v-btn
+        icon
+        @click="setDrawer(true)">
+          <v-icon>menu</v-icon>
+        </v-btn>
         <div v-if="!authenticated">
           <nuxt-link to="/login">
             <v-btn color="secondary">
@@ -18,9 +22,8 @@
             </v-btn>
           </nuxt-link>
         </div>
-        
       </v-flex>
-      <v-flex md4>
+      <v-flex xs6 xl4>
         <v-layout row>
         <v-text-field
             prepend-icon="search"
@@ -39,6 +42,11 @@
 export default {
   props: {
     authenticated: Boolean
+  },
+  methods: {
+    setDrawer(state) {
+      this.$store.commit('setDrawer', state)
+    }
   }
 }
 </script>

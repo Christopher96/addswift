@@ -1,6 +1,6 @@
 <template>
   <v-layout class="mt-4" justify-center>
-    <v-flex md4>
+    <v-flex xs6 xl4>
       <v-card>
         <v-container fluid>
           <v-layout row wrap>
@@ -111,8 +111,13 @@
             return this.theme && this.theme == this.themes[0]
         }
     },
-    layout: 'authenticated'
-  }
+    layout: 'authenticated',
+    head() {
+        return {
+            title: 'Settings'
+        }
+    }
+}
 </script>
 
 <style lang="stylus">

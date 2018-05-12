@@ -23,7 +23,7 @@ export default {
         if(store.getters['auth/isAuthenticated']) {
             return 'authenticated'
         }
-    }
+    },
 }
 </script> 
     

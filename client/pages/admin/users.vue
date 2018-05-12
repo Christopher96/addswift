@@ -2,7 +2,7 @@
   <v-layout 
   class="mt-4" 
   justify-center>
-    <v-flex xs4>
+    <v-flex xs6 xl4>
       <v-card>
         <v-toolbar>
           <v-toolbar-title>Users</v-toolbar-title>
@@ -31,28 +31,7 @@
               <div
               v-if="item.actions != false">
                 <v-list-tile-action>
-                  <v-tooltip 
-                  v-if="item.banned != false"
-                  bottom>
-                    <v-btn
-                    icon
-                    slot="activator"
-                    @click.stop="unban(user._id)">
-                      <v-icon>undo</v-icon>
-                    </v-btn>
-                    <span>Unban user</span>
-                  </v-tooltip>
-                  <v-tooltip 
-                  v-else
-                  bottom>
-                    <v-btn
-                    icon
-                    slot="activator"
-                    @click.stop="ban(user._id)">
-                      <v-icon>block</v-icon>
-                    </v-btn>
-                    <span>Ban user</span>
-                  </v-tooltip>
+                  <BanButton :user="user" />
                 </v-list-tile-action>
               </div>
             </v-list-tile>
@@ -64,6 +43,8 @@
 </template>
 
 <script>
+import BanButton from '@/components/base/user/BanButton'
+
 export default {
   asyncData({ store }) {
     return store.dispatch('admin/getUsers')
@@ -87,29 +68,20 @@ export default {
     items() {
       return [
         { header: 'Admins', users: this.admins, actions: false },
-        { header: 'Banned', users: this.banned, banned: false },
+        { header: 'Banned', users: this.banned, banned: true },
         { header: 'Normal', users: this.normal }
       ]
     }
   },
-  methods: {
-    ban(userId) {
-      return this.$store.dispatch('admin/banUser', userId)
-      .then(res => {
-        this.replaceUser(res.data)
-      })
-    },
-    unban(userId) {
-      return this.$store.dispatch('admin/unbanUser', userId)
-      .then(res => {
-        this.replaceUser(res.data)
-      })
-    },
-    replaceUser(newUser) {
-      this.users = this.users.map(user => (user._id == newUser._id) ? newUser : user)
-    }
+  components: {
+    BanButton
   },
   layout: 'authenticated',
-  middleware: 'admin'
+  middleware: 'admin',
+  head() {
+    return {
+      title: 'Admin'
+    }
+  } 
 }
 </script>

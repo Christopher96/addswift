@@ -9,6 +9,11 @@ export default {
     if(store.getters['auth/isAuthenticated']) {
         return 'authenticated'
     }
+  },
+  head() {
+    return {
+      titleTemplate: null
+    }
   }
 }
 </script>

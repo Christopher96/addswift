@@ -1,7 +1,7 @@
 {
     "name": "addswift",
     "version": "1.0.0",
-    "description": "My primo Nuxt.js project",
+    "description": "A platform that enables everyday users to create their own global internet profile and connect with other people around the world",
     "author": "Christopher Gauffin",
     "private": true,
     "scripts": {

@@ -48,7 +48,7 @@ setUserStatus = (req, res, next) => {
                 user.status = req.status
                 user.save()
                     .then(user => {
-                        return res.status(200).json(user)
+                        return res.status(200).json({ status: req.status })
                     })
                     .catch(err => {
                         return res.sendStatus(500)

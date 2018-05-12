@@ -2,7 +2,7 @@
 <div>
   <Cover :source="profile.cover" />
   <v-layout justify-center>
-    <v-flex id="profile_container" md8>
+    <v-flex id="profile_container" xs10 xl8>
       <v-layout>
         <v-flex id="profile_aside" md3 pr-3>
           <Aside />
@@ -31,8 +31,19 @@ export default {
     profile() {
         return this.$store.getters.profile
     }
+  },
+  head() {
+    return {
+      title: this.profile.username,
+      titleTemplate: null,
+      meta: [
+        { 'vmid': 'og:title', 'property': 'og:title', 'content': this.profile.username },
+        { 'vmid': 'og:type', 'property': 'og:type', 'content': 'user.profile' },
+        { 'vmid': 'og:url', 'property': 'og:url', 'content': process.env.HOST + ':' + process.env.PORT + '/' + this.profile.username },
+        { 'vmid': 'og:image', 'property': 'og:image', 'content': this.profile.picture },
+      ]
+    }
   }
-
 }
 </script>
 

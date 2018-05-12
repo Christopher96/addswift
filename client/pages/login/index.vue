@@ -112,6 +112,11 @@ export default {
     this.$validator.localize('en', this.dictionary)
   },
   layout: 'notAuthenticated',
+  head() {
+    return {
+      title: 'Login'
+    }
+  } 
 }
 </script>
 

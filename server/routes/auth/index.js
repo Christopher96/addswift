@@ -42,7 +42,6 @@ router.post('/login', (req, res, next) => {
             }
         })
         .catch((err) => {
-            console.log(err)
             res.status(404).send(`User '${req.body.username}' was not found`)
         })
 }, signToken)

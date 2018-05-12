@@ -2,20 +2,22 @@ import ProfileService from '@/services/ProfileService'
 
 export const state = () => ({
     profile: null,
-    followers: null
+    followers: null,
+    drawer: true
 })
 
 export const getters = {
     profile: state => state.profile,
     profileOwner: (state, getters) => state.profile && state.profile._id == getters['auth/userId'],
     isFollowing: (state, getters) => state.followers && state.followers.filter(user => user._id == getters['auth/userId']).length == 1,
-    followers: state => state.followers,
+    followers: state => state.followers
 }
 
 const PROFILE_SUCCESS = "PROFILE_SUCCESS"
 const PROFILE_ERROR = "PROFILE_ERROR"
 const FOLLOWERS_SUCCESS = "FOLLOWERS_SUCCESS"
 const FOLLOWERS_ERROR = "FOLLOWERS_ERROR"
+const TOGGLE_DRAWER = "TOGGLE_DRAWER"
 
 export const mutations = {
     [PROFILE_SUCCESS]: (state, profile) => {
@@ -29,6 +31,9 @@ export const mutations = {
     },
     [FOLLOWERS_ERROR]: (state, followers) => {
         state.followers = null
+    },
+    setDrawer: (state, drawer) => {
+        state.drawer = drawer
     }
 }
 

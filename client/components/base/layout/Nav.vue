@@ -1,19 +1,14 @@
 <template>
 <v-layout>
     <v-navigation-drawer
-      permanent
-      :temporary="!mini"
-      :mini-variant="mini"
       dark
       fixed
+      temporary
+      v-model="drawer"
     >
       <v-list>
-        <v-list-tile v-if="mini" @click.stop="mini = !mini">
-          <v-list-tile-action>
-            <v-icon>chevron_right</v-icon>
-          </v-list-tile-action>
-        </v-list-tile>
-        <v-list-tile avatar @click="$router.push('/' + user.username)">
+        <v-list-tile avatar 
+        @click="$router.push('/' + user.username)">
           <v-list-tile-avatar>
             <img :src="user.picture || '/logo.png'">
           </v-list-tile-avatar>
@@ -21,15 +16,39 @@
             <v-list-tile-title>{{ user.username }}</v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-action>
-            <v-btn icon @click.stop="mini = !mini">
+            <v-btn 
+            icon 
+            @click.stop="setDrawer(false)">
               <v-icon>chevron_left</v-icon>
             </v-btn>
           </v-list-tile-action>
         </v-list-tile>
       </v-list>
-      <v-divider light></v-divider>
+      <v-divider></v-divider>
       <v-list>
-        <v-list-tile v-for="item in items" :key="item.title" @click="$router.push(item.path)">
+        <v-list-group
+          prepend-icon="person"
+          value="true"
+          v-if="isAdmin"
+          no-action
+        >
+          <v-list-tile slot="activator">
+            <v-list-tile-title>Admin</v-list-tile-title>
+          </v-list-tile>
+          <v-list-tile 
+          to="/admin/users">
+            <v-list-tile-title>User management</v-list-tile-title>
+            <v-list-tile-action>
+              <v-icon>people_outline</v-icon>
+            </v-list-tile-action>
+          </v-list-tile>
+       </v-list-group>
+      </v-list>
+      <v-list>
+        <v-list-tile 
+        v-for="item in items" 
+        :key="item.title" 
+        :to="item.path">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -51,24 +70,37 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
       items: [
         { title: 'Settings', icon: 'settings', path: '/settings' },
-      ],
-      mini: true
+      ]
     }
   },
   methods: {
     logout() {
        this.$router.push('/logout')
+    },
+    setDrawer(state) {
+      this.$store.commit('setDrawer', state)
     }
   },
   computed: {
-    user() {
-      return this.$store.getters['auth/user']
+    ...mapGetters({
+      user: 'auth/user',
+      isAdmin: 'auth/isAdmin'
+    }),
+    drawer: {
+      get() {
+        return this.$store.state.drawer
+      },
+      set(state) {
+        this.setDrawer(state)
+      }
     }
-  }
+  },
 }
 </script>
