@@ -1,10 +1,10 @@
 <template>
     <div id="content_container">
         <v-bottom-nav 
+            absolute
             id="profile_menu"
             value="true" 
             :active.sync="selectedItem" 
-            shift
         >
             <v-btn
                 flat 
@@ -17,7 +17,11 @@
                 <v-icon>{{ item.icon }}</v-icon>
             </v-btn>
         </v-bottom-nav>
-        <component :is="currentItem.component"></component>
+        <v-layout justify-center>
+            <v-flex sm10 md12>
+                <component :is="currentItem.component"></component>
+            </v-flex>
+        </v-layout>
     </div>
 </template>
 
@@ -44,19 +48,32 @@ export default {
 </script>
 
 <style lang="stylus">
+@require '~vuetify/src/stylus/settings/_variables'
+
+@media $display-breakpoints.md-and-up
+    #content_container
+        position relative
+        margin-top 1em
+    #profile_menu
+        top -6em
+
+@media $display-breakpoints.md-and-down
+    #content_container
+        margin-top 2em
+
+@media $display-breakpoints.xs-only
+    #profile_menu
+        margin-left -1em
+
 #content_container
-    position relative
     .btn:not(.btn--active)
         .icon
             color white !important
-    .btn.btn--active
+    .btn:not(.btn--active)
         span
             color white !important
 
 #profile_menu
-    top 0 
-    justify-content left
-    margin-bottom 1em
     .fa
         width 24px
         height 24px

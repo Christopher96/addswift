@@ -22,7 +22,6 @@
           data-vv-name="email"
           required
           ></v-text-field>
-          
         </v-flex >
         <v-flex column sm6 xs12>
           <v-text-field
@@ -52,7 +51,7 @@
         </v-flex>
       </v-layout>
       <v-layout 
-      pb-3
+      class="tos-box"
       justify-start>
         <v-flex>
           <v-checkbox
@@ -70,10 +69,32 @@
           class="tos-text"
           xs12>
             <p class="subheading">
-              Do you agree to the <a>Terms of Service</a>?
+              Do you agree to the <a href="#" @click.prevent="openTOS">Terms of Service</a>?
             </p>
           </v-flex>
-
+      </v-layout>
+      <v-layout 
+      class="tos-box"
+      justify-start>
+        <v-flex>
+          <v-checkbox
+          class="tos-check"
+          v-validate="'required'"
+          v-model="ppCheck"
+          :error-messages="errors.collect('ppCheck')"
+          value="1"
+          data-vv-name="ppCheck"
+          type="checkbox"
+          required
+          ></v-checkbox>
+        </v-flex>
+          <v-flex 
+          class="tos-text"
+          xs12>
+            <p class="subheading">
+              Do you comply with our <a href="#" @click.prevent="openPP">Privacy Policy</a>?
+            </p>
+          </v-flex>
       </v-layout>
       <v-alert
       v-show="error"
@@ -90,11 +111,19 @@
       @click="clear"
       >clear</v-btn>
       </div>
-      
+      <ConfirmDialog 
+      :enabled="dialog.enabled" 
+      :content="dialog.content" 
+      v-on:resolve="resolveDialog"
+      v-on:reject="closeDialog" />
   </v-form>
 </template>
 
 <script>
+import ConfirmDialog from '@/components/base/user/ConfirmDialog'
+import TOS from '@/components/auth/TOS'
+import PP from '@/components/auth/PP'
+
 export default {
   $_veeValidate: {
     validator: 'new'
@@ -108,15 +137,41 @@ export default {
     email: '',
     error: '',
     tosCheck: null,
+    ppCheck: null,
     dictionary: {
       custom: {
         tosCheck: {
           required: 'You must agree to the Terms of Service'
+        },
+        ppCheck: {
+          required: 'You must comply with our Privacy Policy'
         }
       }
+    },
+    dialog: {
+      enabled: false,
+      content: null
     }
   }),
   methods: {
+    openTOS() {
+      this.dialog.content = TOS
+      this.dialog.enabled = true
+    },
+    openPP() {
+      this.dialog.content = PP
+      this.dialog.enabled = true
+    },
+    resolveDialog() {
+      if(this.dialog.content == TOS) this.tosCheck = '1'
+      else this.ppCheck = '1'
+      this.dialog.enabled = false
+    },
+    closeDialog() {
+      if(this.dialog.content == TOS) this.tosCheck = null
+      else this.ppCheck = null
+      this.dialog.enabled = false
+    },
     register() {
       this.error = ''
       this.success = ''
@@ -149,6 +204,9 @@ export default {
       return {
           title: 'Register',
       }
+  },
+  components: {
+    ConfirmDialog
   }
 }
 </script>
@@ -160,6 +218,10 @@ export default {
     padding-left 40px 
 
 .tos-text
-  padding-top 3px
-  padding-left 40px
+  position absolute
+  margin-top 3px
+  margin-left 40px
+
+.tos-box
+  padding-bottom 4em
 </style>

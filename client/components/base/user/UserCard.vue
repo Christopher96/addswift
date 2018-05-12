@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs4>
+  <v-flex xs12 sm6 md4>
     <v-card>
       <v-list >
         <v-list-tile avatar :to="'/' + user.username">

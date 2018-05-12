@@ -1,48 +1,39 @@
 <template>
-  <v-layout 
-  class="mt-4" 
-  justify-center>
-    <v-flex xs6 xl4>
-      <v-card>
-        <v-toolbar>
-          <v-toolbar-title>Users</v-toolbar-title>
-          <v-spacer></v-spacer>
-        </v-toolbar>
-        <v-list>
-          <div 
-          v-for="item in items"
-          :key="item.header"
-          v-if="item.users.length > 0">
-            <v-subheader>{{ item.header }}</v-subheader>
-            <v-list-tile 
-            avatar 
-            v-for="user in item.users"
-            :key="user._id"
-            @click="$router.push('/' + user.username)">
-              <v-list-tile-avatar>
-                <img :src="user.picture || '/logo.png'">
-              </v-list-tile-avatar>
-              <v-list-tile-content>
-                <v-list-tile-title >
-                    {{ user.username }}
-                </v-list-tile-title>
-                <v-list-tile-sub-title></v-list-tile-sub-title>
-              </v-list-tile-content>
-              <div
-              v-if="item.actions != false">
-                <v-list-tile-action>
-                  <BanButton :user="user" />
-                </v-list-tile-action>
-              </div>
-            </v-list-tile>
+  <ContainerCard title="Users">
+    <v-list>
+      <div 
+      v-for="item in items"
+      :key="item.header"
+      v-if="item.users.length > 0">
+        <v-subheader>{{ item.header }}</v-subheader>
+        <v-list-tile 
+        avatar 
+        v-for="user in item.users"
+        :key="user._id"
+        @click="$router.push('/' + user.username)">
+          <v-list-tile-avatar>
+            <img :src="user.picture || '/logo.png'">
+          </v-list-tile-avatar>
+          <v-list-tile-content>
+            <v-list-tile-title >
+                {{ user.username }}
+            </v-list-tile-title>
+            <v-list-tile-sub-title></v-list-tile-sub-title>
+          </v-list-tile-content>
+          <div
+          v-if="item.actions != false">
+            <v-list-tile-action>
+              <BanButton :user="user" />
+            </v-list-tile-action>
           </div>
-        </v-list>
-      </v-card>
-    </v-flex>
-  </v-layout>
+        </v-list-tile>
+      </div>
+    </v-list>
+  </ContainerCard>
 </template>
 
 <script>
+import ContainerCard from '@/components/base/layout/ContainerCard'
 import BanButton from '@/components/base/user/BanButton'
 
 export default {
@@ -74,7 +65,8 @@ export default {
     }
   },
   components: {
-    BanButton
+    BanButton,
+    ContainerCard
   },
   layout: 'authenticated',
   middleware: 'admin',

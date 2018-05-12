@@ -2,12 +2,12 @@
 <div>
   <Cover :source="profile.cover" />
   <v-layout justify-center>
-    <v-flex id="profile_container" xs10 xl8>
-      <v-layout>
-        <v-flex id="profile_aside" md3 pr-3>
+    <v-flex id="profile_container" sm12 md10 lg8 xl6>
+      <v-layout wrap justify-center>
+        <v-flex id="profile_aside" sm8 md4 lg3>
           <Aside />
         </v-flex>
-        <v-flex md9>
+        <v-flex id="profile_content" xs12 md12 lg9>
           <Content />
         </v-flex>
       </v-layout>
@@ -48,9 +48,18 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-#profile_container
-    margin-top -2.5em
+@require '~vuetify/src/stylus/settings/_variables'
+
+@media $display-breakpoints.md-and-up
+  #profile_aside
+    padding-right 1em
+
+@media $display-breakpoints.xs-only
+  #profile_container
+    padding 1em
+
+
 #profile_aside
-    margin-top -6em
+    margin-top -8em
 </style>
 

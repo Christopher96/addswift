@@ -1,10 +1,11 @@
 <template>
   <v-toolbar 
+    id="header"
     app 
     fixed 
     scroll-off-screen>
     <v-layout>
-      <v-flex xs3 xl5>
+      <v-flex xs1 sm2 lg3>
         <v-btn
         icon
         @click="setDrawer(true)">
@@ -23,7 +24,7 @@
           </nuxt-link>
         </div>
       </v-flex>
-      <v-flex xs6 xl4>
+      <v-flex xs11 sm8 lg6 id="search">
         <v-layout row>
         <v-text-field
             prepend-icon="search"
@@ -33,7 +34,7 @@
           ></v-text-field>
         </v-layout>
       </v-flex>
-      <v-spacer></v-spacer>
+      <v-flex sm1 md2 lg3></v-flex>
     </v-layout>
   </v-toolbar>
 </template>
@@ -52,14 +53,21 @@ export default {
 </script>
 
 
-<style lang="scss" scoped>
-.logo,
-.toolbar__title {
-    height: 100%;
-}
+<style lang="stylus" scoped>
+@require '~vuetify/src/stylus/settings/_variables'
 
-.toolbar__title .logo img {
-    height: 100%;
-    padding: .6em;
-}
+@media $display-breakpoints.xs-only
+  #header
+    padding-right 1em !important
+  #search
+    padding-left 2em
+
+.logo,
+.toolbar__title
+    height 100%
+
+.toolbar__title .logo img
+    height 100%
+    padding .6em
+
 </style>

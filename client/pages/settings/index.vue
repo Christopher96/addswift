@@ -1,7 +1,5 @@
 <template>
-  <v-layout class="mt-4" justify-center>
-    <v-flex xs6 xl4>
-      <v-card>
+    <ContainerCard title="Settings">
         <v-container fluid>
           <v-layout row wrap>
             <v-flex xs4>
@@ -81,13 +79,11 @@
             </v-flex>
           </v-layout>
         </v-container>
-      </v-card>
-    </v-flex>
-  </v-layout>
-  
+    </ContainerCard>
 </template>
 
 <script>
+import ContainerCard from '@/components/base/layout/ContainerCard'
   export default {
     data () {
       return {
@@ -116,6 +112,9 @@
         return {
             title: 'Settings'
         }
+    },
+    components: {
+        ContainerCard
     }
 }
 </script>
