@@ -1,7 +1,8 @@
 <template>
     <v-dialog v-model="isEnabled" max-width="1000">
       <v-card>
-        <component :is="_content" />
+        <component v-if="content" :is="_content" />
+        <span v-else>{{ text }}</span>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="error" @click="$emit('reject')">{{ negative || 'Disagree' }}</v-btn>
@@ -13,7 +14,7 @@
 
 <script>
   export default {
-    props: ['enabled', 'content', 'negative', 'positive'],
+    props: ['enabled', 'content', 'negative', 'positive', 'text'],
     computed: {
       isEnabled: {
         get() {

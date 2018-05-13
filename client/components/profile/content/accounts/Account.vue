@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <v-flex xs4>
+    <v-flex xs12 sm6 md4>
       <v-card>
           <v-card-actions
             :style="'background-color:' + vendor.color + ';'" 
@@ -10,7 +10,9 @@
             </v-btn>
             <span class="subheading">{{ vendor.title }}</span>
             <v-spacer></v-spacer>
-            <v-tooltip bottom>
+            <v-tooltip 
+            v-if="!isOwner"
+            bottom>
               <v-btn
                 icon
                 slot="activator"
@@ -19,7 +21,9 @@
               </v-btn>
               <span>Follow/Add</span>
             </v-tooltip>
-            <v-tooltip bottom>
+            <v-tooltip 
+            v-if="isOwner"
+            bottom>
               <v-btn
                 icon
                 slot="activator"
@@ -46,6 +50,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: ['account'],
   data() {
@@ -53,6 +59,11 @@ export default {
         icon: "fa-"+this.account.vendor.site,
         ...this.account
       }
+  },
+  computed: {
+    ...mapGetters({
+      isOwner: 'profileOwner'
+    })
   },
   methods: {
     remove() {

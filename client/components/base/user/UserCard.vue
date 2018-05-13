@@ -1,11 +1,11 @@
 <template>
-  <v-flex xs12 sm6 md4>
+  <v-flex xs12 sm6 md6 lg4>
     <v-card>
       <v-list >
         <v-list-tile avatar :to="'/' + user.username">
           <v-list-tile-avatar
           >
-             <img :src="user.picture || 'logo.png'">
+             <img :src="user.picture || 'logo.png'"  alt="addswift logo">
           </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title >

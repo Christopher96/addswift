@@ -7,7 +7,7 @@
     :key="user._id"
     @click="$router.push('/' + user.username)">
       <v-list-tile-avatar>
-        <img :src="user.picture || '/logo.png'">
+        <img :src="user.picture || '/logo.png'"  alt="addswift logo">
       </v-list-tile-avatar>
       <v-list-tile-content>
         <v-list-tile-title >

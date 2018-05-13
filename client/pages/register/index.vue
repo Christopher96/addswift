@@ -57,10 +57,10 @@
           <v-checkbox
           class="tos-check"
           v-validate="'required'"
-          v-model="tosCheck"
-          :error-messages="errors.collect('tosCheck')"
+          v-model="check"
+          :error-messages="errors.collect('check')"
           value="1"
-          data-vv-name="tosCheck"
+          data-vv-name="check"
           type="checkbox"
           required
           ></v-checkbox>
@@ -69,30 +69,7 @@
           class="tos-text"
           xs12>
             <p class="subheading">
-              Do you agree to the <a href="#" @click.prevent="openTOS">Terms of Service</a>?
-            </p>
-          </v-flex>
-      </v-layout>
-      <v-layout 
-      class="tos-box"
-      justify-start>
-        <v-flex>
-          <v-checkbox
-          class="tos-check"
-          v-validate="'required'"
-          v-model="ppCheck"
-          :error-messages="errors.collect('ppCheck')"
-          value="1"
-          data-vv-name="ppCheck"
-          type="checkbox"
-          required
-          ></v-checkbox>
-        </v-flex>
-          <v-flex 
-          class="tos-text"
-          xs12>
-            <p class="subheading">
-              Do you comply with our <a href="#" @click.prevent="openPP">Privacy Policy</a>?
+              Do you agree to the <a href="#" @click.prevent="openTOS">Terms of Service</a> and comply with our <a href="#" @click.prevent="openPP">Privacy Policy</a>?
             </p>
           </v-flex>
       </v-layout>
@@ -136,15 +113,13 @@ export default {
     confirm_password: '',
     email: '',
     error: '',
-    tosCheck: null,
-    ppCheck: null,
+    check: null,
+    tosCheck: false,
+    ppCheck: false,
     dictionary: {
       custom: {
-        tosCheck: {
-          required: 'You must agree to the Terms of Service'
-        },
-        ppCheck: {
-          required: 'You must comply with our Privacy Policy'
+        check: {
+          required: 'You must agree to the above'
         }
       }
     },
@@ -163,13 +138,17 @@ export default {
       this.dialog.enabled = true
     },
     resolveDialog() {
-      if(this.dialog.content == TOS) this.tosCheck = '1'
-      else this.ppCheck = '1'
+      if(this.dialog.content == TOS) this.tosCheck = true
+      else this.ppCheck = true
+      
+      this.check = (this.ppCheck && this.tosCheck) ? '1' : null
       this.dialog.enabled = false
     },
     closeDialog() {
-      if(this.dialog.content == TOS) this.tosCheck = null
-      else this.ppCheck = null
+      if(this.dialog.content == TOS) this.tosCheck = false
+      else this.ppCheck = false
+      
+      this.check = (this.ppCheck && this.tosCheck) ? '1' : null
       this.dialog.enabled = false
     },
     register() {

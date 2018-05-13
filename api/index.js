@@ -14,7 +14,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 
 // Connects to MongoDB through public database URI or local database
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:4000/addswift'
+const mongoUri = process.env.MONGODB_URI
 mongoose.connect(mongoUri)
 
 // Additional Schema types
@@ -50,7 +50,7 @@ file.walkSync(routePath, function(path, dirs, files) {
 
 app.use('/api', router)
 
-const host = process.env.HOST
+const host = process.env.API_HOST
 const port = process.env.API_PORT
 
 // Listen the server

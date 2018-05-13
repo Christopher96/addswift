@@ -2,12 +2,12 @@
 <div>
   <Cover :source="profile.cover" />
   <v-layout justify-center>
-    <v-flex id="profile_container" sm12 md10 lg8 xl6>
+    <v-flex id="profile_container" sm12 md11 lg9 xl7>
       <v-layout wrap justify-center>
-        <v-flex id="profile_aside" sm8 md4 lg3>
+        <v-flex id="profile_aside" xs12 sm6 md3 lg3>
           <Aside />
         </v-flex>
-        <v-flex id="profile_content" xs12 md12 lg9>
+        <v-flex xs12 md9 lg9>
           <Content />
         </v-flex>
       </v-layout>
@@ -55,9 +55,8 @@ export default {
     padding-right 1em
 
 @media $display-breakpoints.xs-only
-  #profile_container
+  #profile_aside
     padding 1em
-
 
 #profile_aside
     margin-top -8em

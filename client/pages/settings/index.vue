@@ -69,14 +69,28 @@
                   </v-flex>
               </v-layout>
               </v-flex>
-            <v-flex xs4>
-              <v-subheader>Private</v-subheader>
-            </v-flex>
-            <v-flex xs8>
-                <v-switch
-                    v-model="e1"
-                ></v-switch>
-            </v-flex>
+                <v-flex xs4>
+                <v-subheader>Font Size</v-subheader>
+                </v-flex>
+                <v-flex xs8>
+                    <v-slider :label="fontSize + ' px'" min="12" max="30" v-model="fontSize" thumb-label></v-slider>
+                </v-flex>
+                <v-flex xs4>
+                <v-subheader>Private</v-subheader>
+                </v-flex>
+                <v-flex xs8>
+                    <v-switch
+                        v-model="e1"
+                    ></v-switch>
+                </v-flex>
+                <v-flex xs4>
+                <v-subheader>Account</v-subheader>
+                </v-flex>
+                <v-flex xs8>
+                    <v-btn color="error">
+                        Delete account
+                    </v-btn>
+                </v-flex>
           </v-layout>
         </v-container>
     </ContainerCard>
@@ -84,30 +98,32 @@
 
 <script>
 import ContainerCard from '@/components/base/layout/ContainerCard'
+
   export default {
     data () {
-      return {
-        e1: false,
-        color_1: null,
-        color_2: null,
-        color_3: null,
-        themes: [
-          { text: 'Custom' },
-          { text: 'Addswift' },
-          { text: 'Autumn Breeze' },
-          { text: 'Purple Storm' },
-          { text: 'White Garden' },
-          { text: 'Bright Ocean' }
-        ],
-        theme: null
-      }
+        return {
+            fontSize: null,
+            e1: false,
+            color_1: null,
+            color_2: null,
+            color_3: null,
+            themes: [
+            { text: 'Custom' },
+            { text: 'Addswift' },
+            { text: 'Autumn Breeze' },
+            { text: 'Purple Storm' },
+            { text: 'White Garden' },
+            { text: 'Bright Ocean' }
+            ],
+            theme: null,
+        }
     },
     computed: {
         custom() {
             return this.theme && this.theme == this.themes[0]
         }
     },
-    layout: 'authenticated',
+    middleware: 'authenticated',
     head() {
         return {
             title: 'Settings'

@@ -5,8 +5,8 @@
   class="social-btn"
   >
   <v-layout>
-    <v-flex class="site-icon" md2><v-icon>fa-{{site}}</v-icon></v-flex>
-    <v-flex md10>{{title}}</v-flex>
+    <v-flex class="site-icon" xs3><v-icon>fa-{{site}}</v-icon></v-flex>
+    <v-flex xs9>{{title}}</v-flex>
   </v-layout>
   </v-btn>
 </template>

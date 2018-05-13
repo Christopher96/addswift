@@ -4,7 +4,7 @@
             <div>
                 <v-progress-circular :width="7" :size="400" indeterminate color="secondary">
                     <div class="logo">
-                        <img src="/addswift.png">
+                        <img src="/addswift.png" alt="addswift logo">
                     </div>
                 </v-progress-circular>
             </div>
@@ -21,3 +21,14 @@
     }
 }
 </style>
+
+<script>
+export default {
+  head() {
+      return {
+          titleTemplate: null
+      }
+  }
+}
+</script>
+

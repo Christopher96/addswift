@@ -1,7 +1,6 @@
 <template>
     <div id="content_container">
         <v-bottom-nav 
-            absolute
             id="profile_menu"
             value="true" 
             :active.sync="selectedItem" 
@@ -17,8 +16,8 @@
                 <v-icon>{{ item.icon }}</v-icon>
             </v-btn>
         </v-bottom-nav>
-        <v-layout justify-center>
-            <v-flex sm10 md12>
+        <v-layout id="profile_content" justify-center>
+            <v-flex xs12 sm10 md12>
                 <component :is="currentItem.component"></component>
             </v-flex>
         </v-layout>
@@ -53,18 +52,18 @@ export default {
 @media $display-breakpoints.md-and-up
     #content_container
         position relative
-        margin-top 1em
+        margin-top 3em
     #profile_menu
-        top -6em
+        position absolute
+        top -5em
 
-@media $display-breakpoints.md-and-down
-    #content_container
-        margin-top 2em
-
-@media $display-breakpoints.xs-only
+@media $display-breakpoints.sm-and-down
+    #profile_content
+        padding 1em
     #profile_menu
-        margin-left -1em
-
+        position fixed
+        bottom 0
+        
 #content_container
     .btn:not(.btn--active)
         .icon

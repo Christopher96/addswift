@@ -3,7 +3,7 @@
         <v-content>
             <v-container align-center justify-center>
                 <div class="logo">
-                    <img src="/addswift.png">
+                    <img src="/addswift.png" alt="addswift logo">
                 </div>
                 <nuxt />
             </v-container>

@@ -1,11 +1,18 @@
 <template>
-  <v-layout>
-    <UserCard
-      v-for="user in followers"
-      :key="user._id"
-      :user="user"
-    />
-  </v-layout>
+  <div>
+    <v-layout v-if="followers.length > 0">
+      <UserCard
+       
+        v-for="user in followers"
+        :key="user._id"
+        :user="user"
+      />
+    </v-layout>
+    <v-card v-else>
+      <v-card-title>No one is following yet</v-card-title>
+    </v-card>
+  </div>
+  
 </template>
 
 <script>
@@ -21,7 +28,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.followers)
   }
 }
 </script>
