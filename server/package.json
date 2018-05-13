@@ -1,0 +1,25 @@
+{
+    "name": "addswift",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "bcrypt": "^1.0.3",
+        "cors": "^2.8.4",
+        "dotenv": "^5.0.1",
+        "express": "^4.15.3",
+        "fb": "^2.0.0",
+        "file": "^0.2.2",
+        "jsonwebtoken": "^8.2.0",
+        "mongoose": "5.0.12",
+        "mongoose-type-email": "^1.0.5",
+        "cross-env": "^5.0.1",
+        "morgan": "^1.9.0",
+        "nodemon": "^1.11.0"
+    }
+}

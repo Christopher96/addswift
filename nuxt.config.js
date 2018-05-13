@@ -63,6 +63,7 @@ module.exports = {
     /*
      ** Build configuration
      */
+    buildDir: 'server/dist',
     build: {
         /*
          ** You can extend webpack config here

@@ -34,6 +34,10 @@ if (!(process.env.NODE_ENV === 'production')) {
     // Route to generate database
     const database = require('middleware/database')
     app.use('/save', database)
+} else {
+    // Create link to Nuxt build directory
+    var distDir = __dirname + "/dist/"
+    app.use(express.static(distDir))
 }
 
 // Parse json responses and allow requests from any domain
@@ -49,6 +53,8 @@ file.walkSync(routePath, function(path, dirs, files) {
 })
 
 app.use('/api', router)
+
+
 
 const host = process.env.API_HOST
 const port = process.env.API_PORT
