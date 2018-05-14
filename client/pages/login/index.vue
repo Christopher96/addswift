@@ -93,13 +93,13 @@ export default {
             username: this.username,
             password: this.password
         })
-        .then(res => {
-          this.$router.push('/')
-        })
         .catch((err) => {
-          if(err.response.data)
+          if(err.response)
             this.error = err.response.data
           else console.log(err)
+        })
+        .then(res => {
+          this.$router.push('/')
         })
       })
     },

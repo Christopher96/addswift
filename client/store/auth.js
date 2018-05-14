@@ -50,6 +50,7 @@ export const actions = {
         return new Promise((resolve, reject) => {
             Auth.login(creds)
                 .then((res) => {
+                    console.log(res)
                     commit(AUTH_SUCCESS, res.data.token)
                     resolve(res)
                 })

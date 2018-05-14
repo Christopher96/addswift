@@ -7,12 +7,17 @@ module.exports = {
     srcDir: 'client/',
     mode: 'spa',
 
+    env: {
+        baseURL: 'http://' + process.env.API_HOST + ':' + process.env.API_PORT + '/api'
+    },
+
     /*
      ** Headers of the page
      */
     head: {
-        title: 'Addswift',
-        titleTemplate: '%s | Addswift',
+        titleTemplate: (titleChunk) => {
+            return titleChunk ? `${titleChunk} | Addswift` : 'Addswift'
+        },
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -63,7 +68,6 @@ module.exports = {
     /*
      ** Build configuration
      */
-    buildDir: 'server/dist',
     build: {
         /*
          ** You can extend webpack config here
@@ -87,5 +91,8 @@ module.exports = {
                 ]
             }
         }
+    },
+    generate: {
+        dir: 'server/dist'
     }
 }

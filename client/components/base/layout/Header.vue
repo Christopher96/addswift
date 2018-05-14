@@ -5,14 +5,14 @@
     fixed 
     scroll-off-screen>
     <v-layout>
-      <v-flex xs2 lg3>
+      <v-flex xs2 lg3 xl4>
         <v-btn
         icon
         @click="setDrawer(true)">
           <v-icon>menu</v-icon>
         </v-btn>
       </v-flex>
-      <v-flex xs10 sm8 md8 lg6 id="search">
+      <v-flex xs10 sm8 md8 lg6 xl4 id="search">
         <v-layout row>
         <v-text-field
             prepend-icon="search"

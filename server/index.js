@@ -27,16 +27,16 @@ db.on('error', function(err) {
 })
 
 // Dev middleware
-if (!(process.env.NODE_ENV === 'production')) {
+if (process.env.NODE_ENV === 'development') {
     // Log server messages
     app.use(morgan('dev'))
 
     // Route to generate database
     const database = require('middleware/database')
     app.use('/save', database)
-} else {
+} else if (process.env.NODE_ENV === 'production') {
     // Create link to Nuxt build directory
-    var distDir = __dirname + "/dist/"
+    const distDir = path.resolve(__dirname, './dist').replace(/\\/g, '/')
     app.use(express.static(distDir))
 }
 
@@ -53,8 +53,6 @@ file.walkSync(routePath, function(path, dirs, files) {
 })
 
 app.use('/api', router)
-
-
 
 const host = process.env.API_HOST
 const port = process.env.API_PORT
