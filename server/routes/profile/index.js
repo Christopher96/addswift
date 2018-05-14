@@ -29,7 +29,6 @@ findProfile = (req, res, next) => {
                 if (user.isPrivate) {
                     return res.status(401).send(`Profile ${user.username} is private`)
                 }
-                console.log(user)
                 req.user = user
                 next()
             } else {

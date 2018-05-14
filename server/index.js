@@ -4,7 +4,6 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const path = require('path')
 const file = require('file')
-require('dotenv').config()
 
 // Get express and the router
 const app = express()
@@ -14,7 +13,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 
 // Connects to MongoDB through public database URI or local database
-const mongoUri = process.env.MONGODB_URI
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:4000/addswift'
 mongoose.connect(mongoUri)
 
 // Additional Schema types
@@ -54,8 +53,8 @@ file.walkSync(routePath, function(path, dirs, files) {
 
 app.use('/api', router)
 
-const host = process.env.API_HOST
-const port = process.env.API_PORT
+const host = process.env.HOST || 'localhost'
+const port = process.env.PORT || 8080
 
 // Listen the server
 app.listen(port, host)

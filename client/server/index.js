@@ -1,11 +1,10 @@
 const express = require('express')
 const { Nuxt, Builder } = require('nuxt')
-require('dotenv').config()
 
 const app = express()
 
-const host = process.env.HOST
-const port = process.env.PORT
+const host = process.env.HOST || 'localhost'
+const port = process.env.PORT || 3000
 
 app.set('port', port)
 

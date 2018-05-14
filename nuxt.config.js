@@ -1,5 +1,4 @@
 const pkg = require('./package')
-const Dotenv = require('dotenv-webpack')
 
 const nodeExternals = require('webpack-node-externals')
 
@@ -8,7 +7,7 @@ module.exports = {
     mode: 'spa',
 
     env: {
-        baseURL: 'http://' + process.env.API_HOST + ':' + process.env.API_PORT + '/api'
+        baseURL: process.env.BASE_URL || 'http://localhost:8080/api'
     },
 
     /*
@@ -81,7 +80,6 @@ module.exports = {
                     loader: 'eslint-loader',
                     exclude: /(node_modules)/
                 })
-                config.plugins.push(new Dotenv())
             }
             if (ctx.isServer) {
                 config.externals = [
