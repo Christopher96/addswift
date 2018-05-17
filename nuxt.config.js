@@ -7,7 +7,7 @@ module.exports = {
     mode: 'spa',
 
     env: {
-        baseURL: process.env.BASE_URL || 'http://localhost:8080/api'
+        baseURL: process.env.NODE_ENV == 'production' ? false : 'http://localhost:8080/api'
     },
 
     /*
@@ -64,6 +64,16 @@ module.exports = {
      */
     axios: {},
 
+    /*
+     ** Extended routes
+     */
+    extendRoutes(routes, resolve) {
+        routes.push({
+            name: 'custom',
+            path: '/custom',
+            component: resolve(__dirname, 'pages/404.vue')
+        })
+    },
     /*
      ** Build configuration
      */

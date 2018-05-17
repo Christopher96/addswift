@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const path = require('path')
 const file = require('file')
+require('dotenv').config()
 
 // Get express and the router
 const app = express()
@@ -26,18 +27,14 @@ db.on('error', function(err) {
 })
 
 // Dev middleware
-if (process.env.NODE_ENV === 'development') {
-    // Log server messages
-    app.use(morgan('dev'))
+// if (process.env.NODE_ENV === 'development') {
+// Log server messages
+app.use(morgan('dev'))
 
-    // Route to generate database
-    const database = require('middleware/database')
-    app.use('/save', database)
-} else if (process.env.NODE_ENV === 'production') {
-    // Create link to Nuxt build directory
-    const distDir = path.resolve(__dirname, './dist').replace(/\\/g, '/')
-    app.use(express.static(distDir))
-}
+// Route to generate database
+const database = require('middleware/database')
+app.use('/save', database)
+    // }
 
 // Parse json responses and allow requests from any domain
 app.use(bodyParser.json())
@@ -53,8 +50,11 @@ file.walkSync(routePath, function(path, dirs, files) {
 
 app.use('/api', router)
 
+const distDir = path.resolve(__dirname, './dist').replace(/\\/g, '/')
+app.use(express.static(distDir))
+
 const host = process.env.HOST || 'localhost'
-const port = process.env.PORT || 8080
+const port = process.env.PORT || '8080'
 
 // Listen the server
 app.listen(port, host)

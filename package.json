@@ -6,8 +6,8 @@
     "private": true,
     "scripts": {
         "dev": "cross-env NODE_ENV=development nodemon client/server --watch client/server",
-        "build": "nuxt build",
-        "prod-build": "cross-env BASE_URL=swaggity.com nuxt build",
+        "prod": "cross-env NODE_ENV=production nodemon client/server --watch client/server",
+        "build": "cross-env NODE_ENV=production nuxt build",
         "generate": "nuxt generate",
         "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
         "precommit": "npm run lint"

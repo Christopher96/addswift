@@ -101,6 +101,8 @@ import ConfirmDialog from '@/components/base/user/ConfirmDialog'
 import TOS from '@/components/auth/TOS'
 import PP from '@/components/auth/PP'
 
+import { mapGetters } from 'vuex'
+
 export default {
   $_veeValidate: {
     validator: 'new'
@@ -160,9 +162,11 @@ export default {
             username: this.username,
             password: this.password,
             email: this.email
-        }).then((res) => {
-          this.$router.push('/')
-        }).catch((err) => {
+        })
+        .then(user => {
+          this.user = user
+        })
+        .catch((err) => {
           console.log(err.response)
           if(err.response.data)
             this.error = err.response.data
@@ -173,6 +177,17 @@ export default {
     clear() {
       this.$refs.form.reset()
       this.$validator.reset()
+    }
+  },
+  computed: {
+    ...mapGetters({
+      isAuthenticated: 'auth/isAuthenticated'
+    })
+  },
+  watch: {
+    isAuthenticated(val) {
+      console.log(this.user)
+      if(val) this.$router.push('/')
     }
   },
   mounted() {

@@ -26,10 +26,7 @@ import FacebookService from '@/services/social/FacebookService'
           case "facebook":
             FacebookService.loginUrl()
             .then((res) => {
-                const loginWindow = window.open(res.data.url)
-                loginWindow.onbeforeunload = () => {
-                  this.$router.push('/')
-                }
+              window.location = res.data.url
             })
           break;
           case "twitter":

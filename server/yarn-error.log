@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Christopher\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js run server
+  C:\Program Files\nodejs\node.exe C:\Users\Christopher\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js run build
 
 PATH: 
   C:\Program Files (x86)\cmder\bin;C:\Program Files (x86)\cmder\vendor\git-for-windows\cmd;C:\Program Files (x86)\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Program Files (x86)\cmder\vendor\conemu-maximus5;C:\Program Files (x86)\cmder\vendor\conemu-maximus5\ConEmu;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\dotnet\;C:\MAMP\bin\php\php7.1.5;C:\ProgramData\ComposerSetup\bin;C:\Users\Christopher\AppData\Roaming\npm\node_modules;C:\Program Files\nodejs\;C:\Program Files\MongoDB\Server\3.4\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Microsoft\Web Platform Installer\;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\dotnet\;C:\MAMP\bin\php\php7.1.5;C:\ProgramData\ComposerSetup\bin;C:\Users\Christopher\AppData\Roaming\npm\node_modules;C:\Program Files\nodejs\;C:\Program Files\MongoDB\Server\3.4\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Microsoft\Web Platform Installer\;C:\Users\Christopher\AppData\Local\Microsoft\WindowsApps;C:\Users\Christopher\AppData\Roaming\npm;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Heroku\bin;C:\Users\Christopher\AppData\Local\Microsoft\WindowsApps;C:\Users\Christopher\AppData\Roaming\npm;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Heroku\bin;C:\Users\Christopher\AppData\Local\Programs\Fiddler;C:\Android\platform-tools;;C:\Program Files (x86)\cmder\vendor\git-for-windows\usr\bin;C:\Program Files (x86)\cmder\vendor\git-for-windows\usr\share\vim\vim74;C:\Program Files (x86)\cmder\
@@ -17,18 +17,16 @@ npm manifest:
   {
       "name": "addswift",
       "version": "1.0.0",
-      "description": "",
       "main": "index.js",
       "scripts": {
-          "test": "echo \"Error: no test specified\" && exit 1",
           "dev": "cross-env NODE_ENV=development NODE_PATH=./ nodemon index.js",
           "start": "cross-env NODE_ENV=production NODE_PATH=./ node index.js"
       },
-      "author": "",
       "license": "ISC",
       "dependencies": {
           "bcrypt": "^1.0.3",
           "cors": "^2.8.4",
+          "cross-env": "^5.1.5",
           "dotenv": "^5.0.1",
           "express": "^4.15.3",
           "fb": "^2.0.0",
@@ -36,7 +34,6 @@ npm manifest:
           "jsonwebtoken": "^8.2.0",
           "mongoose": "5.0.12",
           "mongoose-type-email": "^1.0.5",
-          "cross-env": "^5.0.1",
           "morgan": "^1.9.0",
           "nodemon": "^1.11.0"
       }
@@ -475,7 +472,7 @@ Lockfile:
     dependencies:
       capture-stack-trace "^1.0.0"
   
-  cross-env@^5.0.1:
+  cross-env@^5.1.5:
     version "5.1.5"
     resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.1.5.tgz#31daf7f3a52ef337c8ddda585f08175cce5d1fa5"
     dependencies:
@@ -2460,7 +2457,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/yallist/-/yallist-3.0.2.tgz#8452b4bb7e83c7c188d8041c1a837c773d6d8bb9"
 
 Trace: 
-  Error: Command "server" not found. Did you mean "semver"?
+  Error: Command "build" not found.
       at new MessageError (C:\Users\Christopher\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:186:110)
       at C:\Users\Christopher\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:87307:17
       at Generator.next (<anonymous>)

@@ -6,13 +6,12 @@ const User = require('models/User')
 const Vendor = require('models/Vendor')
 const Account = require('models/Account')
 
-const host = process.env.HOST
-const port = process.env.PORT
+let url = process.env.NODE_ENV == 'development' ? 'http://localhost:3000' : process.env.CLIENT_URI
 
 FB.options({
-    appId: '1577677152512840',
-    appSecret: '55afabda7af7395a49db54f04a6252df',
-    redirectUri: 'http://' + host + ':' + port + '/social/facebook',
+    appId: '1441079792571218',
+    appSecret: 'fecfb60fa8c53ab6eddb682246cb9a91',
+    redirectUri: url + '/social/facebook',
 })
 
 router.get('/login-url', (req, res) => {

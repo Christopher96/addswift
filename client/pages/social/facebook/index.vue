@@ -15,11 +15,11 @@ export default {
         .then((res) => {
           return this.$store.dispatch('auth/socialLogin', res.data.token)
         })
+        .then(() => {
+          this.$router.push('/')
+        })
         .catch((err) => {
           console.log(err.response)
-        })
-        .then(() => {
-          window.close()
         })
     }
   }

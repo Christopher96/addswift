@@ -1,25 +1,18 @@
 <template>
     <Profile v-if="profile" />
-    <v-layout 
-    justify-center
-    align-center
-    fill-height
-    v-else>
-        <div
-        class="text-xs-center">
-            <span class="display-3">404</span><br/><br/>
-            <span class="display-1 grey--text">User was not found.</span>
-        </div>
-    </v-layout> 
+    <notFound v-else />
 </template>
 
 <script>
 import Profile from '@/components/profile'
+import notFound from '@/components/base/util/404'
 
 export default {
     validate ({ params }) {
+        console.log(params)
         // Username "user123" or "facebook.123"
-        return /^\w+(\.\d+)?$/.test(params.username)
+        return true
+        //return /^ \w+(\.\d+)?$/.test(params.username)
     },
     asyncData({ params, store, redirect }) {
         return store.dispatch('getProfile', params.username)
@@ -31,7 +24,8 @@ export default {
         }
     },
     components: {
-        Profile
+        Profile,
+        notFound
     }
 }
 </script> 

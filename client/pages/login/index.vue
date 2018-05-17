@@ -98,14 +98,21 @@ export default {
             this.error = err.response.data
           else console.log(err)
         })
-        .then(res => {
-          this.$router.push('/')
-        })
       })
     },
     clear() {
       this.$refs.form.reset()
       this.$validator.reset()
+    }
+  },
+  computed: {
+    ...mapGetters({
+      isAuthenticated: 'auth/isAuthenticated'
+    })
+  },
+  watch: {
+    isAuthenticated(val) {
+      if(val) this.$router.push('/')
     }
   },
   mounted() {
