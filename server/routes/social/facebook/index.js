@@ -6,7 +6,7 @@ const User = require('models/User')
 const Vendor = require('models/Vendor')
 const Account = require('models/Account')
 
-let url = process.env.NODE_ENV == 'development' ? 'http://localhost:8080' : process.env.CLIENT_URI
+let url = process.env.NODE_ENV == 'development' ? 'http://localhost:8080' : process.env.BASE_URL
 
 FB.options({
     appId: '1441079792571218',

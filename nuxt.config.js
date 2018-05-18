@@ -3,10 +3,10 @@ const pkg = require('./package')
 const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
-    mode: 'spa',
+    mode: 'universal',
 
     env: {
-        baseURL: process.env.NODE_ENV == 'production' ? false : 'http://localhost:8080/api'
+        baseURL: process.env.NODE_ENV == 'production' ? 'https://addswift.herokuapp.com/api' : 'http://localhost:8080/api'
     },
 
     /*
@@ -99,7 +99,4 @@ module.exports = {
             }
         }
     },
-    generate: {
-        dir: 'server/dist'
-    }
 }
