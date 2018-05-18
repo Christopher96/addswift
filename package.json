@@ -5,8 +5,8 @@
     "author": "Christopher Gauffin",
     "private": true,
     "scripts": {
-        "dev": "cross-env NODE_ENV=development nodemon client/server --watch client/server",
-        "prod": "cross-env NODE_ENV=production nodemon client/server --watch client/server",
+        "dev": "cross-env NODE_ENV=development NODE_PATH=server nodemon server --watch server",
+        "start": "cross-env NODE_ENV=production NODE_PATH=server nodemon server --watch server",
         "build": "cross-env NODE_ENV=production nuxt build",
         "generate": "nuxt generate",
         "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
@@ -19,7 +19,19 @@
         "nuxt": "^1.0.0",
         "dotenv-webpack": "^1.5.5",
         "vee-validate": "^2.0.6",
-        "vuetify": "^1.0.14"
+        "vuetify": "^1.0.14",
+        "bcrypt": "^1.0.3",
+        "cors": "^2.8.4",
+        "cross-env": "^5.1.5",
+        "dotenv": "^5.0.1",
+        "express": "^4.15.3",
+        "fb": "^2.0.0",
+        "file": "^0.2.2",
+        "jsonwebtoken": "^8.2.0",
+        "mongoose": "5.0.12",
+        "mongoose-type-email": "^1.0.5",
+        "morgan": "^1.9.0",
+        "nodemon": "^1.11.0"
     },
     "devDependencies": {
         "babel-eslint": "^8.2.1",

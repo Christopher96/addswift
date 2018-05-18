@@ -4,20 +4,23 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const path = require('path')
 const file = require('file')
+
+const { Nuxt, Builder } = require('nuxt')
+
 require('dotenv').config()
 
 // Get express and the router
 const app = express()
 const router = express.Router()
 
-// Get the mongoose plugin
+// Get the mongoose instance
 const mongoose = require('mongoose')
 
 // Connects to MongoDB through public database URI or local database
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:4000/addswift'
 mongoose.connect(mongoUri)
 
-// Additional Schema types
+// Automatically add modified field
 mongoose.plugin(require('plugins/modified'))
 
 // Check for DB errors
@@ -26,44 +29,56 @@ db.on('error', function(err) {
     console.log(err)
 })
 
-// Dev middleware
-// if (process.env.NODE_ENV === 'development') {
-// Log server messages
-app.use(morgan('dev'))
-
-// Route to generate database
-const database = require('middleware/database')
-app.use('/save', database)
-    // }
+// Set host and port to environment variables or default values
+const host = process.env.HOST || 'localhost'
+const port = process.env.PORT || '8080'
 
 // Parse json responses and allow requests from any domain
 app.use(bodyParser.json())
 app.use(cors())
 
-// Dynamically add routes by folder structure
-const routePath = path.resolve(__dirname, './routes')
-file.walkSync(routePath, function(path, dirs, files) {
-    const dirPath = path.replace(routePath, '').replace(/\\/g, '/')
-    if (dirPath != '' && files.indexOf('index.js') != -1)
-        router.use(dirPath, require(path))
-})
+let config = require('../nuxt.config.js')
+config.dev = !(process.env.NODE_ENV === 'production')
 
-app.use('/api', router)
+async function start() {
+    // Init Nuxt.js
+    const nuxt = new Nuxt(config)
 
-const distDir = path.resolve(__dirname, './dist').replace(/\\/g, '/')
-app.use(express.static(distDir))
+    // Dev middleware
+    if (config.dev) {
+        const builder = new Builder(nuxt)
+        await builder.build()
 
-const host = process.env.HOST || 'localhost'
-const port = process.env.PORT || '8080'
+        // Log server messages
+        app.use(morgan('dev'))
 
-// Listen the server
-app.listen(port, host)
-app.on('listening', function() {
-    console.log('Express server started on port %s at %s', server.address().port, server.address().address);
-})
+        // Route to generate database
+        const database = require('middleware/database')
+        app.use('/save', database)
+    }
 
-// Exit properly on CTRL-C
-process.on('SIGINT', () => {
-    console.log("Bye bye!");
-    process.exit();
-})
+    // Dynamically add routes by folder structure
+    const routePath = path.resolve(__dirname, './routes')
+    file.walkSync(routePath, function(path, dirs, files) {
+        const dirPath = path.replace(routePath, '').replace(/\\/g, '/')
+        if (dirPath != '' && files.indexOf('index.js') != -1)
+            router.use(dirPath, require(path))
+    })
+
+    app.use('/api', router)
+    app.use(nuxt.render)
+
+    // Listen the server
+    app.listen(port, host)
+    app.on('listening', function() {
+        console.log('Express server started on port %s at %s', server.address().port, server.address().address)
+    })
+
+    // Exit properly on CTRL-C
+    process.on('SIGINT', () => {
+        console.log("Bye bye!")
+        process.exit()
+    })
+}
+
+start()
