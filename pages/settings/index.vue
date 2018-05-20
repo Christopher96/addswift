@@ -76,10 +76,11 @@
                     <v-slider :label="fontSize + ' px'" min="12" max="30" v-model="fontSize" thumb-label></v-slider>
                 </v-flex>
                 <v-flex xs4>
-                <v-subheader>Private</v-subheader>
+                    <v-subheader>Private</v-subheader>
                 </v-flex>
                 <v-flex xs8>
                     <v-switch
+                        class="pt-2"
                         v-model="e1"
                     ></v-switch>
                 </v-flex>
