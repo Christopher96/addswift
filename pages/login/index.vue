@@ -75,6 +75,7 @@ export default {
     validator: 'new'
   },
   data: () => ({
+    user: null,
     pw: false,
     username: '',
     password: '',
@@ -92,6 +93,9 @@ export default {
         this.$store.dispatch('auth/login', {
             username: this.username,
             password: this.password
+        })
+        .then(user => {
+          this.user = user
         })
         .catch((err) => {
           if(err.response)
@@ -112,6 +116,7 @@ export default {
   },
   watch: {
     isAuthenticated(val) {
+      console.log(this.user)
       if(val) this.$router.push('/')
     }
   },

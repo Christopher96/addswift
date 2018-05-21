@@ -1,7 +1,7 @@
 <template>
-    <v-dialog v-model="isEnabled" max-width="1000">
+    <v-dialog v-model="enabled" max-width="1000">
       <v-card>
-        <component v-if="content" :is="_content" />
+        <component v-if="content" :is="content" />
         <span v-else>{{ text }}</span>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -14,22 +14,13 @@
 
 <script>
   export default {
-    props: ['enabled', 'content', 'negative', 'positive', 'text'],
-    computed: {
-      isEnabled: {
-        get() {
-          return this.enabled
-        },
-        set(val) {
-          if(!val) this.$emit('reject')
-        }
-      },
-      _content() {
-        return this.content
-      }
-    },
+    props: ['negative', 'positive', 'text'],
+    data: () => ({
+      enabled: false,
+      content: null
+    }),
     watch: {
-      isEnabled(val, old) {
+      enabled(val, old) {
         if(val && !old) setTimeout(() => document.querySelector(".dialog").scrollTo(0,0), 1)
       }
     }
