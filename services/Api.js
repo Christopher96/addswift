@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default (path) => {
-    let url = process.env.baseURL
+    let url = process.env.API_URI
     console.log(url)
 
     if (path) url += path
