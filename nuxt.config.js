@@ -62,17 +62,6 @@ module.exports = {
      ** Axios module configuration
      */
     axios: {},
-
-    /*
-     ** Extended routes
-     */
-    extendRoutes(routes, resolve) {
-        routes.push({
-            name: 'custom',
-            path: '/custom',
-            component: resolve(__dirname, 'pages/404.vue')
-        })
-    },
     /*
      ** Build configuration
      */
