@@ -1,6 +1,5 @@
 <template>
   <v-form v-model="valid" ref="form" lazy-validation>
-    <Stepper />
     <p class="subheading">Already a member? <nuxt-link to="login">Login </nuxt-link><i class="fa fa-arrow-right"></i></p>
     <v-layout row wrap>
       <v-flex column sm6 xs12>
@@ -56,12 +55,14 @@
     justify-start>
       <v-flex>
         <v-checkbox
+        readonly
         class="tos-check"
         v-validate="'required'"
-        v-model="check"
-        :error-messages="errors.collect('check')"
+        v-model="tosCheck"
+        @click.native="openStepper"
+        :error-messages="errors.collect('tosCheck')"
         value="1"
-        data-vv-name="check"
+        data-vv-name="tosCheck"
         type="checkbox"
         required
         ></v-checkbox>
@@ -70,7 +71,7 @@
         class="tos-text"
         xs12>
           <p class="subheading">
-            Do you agree to the <a href="#" @click.prevent="openTOS">Terms of Service</a> and comply with our <a href="#" @click.prevent="openPP">Privacy Policy</a>?
+            Do you agree to our <a href="#" @click="openStepper">Community Guidelines</a>?
           </p>
         </v-flex>
     </v-layout>
@@ -89,18 +90,13 @@
     @click="clear"
     >clear</v-btn>
     </div>
-    <ConfirmDialog 
-    :enabled="dialog.enabled" 
-    :content="dialog.content" 
-    v-on:resolve="resolveDialog"
-    v-on:reject="closeDialog" />
+    <Stepper 
+    ref="stepper"
+    v-on:resolve="resolveStepper" />
   </v-form>
 </template>
 
 <script>
-import ConfirmDialog from '@/components/base/user/ConfirmDialog'
-import TOS from '@/components/auth/TOS'
-import PP from '@/components/auth/PP'
 import Stepper from '@/components/auth/AuthStepper'
 
 import { mapGetters } from 'vuex'
@@ -117,12 +113,10 @@ export default {
     confirm_password: '',
     email: '',
     error: '',
-    check: null,
-    tosCheck: false,
-    ppCheck: false,
+    tosCheck: null,
     dictionary: {
       custom: {
-        check: {
+        tosCheck: {
           required: 'You must agree to the above.'
         },
         confirm_password: {
@@ -131,33 +125,18 @@ export default {
         }
       }
     },
-    dialog: {
-      enabled: false,
-      content: null
+    stepper: {
+      validated: false
     }
   }),
   methods: {
-    openTOS() {
-      this.dialog.content = TOS
-      this.dialog.enabled = true
+    openStepper() {
+      this.$refs.stepper.enabled = true
+      this.tosCheck = null
     },
-    openPP() {
-      this.dialog.content = PP
-      this.dialog.enabled = true
-    },
-    resolveDialog() {
-      if(this.dialog.content == TOS) this.tosCheck = true
-      else this.ppCheck = true
-      
-      this.check = (this.ppCheck && this.tosCheck) ? '1' : null
-      this.dialog.enabled = false
-    },
-    closeDialog() {
-      if(this.dialog.content == TOS) this.tosCheck = false
-      else this.ppCheck = false
-      
-      this.check = (this.ppCheck && this.tosCheck) ? '1' : null
-      this.dialog.enabled = false
+    resolveStepper() {
+      console.log("resolve")
+      this.tosCheck = '1'
     },
     register() {
       this.error = ''
@@ -206,7 +185,6 @@ export default {
       }
   },
   components: {
-    ConfirmDialog,
     Stepper
   }
 }

@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Christopher\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js start
+  C:\Program Files\nodejs\node.exe C:\Users\Christopher\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js star
 
 PATH: 
-  C:\Program Files (x86)\cmder\bin;C:\Program Files (x86)\cmder\vendor\git-for-windows\cmd;C:\Program Files (x86)\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Program Files (x86)\cmder\vendor\conemu-maximus5;C:\Program Files (x86)\cmder\vendor\conemu-maximus5\ConEmu;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\dotnet\;C:\MAMP\bin\php\php7.1.5;C:\ProgramData\ComposerSetup\bin;C:\Users\Christopher\AppData\Roaming\npm\node_modules;C:\Program Files\nodejs\;C:\Program Files\MongoDB\Server\3.4\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Microsoft\Web Platform Installer\;C:\Users\Christopher\AppData\Local\Microsoft\WindowsApps;C:\Users\Christopher\AppData\Roaming\npm;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Heroku\bin;C:\Users\Christopher\AppData\Local\Microsoft\WindowsApps;C:\Users\Christopher\AppData\Roaming\npm;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Heroku\bin;C:\Users\Christopher\AppData\Local\Programs\Fiddler;C:\Android\platform-tools;C:\Program Files (x86)\cmder\vendor\git-for-windows\usr\bin;C:\Program Files (x86)\cmder\vendor\git-for-windows\usr\share\vim\vim74;C:\Program Files (x86)\cmder\
+  C:\Program Files (x86)\cmder\bin;C:\Program Files (x86)\cmder\vendor\git-for-windows\cmd;C:\Program Files (x86)\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Program Files (x86)\cmder\vendor\conemu-maximus5;C:\Program Files (x86)\cmder\vendor\conemu-maximus5\ConEmu;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\dotnet\;C:\MAMP\bin\php\php7.1.5;C:\ProgramData\ComposerSetup\bin;C:\Users\Christopher\AppData\Roaming\npm\node_modules;C:\Program Files\nodejs\;C:\Program Files\MongoDB\Server\3.4\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Microsoft\Web Platform Installer\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\dotnet\;C:\MAMP\bin\php\php7.1.5;C:\ProgramData\ComposerSetup\bin;C:\Users\Christopher\AppData\Roaming\npm\node_modules;C:\Program Files\nodejs\;C:\Program Files\MongoDB\Server\3.4\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Microsoft\Web Platform Installer\;C:\Users\Christopher\AppData\Local\Microsoft\WindowsApps;C:\Users\Christopher\AppData\Roaming\npm;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Heroku\bin;C:\Users\Christopher\AppData\Local\Programs\Fiddler;C:\Android\platform-tools;;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\cmder\vendor\git-for-windows\usr\bin;C:\Program Files (x86)\cmder\vendor\git-for-windows\usr\share\vim\vim74;C:\Program Files (x86)\cmder\
 
 Yarn version: 
   1.5.1
@@ -22,8 +22,9 @@ npm manifest:
       "private": true,
       "scripts": {
           "dev": "cross-env NODE_ENV=development NODE_PATH=server nodemon server --watch server",
-          "prod": "cross-env NODE_ENV=production nodemon client/server --watch client/server",
-          "build": "cross-env NODE_ENV=production nuxt build",
+          "start": "cross-env NODE_ENV=production NODE_PATH=server nodemon server --watch server",
+          "build": "nuxt build",
+          "prod-build": "cross-env NODE_ENV=production nuxt build",
           "generate": "nuxt generate",
           "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
           "precommit": "npm run lint"
@@ -7488,7 +7489,7 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: Command "start" not found.
+  Error: Command "star" not found. Did you mean "start"?
       at new MessageError (C:\Users\Christopher\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:186:110)
       at C:\Users\Christopher\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:87307:17
       at Generator.next (<anonymous>)
