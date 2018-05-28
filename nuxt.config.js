@@ -6,7 +6,7 @@ module.exports = {
     mode: 'universal',
 
     env: {
-        API_URI: process.env.BASE_URI + '/api' || 'http://localhost:8080/api'
+        API_URI: (process.env.BASE_URI || 'http://localhost:8080') + '/api'
     },
 
     /*

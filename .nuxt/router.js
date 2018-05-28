@@ -5,7 +5,6 @@ Vue.use(Router)
 
 const _2d87c08d = () => import('..\\pages\\register\\index.vue' /* webpackChunkName: "pages_register_index" */).then(m => m.default || m)
 const _3f69dd0a = () => import('..\\pages\\login\\index.vue' /* webpackChunkName: "pages_login_index" */).then(m => m.default || m)
-const _7e0b04f6 = () => import('..\\pages\\404.vue' /* webpackChunkName: "pages_404" */).then(m => m.default || m)
 const _60959788 = () => import('..\\pages\\logout.vue' /* webpackChunkName: "pages_logout" */).then(m => m.default || m)
 const _47ec79e6 = () => import('..\\pages\\settings\\index.vue' /* webpackChunkName: "pages_settings_index" */).then(m => m.default || m)
 const _1f0aedbd = () => import('..\\pages\\social\\facebook\\index.vue' /* webpackChunkName: "pages_social_facebook_index" */).then(m => m.default || m)
@@ -80,11 +79,6 @@ export function createRouter () {
 			path: "/login",
 			component: _3f69dd0a,
 			name: "login"
-		},
-		{
-			path: "/404",
-			component: _7e0b04f6,
-			name: "404"
 		},
 		{
 			path: "/logout",

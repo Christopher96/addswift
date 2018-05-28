@@ -43,6 +43,7 @@ export const actions = {
     checkToken({ commit }) {
         const token = TS.getToken()
         if (token) {
+            console.log(token)
             commit(AUTH_SUCCESS, token)
         }
     },

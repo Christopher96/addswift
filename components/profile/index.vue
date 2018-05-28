@@ -39,7 +39,7 @@ export default {
       meta: [
         { 'vmid': 'og:title', 'property': 'og:title', 'content': this.profile.username },
         { 'vmid': 'og:type', 'property': 'og:type', 'content': 'user.profile' },
-        { 'vmid': 'og:url', 'property': 'og:url', 'content': process.env.HOST + ':' + process.env.PORT + '/' + this.profile.username },
+        { 'vmid': 'og:url', 'property': 'og:url', 'content': process.env.BASE_URI + '/' + this.profile.username },
         { 'vmid': 'og:image', 'property': 'og:image', 'content': this.profile.picture },
       ]
     }

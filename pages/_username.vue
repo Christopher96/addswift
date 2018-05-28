@@ -1,11 +1,11 @@
 <template>
     <Profile v-if="profile" />
-    <notFound v-else />
+    <ErrorCode v-else :code="code" :message="message" />
 </template>
 
 <script>
 import Profile from '@/components/profile'
-import notFound from '@/components/base/util/404'
+import ErrorCode from '@/components/base/util/ErrorCode.vue'
 
 export default {
     validate ({ params }) {
@@ -16,7 +16,12 @@ export default {
     },
     asyncData({ params, store, redirect }) {
         return store.dispatch('getProfile', params.username)
-        .catch(() => {})
+        .catch((res) => {
+            return {
+                code: res.response.status,
+                message: res.response.data
+            }
+        })
     },
     computed: {
         profile() {
@@ -25,7 +30,7 @@ export default {
     },
     components: {
         Profile,
-        notFound
+        ErrorCode
     }
 }
 </script> 

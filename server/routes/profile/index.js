@@ -27,12 +27,15 @@ findProfile = (req, res, next) => {
         .exec((err, user) => {
             if (!err && user) {
                 if (user.isPrivate) {
-                    return res.status(401).send(`Profile ${user.username} is private`)
+                    return res.status(401).send(`User ${user.username} profile is private`)
+                }
+                if (user.status == 0) {
+                    return res.status(401).send(`User ${user.username} is banned`)
                 }
                 req.user = user
                 next()
             } else {
-                return res.sendStatus(404)
+                return res.status(404).send(`User ${query.username} was not found.`)
             }
         })
 }

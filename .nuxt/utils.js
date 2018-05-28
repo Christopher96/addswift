@@ -113,14 +113,14 @@ export async function setContext(app, context) {
         return process.client
       },
       isStatic: process.static,
-      isDev: false,
+      isDev: true,
       isHMR: false,
       app,
       store: app.store,
       payload: context.payload,
       error: context.error,
       base: '/',
-      env: {"baseURL":"https://addswift.herokuapp.com/api"}
+      env: {"API_URI":"http://localhost:8080/api"}
     }
     // Only set once
     if (context.req) app.context.req = context.req

@@ -17,7 +17,7 @@
                         <i class="body-2 grey--text">{{ profile.role.title }}</i>
                     </v-list-tile-content>
                     <v-spacer></v-spacer>
-                    <FollowButton :name="profile.username" v-if="!profileOwner" :isFollowing="isFollowing" />
+                    <FollowButton :name="profile.username" v-if="!profileOwner && isAuthenticated" :isFollowing="isFollowing" />
                 </v-list-tile>
                 <div v-if="profileData">
                     <v-divider></v-divider>
@@ -53,6 +53,7 @@ export default {
   },
   computed: {
     ...mapGetters(["profile", "profileOwner", "isFollowing"]),
+    ...mapGetters({ isAuthenticated: "auth/isAuthenticated"}),
     profileData() {
         let profileData = this.profile.data
         if(profileData) delete profileData["_id"]
