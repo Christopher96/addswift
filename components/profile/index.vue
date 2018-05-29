@@ -1,3 +1,7 @@
+/*
+ * Template for profile, contains responsive columns and OGP meta data
+ */
+
 <template>
 <div>
   <Cover :source="profile.cover" />

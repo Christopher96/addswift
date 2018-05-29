@@ -1,3 +1,7 @@
+/*
+ * Dynamic route for profiles, validates username and fetches the profile if it exists
+ */
+
 <template>
     <Profile v-if="profile" />
     <ErrorCode v-else :code="code" :message="message" />

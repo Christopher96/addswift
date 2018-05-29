@@ -1,5 +1,5 @@
 /*
- * Backend API, communicates with MongoDB through the express router
+ * Routes for authenticating a user and fetching data from an authenticated user
  */
 
 // JWT helper functions
@@ -15,6 +15,7 @@ const ObjectId = mongoose.Types.ObjectId
 
 const User = require('models/User')
 
+// Registers a user, checks if username is available
 router.post('/register', (req, res, next) => {
     User.findOne({ username: req.body.username }, function(err, user) {
         if (!user) {
@@ -31,6 +32,7 @@ router.post('/register', (req, res, next) => {
     })
 }, signToken)
 
+// Logs a user in compares the plaintext password with the stored encrypted password
 router.post('/login', (req, res, next) => {
     User.findOne({ username: req.body.username, isSocial: false })
         .then((user) => {
@@ -46,12 +48,14 @@ router.post('/login', (req, res, next) => {
         })
 }, signToken)
 
+// Optional logout logic
 router.post('/logout', (req, res) => {
 
 })
 
+// Gets user data from the authenticated user
 router.get('/user', verifyToken, (req, res) => {
-    User.findById(req.userId)
+    User.findById(req.authId)
         .populate("role")
         .exec((err, user) => {
             if (!err && user) {

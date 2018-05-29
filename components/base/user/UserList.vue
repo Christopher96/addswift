@@ -1,3 +1,7 @@
+/*
+ * User list for Admin modifications
+ */
+
 <template>
   <div>
     <v-subheader>{{ item.header }}</v-subheader>

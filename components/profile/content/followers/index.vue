@@ -1,3 +1,7 @@
+/*
+ * Lists all followers of the profile
+ */
+
 <template>
   <div>
     <v-layout v-if="followers.length > 0">

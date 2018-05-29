@@ -1,3 +1,7 @@
+/*
+ * Contains Middleware for JWT signing and verification
+ */
+
 const jwt = require('jsonwebtoken')
 
 // Verify JWT token
@@ -12,7 +16,7 @@ module.exports.verifyToken = (req, res, next) => {
 
         jwt.verify(token, 'secretkey', (err, auth) => {
             if (!err && auth) {
-                req.userId = auth.userId
+                req.authId = auth.userId
                 return next()
             } else {
                 res.sendStatus(500)
@@ -24,13 +28,13 @@ module.exports.verifyToken = (req, res, next) => {
 }
 
 module.exports.signToken = (req, res, next) => {
-    if(req.user) {
+    if (req.user) {
         jwt.sign({ userId: req.user._id }, 'secretkey', { expiresIn: '7d' }, (err, token) => {
             if (!err && token) res.status(200).json({ token })
             else {
                 res.sendStatus(500)
             }
-        }) 
+        })
     } else {
         res.sendStatus(404)
     }

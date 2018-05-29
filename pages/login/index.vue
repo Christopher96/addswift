@@ -1,3 +1,7 @@
+/*
+ * Login page with normal login and through social media
+ */
+
 <template>
   <v-layout row wrap>
     <v-flex column sm6 xs12>

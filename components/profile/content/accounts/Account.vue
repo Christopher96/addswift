@@ -1,4 +1,8 @@
-<template>
+/*
+ * Dynamic card for accounts, contains title, image, description, delete button (not implemented)
+ */
+ 
+ <template>
   <v-layout>
     <v-flex xs12 sm6 md4>
       <v-card>

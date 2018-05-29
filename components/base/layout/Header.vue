@@ -1,3 +1,7 @@
+/*
+ * Header template
+ */
+ 
 <template>
   <v-toolbar 
     id="header"

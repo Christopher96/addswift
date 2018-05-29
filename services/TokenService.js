@@ -1,3 +1,7 @@
+/*
+ * Methods for setting and removing authorization header and cookie to generated JWT token
+ */
+
 import axios from 'axios'
 import * as Cookies from 'js-cookie'
 

@@ -1,3 +1,7 @@
+/*
+ * Logout route, kills the session and removes token
+ */
+
 <template>
   <div></div>
 </template>

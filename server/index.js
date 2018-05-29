@@ -1,3 +1,8 @@
+/*
+ * Routes related to profile activites like following/unfollowing profiles
+ */
+
+// Defines required modules
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -6,8 +11,6 @@ const path = require('path')
 const file = require('file')
 
 const { Nuxt, Builder } = require('nuxt')
-
-require('dotenv').config()
 
 // Get express and the router
 const app = express()
@@ -57,7 +60,7 @@ async function start() {
     // Log server messages
     app.use(morgan('dev'))
 
-    // Dynamically add routes by folder structure
+    // Dynamically add routes by folder structure accesible through the API router
     const routePath = path.resolve(__dirname, './routes')
     file.walkSync(routePath, function(path, dirs, files) {
         const dirPath = path.replace(routePath, '').replace(/\\/g, '/')
@@ -65,6 +68,7 @@ async function start() {
             router.use(dirPath, require(path))
     })
 
+    // Add the routes for the Nuxt frontend and API router
     app.use('/api', router)
     app.use(nuxt.render)
 

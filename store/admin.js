@@ -1,3 +1,7 @@
+/*
+ * Vuex store module for Admin services
+ */
+
 import Admin from '@/services/AdminService'
 
 export const state = () => ({})

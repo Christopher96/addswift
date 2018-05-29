@@ -1,3 +1,7 @@
+/*
+ * Registration page with direct validation through vee-validate and GDPR complinace popup
+ */
+
 <template>
   <v-form v-model="valid" ref="form" lazy-validation>
     <p class="subheading">Already a member? <nuxt-link to="login">Login </nuxt-link><i class="fa fa-arrow-right"></i></p>

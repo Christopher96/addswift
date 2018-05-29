@@ -1,3 +1,7 @@
+/*
+ * Default layout for pages without defined layout
+ */
+
 <template>
   <v-app dark>
     <v-content>

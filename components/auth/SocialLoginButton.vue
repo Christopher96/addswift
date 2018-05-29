@@ -1,3 +1,7 @@
+/*
+ * Dynamic social login button, switch statement to route to the correct API
+ */
+
 <template>
   <v-btn
   @click="login" 

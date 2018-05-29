@@ -1,3 +1,7 @@
+/*
+ * General container with title
+ */
+
 <template>
   <v-layout
   class="container-card"

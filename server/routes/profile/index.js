@@ -1,5 +1,5 @@
 /*
- * Backend API, communicates with MongoDB through the express router
+ * Routes related to profile activites like following/unfollowing profiles
  */
 
 // JWT helper functions
@@ -15,7 +15,7 @@ const ObjectId = mongoose.Types.ObjectId
 
 const User = require('models/User')
 
-
+// Finds the profile of searched or authenticated user
 findProfile = (req, res, next) => {
     let query = {}
     if (req.params.username) query.username = req.params.username
@@ -40,6 +40,7 @@ findProfile = (req, res, next) => {
         })
 }
 
+// Dynamic route for finding profiles by username
 router.get('/:username',
     findProfile,
     (req, res) => {
@@ -47,14 +48,15 @@ router.get('/:username',
     }
 )
 
+// Follow route, adding the authenticated user to the follow list of target profile
 router.post('/follow',
     verifyToken,
     findProfile,
     (req, res) => {
         const user = req.user
 
-        if (user._id != req.userId && user.followers.filter(id => id == req.userId).length < 1) {
-            user.followers.push(req.userId)
+        if (user._id != req.authId && user.followers.filter(id => id == req.authId).length < 1) {
+            user.followers.push(req.authId)
             user.save()
                 .then(user => {
                     return res.status(200).json(user.followers)
@@ -65,14 +67,16 @@ router.post('/follow',
         }
     }
 )
+
+//  Unfollow route, removing the authenticated user from the follow list of target profile
 router.post('/unfollow',
     verifyToken,
     findProfile,
     (req, res) => {
         const user = req.user
 
-        if (user._id != req.userId && user.followers.filter(id => id == req.userId).length > 0) {
-            user.followers.splice(user.followers.indexOf(req.userId), 1)
+        if (user._id != req.authId && user.followers.filter(id => id == req.authId).length > 0) {
+            user.followers.splice(user.followers.indexOf(req.authId), 1)
             user.save()
                 .then(user => {
                     return res.status(200).json(user.followers)
@@ -84,6 +88,7 @@ router.post('/unfollow',
     }
 )
 
+// Gets all followers of the target profile, populating necessary data
 router.post('/followers', (req, res) => {
     User.findById(req.body.userId)
         .populate('followers', '_id picture name username')

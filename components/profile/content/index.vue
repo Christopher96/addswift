@@ -1,3 +1,7 @@
+/*
+ * Profile content container, contains nav with a dynamic component displaying content from the selected tab
+ */
+
 <template>
     <div id="content_container">
         <v-bottom-nav 

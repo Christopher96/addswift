@@ -1,8 +1,12 @@
+/*
+ * Used for populating all fields of a schema
+ */
+
 module.exports = (schema) => {
     schema.statics.populateAll = () => {
         let paths = ''
         schema.eachPath((pathname, schemaType) => {
-            if (pathname=='_id') return
+            if (pathname == '_id') return
 
             const type = schemaType.constructor.name
             if (type == 'ObjectId' || type == 'SchemaArray')
@@ -10,7 +14,6 @@ module.exports = (schema) => {
 
         })
 
-        return paths            
+        return paths
     }
 }
-

@@ -1,3 +1,7 @@
+/*
+ * Settings page for logged in users, including privacy option and delete button
+ */
+
 <template>
     <ContainerCard title="Settings">
         <v-container fluid>

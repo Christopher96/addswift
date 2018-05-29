@@ -1,3 +1,7 @@
+/*
+ * Small card for users under following/followers tabs
+ */
+
 <template>
   <v-flex xs12 sm6 md6 lg4>
     <v-card>

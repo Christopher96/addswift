@@ -1,3 +1,7 @@
+/*
+ * Layout for registration and login
+ */
+
 <template>
     <v-app dark>
         <v-content>

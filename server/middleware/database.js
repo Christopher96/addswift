@@ -1,3 +1,7 @@
+/*
+ * Used for saving database on new machines
+ */
+
 module.exports = (req, res) => {
     const VendorType = require('models/VendorType')
 

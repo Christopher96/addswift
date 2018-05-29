@@ -1,3 +1,7 @@
+/*
+ * Terms of Service dialog (dummy data)
+ */
+
 <template>
 <div class="tos-container">
 <img src="/addswift.png" alt="addswift logo">

@@ -1,3 +1,7 @@
+/*
+ * API service used for initializing axios with a base route
+ */
+
 import axios from 'axios'
 
 export default (path) => {

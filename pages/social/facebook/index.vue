@@ -1,3 +1,7 @@
+/*
+ * Redirect page for converting Facebook code to Oauth token
+ */
+
 <template>
 <div></div>
 </template>

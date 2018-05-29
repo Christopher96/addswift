@@ -1,3 +1,7 @@
+/*
+ * Startpage will contain a feed containing profile posts, new uploads and status updates
+ */
+
 <template>
   <v-layout>
     <v-flex mt-5 class="text-xs-center">

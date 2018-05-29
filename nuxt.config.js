@@ -1,3 +1,7 @@
+/*
+ * Nuxt configuration file, defining mode (SSR), meta tags, title, favicon, stylesheets, plugins, modules and extended webpack config
+ */
+
 const pkg = require('./package')
 
 const nodeExternals = require('webpack-node-externals')
@@ -5,6 +9,9 @@ const nodeExternals = require('webpack-node-externals')
 module.exports = {
     mode: 'universal',
 
+    /*
+     ** Defines the API route as environment variable
+     */
     env: {
         API_URI: (process.env.BASE_URI || 'http://localhost:8080') + '/api'
     },

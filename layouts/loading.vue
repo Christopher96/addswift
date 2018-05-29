@@ -1,3 +1,7 @@
+/*
+ * Addswift loader layout
+ */
+
 <template>
     <v-app dark>
             <v-layout align-center justify-center>

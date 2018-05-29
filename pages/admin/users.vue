@@ -1,4 +1,8 @@
-<template>
+/*
+ * Checks whether a user is Authenticated and fetches user data if there is none
+ */
+ 
+ <template>
   <ContainerCard title="Users">
     <v-list>
       <div 

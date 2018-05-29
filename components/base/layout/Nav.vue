@@ -1,3 +1,7 @@
+/*
+ * Side navigation with profile link, routes and logout
+ */
+
 <template>
 <v-layout>
     <v-navigation-drawer

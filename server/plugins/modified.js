@@ -1,3 +1,7 @@
+/*
+ * Adds the modified field to schemas
+ */
+
 module.exports = (schema, options) => {
     schema.add({ modified: Date });
 

@@ -1,3 +1,7 @@
+/*
+ * Displays custom error message and code
+ */
+
 <template>
     <v-layout 
         justify-center

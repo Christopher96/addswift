@@ -1,3 +1,7 @@
+/*
+ * Lists all account cards owned by the profile
+ */
+
 <template>
   <div>
     <v-btn block color="secondary">

@@ -1,3 +1,7 @@
+/*
+ * Button for banning or unbanning users
+ */
+
 <template>
     <v-tooltip 
     v-if="isBanned"

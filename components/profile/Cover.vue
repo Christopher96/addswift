@@ -1,3 +1,7 @@
+/*
+ * Profile cover image component
+ */
+
 <template>
     <v-card
         color="grey darken-4"

@@ -1,3 +1,7 @@
+/*
+ * Vuex store module for global services
+ */
+
 import ProfileService from '@/services/ProfileService'
 
 export const state = () => ({

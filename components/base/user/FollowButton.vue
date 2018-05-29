@@ -1,3 +1,7 @@
+/*
+ * Follow/Unfollow button with snackbar popup on interaction
+ */
+
 <template>
     <div>
         <v-tooltip 

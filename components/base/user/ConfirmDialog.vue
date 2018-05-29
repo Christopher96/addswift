@@ -1,3 +1,7 @@
+/*
+ * Dynamic confirm dialog with optional text button fields, can use component as content
+ */
+
 <template>
     <v-dialog v-model="enabled" max-width="1000">
       <v-card>

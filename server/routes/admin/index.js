@@ -1,5 +1,5 @@
 /*
- * Backend API, communicates with MongoDB through the express router
+ * Admin routes, contains routes for generating a list of users and banning/unbanning
  */
 
 // JWT helper functions
@@ -15,8 +15,15 @@ const ObjectId = mongoose.Types.ObjectId
 
 const User = require('models/User')
 
+// Adds JWT and admin middleware to all subroutes
+router.all('*', [
+    verifyToken,
+    isAdmin
+])
+
+// Checks if authenticated user is admin (role privlege > 2)
 isAdmin = (req, res, next) => {
-    User.findById(req.userId)
+    User.findById(req.authId)
         .populate('role')
         .exec((err, user) => {
             if (!err && user && user.role.priv > 2) {
@@ -27,11 +34,7 @@ isAdmin = (req, res, next) => {
         })
 }
 
-router.all('*', [
-    verifyToken,
-    isAdmin
-])
-
+// Gets a list of users with their role
 router.get('/users', (req, res) => {
     User.find()
         .populate('role')
@@ -41,6 +44,7 @@ router.get('/users', (req, res) => {
         })
 })
 
+// Changes a users status to given parameter
 setUserStatus = (req, res, next) => {
     User.findById(req.body.userId)
         .exec((err, user) => {
@@ -59,6 +63,7 @@ setUserStatus = (req, res, next) => {
         })
 }
 
+// Routes for banning and unbanning users
 router.post('/ban', (req, res, next) => {
     req.status = 0
     next()

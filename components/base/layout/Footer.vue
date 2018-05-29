@@ -1,3 +1,7 @@
+/*
+ * Footer template
+ */
+
 <template>
   <v-footer app fixed>
       <span>&copy; 2017</span>

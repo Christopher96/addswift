@@ -1,3 +1,7 @@
+/*
+ * Aside column for profile picture and list of information related to the profile
+ */
+
 <template>
     <div>
         <v-card 

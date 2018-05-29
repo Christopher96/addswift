@@ -1,3 +1,7 @@
+/*
+ * Vuex store module for Authentication services
+ */
+
 import Auth from '@/services/AuthenticationService'
 import TS from '@/services/TokenService'
 

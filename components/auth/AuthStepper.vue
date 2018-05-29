@@ -1,3 +1,7 @@
+/*
+ * Authentication stepper for Terms of Service and GDPR Privacy Policy
+ */
+
 <template>
     <div>
         <ConfirmDialog 
