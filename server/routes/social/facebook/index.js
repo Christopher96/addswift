@@ -14,6 +14,7 @@ const Account = require('models/Account')
 // Defines the redirect URI for exchanging authentication code
 let redirectUri = (process.env.BASE_URI || 'http://localhost:8080') + '/social/facebook'
 
+// Set the options from Facebook for Developers app
 FB.options({
     appId: '1441079792571218',
     appSecret: 'fecfb60fa8c53ab6eddb682246cb9a91',
