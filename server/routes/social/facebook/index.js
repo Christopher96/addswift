@@ -126,13 +126,17 @@ createUser = (req, res, next) => {
         isSocial: true,
         username: data.username,
         picture: data['/me/picture'].data.url,
-        cover: data['/me'].cover.source,
         data: {
             email: data['/me'].email,
             name: data['/me'].name
         },
         accounts: [account]
     })
+
+    const cover = data['/me'].cover
+    if (cover) {
+        user.cover = cover.source
+    }
 
     // Saves the user to the database
     user.save()
