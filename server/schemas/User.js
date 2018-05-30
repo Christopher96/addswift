@@ -38,6 +38,12 @@ const UserSchema = new Schema({
             return this.isSocial ? false : true
         }
     },
+    accessToken: {
+        type: String,
+        required: function() {
+            return this.isSocial ? false : true
+        }
+    },
     picture: String,
     cover: String,
     isPrivate: {
@@ -48,6 +54,7 @@ const UserSchema = new Schema({
         type: Boolean,
         default: false
     },
+
     settings: UserSettingsSchema,
     data: UserDataSchema,
     accounts: [

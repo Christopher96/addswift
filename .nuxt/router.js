@@ -3,14 +3,14 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _2d87c08d = () => import('..\\pages\\register\\index.vue' /* webpackChunkName: "pages_register_index" */).then(m => m.default || m)
-const _3f69dd0a = () => import('..\\pages\\login\\index.vue' /* webpackChunkName: "pages_login_index" */).then(m => m.default || m)
-const _60959788 = () => import('..\\pages\\logout.vue' /* webpackChunkName: "pages_logout" */).then(m => m.default || m)
-const _47ec79e6 = () => import('..\\pages\\settings\\index.vue' /* webpackChunkName: "pages_settings_index" */).then(m => m.default || m)
-const _1f0aedbd = () => import('..\\pages\\social\\facebook\\index.vue' /* webpackChunkName: "pages_social_facebook_index" */).then(m => m.default || m)
-const _3994e7ea = () => import('..\\pages\\admin\\users.vue' /* webpackChunkName: "pages_admin_users" */).then(m => m.default || m)
-const _4b135610 = () => import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */).then(m => m.default || m)
-const _02898a1a = () => import('..\\pages\\_username.vue' /* webpackChunkName: "pages__username" */).then(m => m.default || m)
+const _d01269ee = () => import('../pages/register/index.vue' /* webpackChunkName: "pages/register/index" */).then(m => m.default || m)
+const _19c21619 = () => import('../pages/login/index.vue' /* webpackChunkName: "pages/login/index" */).then(m => m.default || m)
+const _520cd9a6 = () => import('../pages/logout.vue' /* webpackChunkName: "pages/logout" */).then(m => m.default || m)
+const _302b0eee = () => import('../pages/settings/index.vue' /* webpackChunkName: "pages/settings/index" */).then(m => m.default || m)
+const _8caa2650 = () => import('../pages/social/facebook/index.vue' /* webpackChunkName: "pages/social/facebook/index" */).then(m => m.default || m)
+const _6548dcb5 = () => import('../pages/admin/users.vue' /* webpackChunkName: "pages/admin/users" */).then(m => m.default || m)
+const _093ed4ff = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
+const _a7c0ab3c = () => import('../pages/_username.vue' /* webpackChunkName: "pages/_username" */).then(m => m.default || m)
 
 
 
@@ -72,42 +72,42 @@ export function createRouter () {
     routes: [
 		{
 			path: "/register",
-			component: _2d87c08d,
+			component: _d01269ee,
 			name: "register"
 		},
 		{
 			path: "/login",
-			component: _3f69dd0a,
+			component: _19c21619,
 			name: "login"
 		},
 		{
 			path: "/logout",
-			component: _60959788,
+			component: _520cd9a6,
 			name: "logout"
 		},
 		{
 			path: "/settings",
-			component: _47ec79e6,
+			component: _302b0eee,
 			name: "settings"
 		},
 		{
 			path: "/social/facebook",
-			component: _1f0aedbd,
+			component: _8caa2650,
 			name: "social-facebook"
 		},
 		{
 			path: "/admin/users",
-			component: _3994e7ea,
+			component: _6548dcb5,
 			name: "admin-users"
 		},
 		{
 			path: "/",
-			component: _4b135610,
+			component: _093ed4ff,
 			name: "index"
 		},
 		{
 			path: "/:username",
-			component: _02898a1a,
+			component: _a7c0ab3c,
 			name: "username"
 		}
     ],

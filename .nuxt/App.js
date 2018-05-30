@@ -1,20 +1,20 @@
 import Vue from 'vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 
-import '..\\assets\\fonts\\fonts.css'
+import '../assets/fonts/fonts.css'
 
-import '..\\assets\\styl\\main.styl'
+import '../assets/styl/main.styl'
 
-import '..\\assets\\scss\\main.scss'
+import '../assets/scss/main.scss'
 
 
 let layouts = {
 
-  "_default": () => import('..\\layouts\\default.vue'  /* webpackChunkName: "layouts_default" */).then(m => m.default || m),
+  "_default": () => import('../layouts/default.vue'  /* webpackChunkName: "layouts/default" */).then(m => m.default || m),
 
-  "_loading": () => import('..\\layouts\\loading.vue'  /* webpackChunkName: "layouts_loading" */).then(m => m.default || m),
+  "_loading": () => import('../layouts/loading.vue'  /* webpackChunkName: "layouts/loading" */).then(m => m.default || m),
 
-  "_notAuthenticated": () => import('..\\layouts\\notAuthenticated.vue'  /* webpackChunkName: "layouts_notAuthenticated" */).then(m => m.default || m)
+  "_notAuthenticated": () => import('../layouts/notAuthenticated.vue'  /* webpackChunkName: "layouts/notAuthenticated" */).then(m => m.default || m)
 
 }
 

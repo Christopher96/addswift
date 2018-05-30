@@ -12,9 +12,9 @@ import { setContext, getLocation, getRouteData } from './utils'
 import { createStore } from './store.js'
 
 /* Plugins */
-import nuxt_plugin_axios_2d6a5286 from 'nuxt_plugin_axios_2d6a5286' // Source: ./axios.js
-import nuxt_plugin_vuetify_e5914fcc from 'nuxt_plugin_vuetify_e5914fcc' // Source: ..\\plugins\\vuetify
-import nuxt_plugin_veevalidate_346f6561 from 'nuxt_plugin_veevalidate_346f6561' // Source: ..\\plugins\\vee-validate
+import nuxt_plugin_axios_d5bbda82 from 'nuxt_plugin_axios_d5bbda82' // Source: ./axios.js
+import nuxt_plugin_vuetify_e5914fcc from 'nuxt_plugin_vuetify_e5914fcc' // Source: ../plugins/vuetify
+import nuxt_plugin_veevalidate_346f6561 from 'nuxt_plugin_veevalidate_346f6561' // Source: ../plugins/vee-validate
 
 
 // Component: <no-ssr>
@@ -153,7 +153,7 @@ async function createApp (ssrContext) {
 
   // Plugin execution
   
-  if (typeof nuxt_plugin_axios_2d6a5286 === 'function') await nuxt_plugin_axios_2d6a5286(app.context, inject)
+  if (typeof nuxt_plugin_axios_d5bbda82 === 'function') await nuxt_plugin_axios_d5bbda82(app.context, inject)
   if (typeof nuxt_plugin_vuetify_e5914fcc === 'function') await nuxt_plugin_vuetify_e5914fcc(app.context, inject)
   if (typeof nuxt_plugin_veevalidate_346f6561 === 'function') await nuxt_plugin_veevalidate_346f6561(app.context, inject)
   
