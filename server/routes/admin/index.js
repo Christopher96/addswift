@@ -15,12 +15,6 @@ const ObjectId = mongoose.Types.ObjectId
 
 const User = require('models/User')
 
-// Adds JWT and admin middleware to all subroutes
-router.all('*', [
-    verifyToken,
-    isAdmin
-])
-
 // Checks if authenticated user is admin (role privlege > 2)
 isAdmin = (req, res, next) => {
     User.findById(req.authId)
@@ -33,6 +27,12 @@ isAdmin = (req, res, next) => {
             }
         })
 }
+
+// Adds JWT and admin middleware to all subroutes
+router.all('*', [
+    verifyToken,
+    isAdmin
+])
 
 // Gets a list of users with their role
 router.get('/users', (req, res) => {

@@ -96,6 +96,14 @@
                         Delete account
                     </v-btn>
                 </v-flex>
+                <v-flex xs4>
+                <v-subheader>Subscription</v-subheader>
+                </v-flex>
+                <v-flex xs8>
+                    <v-btn color="success">
+                        Become a member
+                    </v-btn>
+                </v-flex>
           </v-layout>
         </v-container>
     </ContainerCard>

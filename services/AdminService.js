@@ -1,3 +1,7 @@
+/*
+ * Admin service
+ */
+
 import Api from '@/services/Api'
 const Admin = Api('/admin')
 

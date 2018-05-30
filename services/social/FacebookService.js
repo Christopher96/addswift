@@ -1,3 +1,7 @@
+/*
+ * Facebook service
+ */
+
 import Api from '../Api'
 const FB = Api('/social/facebook')
 

@@ -1,3 +1,7 @@
+/*
+ * Authentication service
+ */
+
 import Api from '@/services/Api'
 const Auth = Api('/auth')
 

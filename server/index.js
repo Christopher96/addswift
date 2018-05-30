@@ -51,14 +51,14 @@ async function start() {
     if (config.dev) {
         const builder = new Builder(nuxt)
         await builder.build()
+
+        // Route to generate database
+        const database = require('middleware/database')
+        app.use('/save', database)
+
+        // Log server messages
+        app.use(morgan('dev'))
     }
-
-    // Route to generate database
-    const database = require('middleware/database')
-    app.use('/save', database)
-
-    // Log server messages
-    app.use(morgan('dev'))
 
     // Dynamically add routes by folder structure accesible through the API router
     const routePath = path.resolve(__dirname, './routes')

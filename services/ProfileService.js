@@ -1,3 +1,7 @@
+/*
+ * Profile service
+ */
+
 import Api from '@/services/Api'
 const Profile = Api('/profile')
 
