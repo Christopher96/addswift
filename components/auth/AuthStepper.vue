@@ -75,9 +75,9 @@
 </template>
 
 <script>
-import ConfirmDialog from '@/components/base/user/ConfirmDialog'
-import TOS from '@/components/auth/TOS'
-import PP from '@/components/auth/PP'
+import ConfirmDialog from './ConfirmDialog'
+import TOS from './TOS'
+import PP from './PP'
 
   export default {
     data: () => ({
@@ -85,16 +85,16 @@ import PP from '@/components/auth/PP'
         enabled: false,
     }),
     methods: {
+        openDialog() {
+            this.$refs.dialog.enabled = true
+        },
         openTOS() {
             this.$refs.dialog.content = TOS
-            openDialog()
+            this.openDialog()
         },
         openPP() {
             this.$refs.dialog.content = PP
-            openDialog()
-        },
-        openDialog() {
-            this.$refs.dialog.enabled = true
+            this.openDialog()
         },
         resolve() {
             this.$emit('resolve')

@@ -9,8 +9,8 @@
         <span v-else>{{ text }}</span>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="error" @click="$emit('reject')">{{ negative || 'Disagree' }}</v-btn>
-          <v-btn color="success" @click="$emit('resolve')">{{ positive || 'Agree' }}</v-btn>
+          <v-btn color="error" @click="reject">{{ negative || 'Disagree' }}</v-btn>
+          <v-btn color="success" @click="resolve">{{ positive || 'Agree' }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -23,8 +23,19 @@
       enabled: false,
       content: null
     }),
+    methods: {
+        resolve() {
+            this.$emit('resolve')
+            this.enabled = false
+        },
+        reject() {
+            this.$emit('reject')
+            this.enabled = false
+        }
+    },
     watch: {
       enabled(val, old) {
+        console.log("asfd")
         if(val && !old) setTimeout(() => document.querySelector(".dialog").scrollTo(0,0), 1)
       }
     }
